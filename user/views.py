@@ -1,3 +1,7 @@
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -8,6 +12,12 @@ def login_home(request):
 
 def login_about(request):
     return render(request, 'user/about.html')
+
+
+#to be added after register view
+@login_required
+def profile(request):
+    return render(request,"user/profile.html")
 
 def register(request):
     if request.method=='POST':
