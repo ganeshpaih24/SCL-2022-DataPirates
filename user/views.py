@@ -1,8 +1,4 @@
-from django.shortcuts import render
 from .models import Post
-
-
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render,redirect
@@ -11,17 +7,12 @@ from django.contrib import messages
 from .forms import UserRegisterForm
 
 def login_home(request):
-
     return render(request, 'base.html')
 
 def login_about(request):
-    data=Post.objects.all()
     context={
         'posts':Post.objects.all()
     }  
-    for i in data:
-        print(i)
-    
     return render(request, 'base.html')
 
 def login_about(request):
