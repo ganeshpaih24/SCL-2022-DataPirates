@@ -11,6 +11,10 @@ from django.contrib import messages
 from .forms import UserRegisterForm
 
 def login_home(request):
+
+    return render(request, 'base.html')
+
+def login_about(request):
     data=Post.objects.all()
     context={
         'posts':Post.objects.all()
@@ -18,7 +22,7 @@ def login_home(request):
     for i in data:
         print(i)
     
-    return render(request, 'user/home.html')
+    return render(request, 'base.html')
 
 def login_about(request):
     return render(request, 'user/about.html')
