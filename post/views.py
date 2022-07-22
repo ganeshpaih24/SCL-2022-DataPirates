@@ -20,7 +20,7 @@ from django.contrib import messages
 
 class PostListView(ListView):
     model=Post
-    template_name='user/home.html'
+    template_name='post/home.html'
     context_object_name='posts'
     ordering=['date_posted']
 

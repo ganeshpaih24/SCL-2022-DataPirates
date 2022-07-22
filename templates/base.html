@@ -16,9 +16,18 @@
 
     {% include 'includes/navbar.html' %}
 
+    {%if messages%}
+        {%for message in messages%}
+            <div class="alert alert-{{message.tags}}">
+                {{message}}
+            </div>
+        {%endfor%}
+    {%endif%}
+
     {% block content %}
     {% endblock %}
 
+    {% include 'includes/style.html' %}
     {% include 'includes/footer.html' %}
 
     {% block custom_js %}{% endblock %}

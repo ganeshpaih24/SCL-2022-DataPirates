@@ -1,13 +1,10 @@
-{% extends "user/base.html" %}
+{% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-{% include 'includes/navbar.html' %}
     <center><h2><br>You have been logged out</h2></center>
     <div class="border-top pt-3">
         <small class="text-muted">
             <center><a href="{% url 'login' %}">Log In Again</a></center>
         </small>
     </div>
-{% include 'includes/style.html' %}
-{% include 'includes/footer.html' %}
 {% endblock content %}
