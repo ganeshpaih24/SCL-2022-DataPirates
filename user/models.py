@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 from PIL import Image
+
+from post.models import Post
 
 
 class Profile(models.Model):

@@ -1,23 +1,35 @@
 {% extends "user/base.html" %}
 {%load crispy_forms_tags%}
 {% block content%}
-    <div class="content-section">
-        <form method="POST">
+{% include 'includes/navbar.html' %}
+<style>
+    .border-bottom,.border-top
+    {
+        text-align: center;
+    }
+    input {max-width: 50em};
+</style>
+
+<div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center">
+    <div class="div-to-align"><br>
+        <form class="mx-4" method="POST">
            {% csrf_token %}
            <fieldset class="form-group">
                 <legend class="border-bottom mb-4 ">Join Today</legend>
                 {{ form|crispy }}
            </fieldset>
            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
-
+                <center><button class="btn btn-outline-info" type="submit">Sign Up</button></center>
            </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="#">Sign In</a>
+                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
             </small>
         </div>
     </div>
-
+    </div>
+   
+{% include 'includes/style.html' %}
+{% include 'includes/footer.html' %}
 {%endblock content%}
