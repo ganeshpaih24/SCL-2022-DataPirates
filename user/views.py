@@ -36,7 +36,8 @@ def profile(request):
         'p_form': p_form
     }
 
-    return render(request, 'user/profile.html', context)
+
+    return render(request, 'users/profile.html', context)
     
 def login_home(request):
     return render(request, 'user/home.html')
