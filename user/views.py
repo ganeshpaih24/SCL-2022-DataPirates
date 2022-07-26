@@ -4,6 +4,15 @@ from django.contrib.auth.decorators import login_required
 
 from post.models import Post
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from post.models import Post
+
+def login_home(request):
+    post = Post.objects.all()
+    context={'posts':post}
+    return render(request, 'user/home.html',context)
+
+def login_about(request):
+    return render(request, 'user/about.html')
 
 def register(request):
     if request.method == 'POST':
@@ -15,16 +24,7 @@ def register(request):
             return redirect('login')
     else:
         form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
-def login_home(request):
-    data=Post.objects.all()
-    context={
-        'posts': Post.objects.all()
-    }  
-    for i in data:
-        print(i)
-    
-    return render(request, 'user/home.html')
+    return render(request, 'user/register.html', {'form': form})
 
 def login_about(request):
     return render(request, 'user/about.html')
@@ -49,7 +49,4 @@ def profile(request):
         'p_form': p_form
     }
 
-
-    return render(request, 'users/profile.html', context)
-    
-
+    return render(request, 'user/profile.html', context)
