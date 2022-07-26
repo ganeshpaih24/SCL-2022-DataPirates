@@ -1,12 +1,7 @@
 from django.db import models
-<<<<<<< HEAD
 from django.utils import timezone
-=======
->>>>>>> c3769c453e2abe43eb38e12af9b47484cf2282b9
 from django.contrib.auth.models import User
-
 from PIL import Image
-
 from post.models import Post
 
 
