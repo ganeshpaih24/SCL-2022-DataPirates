@@ -12,7 +12,7 @@ from django.views.generic import (
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-
+from django.urls import reverse
 
 
 
@@ -31,9 +31,21 @@ class PostCreateView(LoginRequiredMixin,CreateView):
     model=Post
     fields=['title','content']
 
+    def get_template_names(self):
+        if self.request.htmx:
+            return ["post/htmx_form.html"]
+        else:
+            return ["post/post_form.html"]
+    
     def form_valid(self,form):
         form.instance.author=self.request.user
-        return super().form_valid(form)
+        super().form_valid(form)
+
+        self.object=form.save(commit=False)
+        if self.request.htmx:
+            return render(self.request, 'post/htmx_form.html')
+        else:
+            return reverse('post-detail', kwargs={'pk': self.object.id})
 
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model=Post
