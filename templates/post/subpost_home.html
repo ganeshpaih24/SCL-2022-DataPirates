@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{%load crispy_forms_tags%}
+{% block content%}
+
+
+  {% for subpost in subposts %}
+      <article class="media content-section">
+         <div class="media-body">
+            <div class="article-metadata">
+              <small class="text-muted">{{ subpost.date_posted|date:"F d,Y"}}</small>   
+            </div>
+            <h2><a class="article-title" href="#">{{ subpost.title }}</a></h2>
+            <p class="article-content">{{ subpost.description }}</p>
+         </div>
+         <a href="{% url 'subpost-update' subpost.id %}">Edit</a>
+         <a href="{% url 'subpost-delete' subpost.id %}">Delete</a>
+      </article>
+      {% endfor %}
+    
+  
+{%endblock content%}
