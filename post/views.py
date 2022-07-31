@@ -1,4 +1,4 @@
-from .models import Post
+from .models import Post,SubPost
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -13,6 +13,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.urls import reverse
+from .forms import SubPostModelForm
 
 
 
@@ -73,3 +74,63 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 
 def flowchart(request):
     return render(request, 'post/flow2.html')
+@login_required
+def subpost(request):
+    subposts = SubPost.objects.all()
+    context = {'subposts': subposts}
+    return render(request,'post/subpost_home.html',context)
+
+
+@login_required
+def createSubpost(request):
+    form = SubPostModelForm()
+    if request.method == 'POST':
+        form=SubPostModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('post-subpost')
+    context = {'form':form}
+    return render(request, 'post/subpost_form.html',context)
+    '''
+    if request.method == 'GET':
+        
+        return render(request, 'post/one_entry.html', context=context)
+    elif request.method == 'POST':
+        form = SubPostModelForm(request.POST)
+        if form.is_valid():
+            row = form.save(commit=False)
+            row.user = request.user
+            form.save()
+            messages.success(request, f'Your subpost information has been created')
+        else:
+            messages.error(request, f'Something is wrong in your input')
+        return redirect('subpost')
+'''
+
+@login_required
+def updateSubpost(request, pk):
+    subpost = SubPost.objects.get(id=pk)
+    
+    if request.method == 'GET':
+        form = SubPostModelForm(instance=subpost)
+        context = {
+            'heading': "Update the subpost Information",
+            'form': form,
+        }
+        return render(request, 'post/subpost_form.html', context=context)
+    
+    if request.method == 'POST':
+        form = SubPostModelForm(request.POST, instance=subpost)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your subpost information has been updated')
+        else:
+            messages.error(request, f'Something is wrong in your input')
+        return redirect('post-subpost')
+
+
+@login_required
+def deleteSubpost(request, pk):
+    subpost = SubPost.objects.get(id=pk, user=request.user).delete()
+    messages.success(request, f'Your subpost information has been deleted')
+    return redirect('post-subpost')
