@@ -28,6 +28,12 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model=Post
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['subposts']=SubPost.objects.all()
+
+        return context
+
 class PostCreateView(LoginRequiredMixin,CreateView):
     model=Post
     fields=['title','content']
