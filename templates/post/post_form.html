@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
 {% block content%}
+<style>
+    .content-section{
+        padding-left: 70px;
+    }
+</style>
+<div class="col-10 offset-1 col-lg-9 offset-lg-1  ">
     <div class="content-section">
         <form method="POST" hx-post='.'>
            {% csrf_token %}
@@ -8,11 +14,12 @@
                 <legend class="border-bottom mb-4 ">User Post</legend>
                 {{ form|crispy }}
            </fieldset>
-           <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
-
+           <div class="form-group"><br>
+               <center> <button class="btn btn-outline-info" type="submit">Post</button></center>
+                <br>
            </div>
         </form>
+    </div>
     </div>
 
 {%endblock content%}

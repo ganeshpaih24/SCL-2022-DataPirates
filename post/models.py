@@ -5,10 +5,10 @@ from django.urls import reverse
 from django.forms import ModelForm
 #from tinymce import HTMLField
 
-class Topic(models.Model):
-    name = models.CharField(max_length=200)
-    def __str__(self):
-        return self.name
+# class Topic(models.Model):
+#     name = models.CharField(max_length=200)
+#     def __str__(self):
+#         return self.name
 
 
 '''
@@ -19,7 +19,7 @@ class SubForm(ModelForm):
 '''
 
 class Post(models.Model):
-    topic=models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
+    # topic=models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     title=models.CharField(max_length=100)
     content=models.TextField(null=True, blank=True)
     #subpost=models.ForeignKey(Post,on_delete=models.CASCADE)  
@@ -38,6 +38,7 @@ class SubPost(models.Model):
     post=models.ForeignKey(Post,on_delete=models.CASCADE)  
     title=models.CharField(max_length=100)
     description=models.TextField(null=True, blank=True)
+    resources=models.TextField(null=True, blank=True)
     date_posted=models.DateTimeField(default=timezone.now)
     
     '''

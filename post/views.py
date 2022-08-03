@@ -46,6 +46,12 @@ class CommentCreateView(CreateView):
         return super().form_valid(form)
     success_url="/post/{post_id}"
 
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['subposts']=SubPost.objects.all()
+
+        return context
+
 class PostCreateView(LoginRequiredMixin,CreateView):
     model=Post
     fields=['title','content']
@@ -93,13 +99,13 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 def flowchart(request):
     subpost = SubPost.objects.all()
     context = {'subpost': subpost}
-    return render(request, 'post/flow.html',context)
+    return render(request, 'post/flow2.html',context)
     
 @login_required
 def subpost(request):
     subposts = SubPost.objects.all()
     context = {'subposts': subposts}
-    return render(request,'post/subpost_home.html',context)
+    return render(request,'post/post_detail.html',context)
 
 
 @login_required
