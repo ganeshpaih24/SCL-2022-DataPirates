@@ -4,6 +4,9 @@
     <!-- <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}"> -->
     <div class="media-body">
       <div class="article-metadata">
+        <div class="container my-4">
+          <div class="row">
+            <div class="col-6">
         <a class="mr-2" href="#">{{ object.author }}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
         {% if object.author == user %}
@@ -13,8 +16,74 @@
           </div>
         {% endif %}
       </div>
-      <h2 class="article-title">{{ object.title }}</h2>
+      
+      
+            <h1 class="display-2 ">Title for flow</h1>
+        <small class="text-muted">With faded secondary text</small>
+        <h2 class="article-title">{{ object.id }}</h2>
       <p class="article-content">{{ object.content }}</p>
+      {% for subpost in subposts %}
+        {% if object.id == subpost.post.id %}
+        <!-- <p>{{subpost.post.id}} </p> -->
+            <div class="card">
+              <!-- <div class="card-img-body">
+              <img class="card-img" src="https://picsum.photos/500/230" alt="Card image cap"> -->
+              
+              <div class="card-body">
+                <h4 class="card-title">{{subpost.title}} </h4>
+                <p class="card-text">{{subpost.description}} </p>
+                <!-- <a href="#" class="btn btn-outline-primary">Primary</a> -->
+              </div>
+            </div>
+          {% endif %}
+      {% endfor %}
+
+          </div>
+          </div>
+      
     </div>
   </article>
+
+  <script>
+    // sandbox disable popups
+    if (window.self !== window.top && window.name!="view1") {;
+      window.alert = function(){/*disable alert*/};
+      window.confirm = function(){/*disable confirm*/};
+      window.prompt = function(){/*disable prompt*/};
+      window.open = function(){/*disable open*/};
+    }
+    
+    // prevent href=# click jump
+    document.addEventListener("DOMContentLoaded", function() {
+      var links = document.getElementsByTagName("A");
+      for(var i=0; i < links.length; i++) {
+        if(links[i].href.indexOf('#')!=-1) {
+          links[i].addEventListener("click", function(e) {
+          console.debug("prevent href=# click");
+              if (this.hash) {
+                if (this.hash=="#") {
+                  e.preventDefault();
+                  return false;
+                }
+                else {
+                  /*
+                  var el = document.getElementById(this.hash.replace(/#/, ""));
+                  if (el) {
+                    el.scrollIntoView(true);
+                  }
+                  */
+                }
+              }
+              return false;
+          })
+        }
+      }
+    }, false);
+  </script>
+  
+  <!--scripts loaded here-->
+  
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 {% endblock content %}
