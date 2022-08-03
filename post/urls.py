@@ -4,7 +4,8 @@ from .views import (
     PostDetailView,
     PostCreateView,
     PostUpdateView,
-    PostDeleteView
+    PostDeleteView,
+    CommentCreateView,
 )
 from . import views
 
@@ -19,4 +20,5 @@ urlpatterns = [
     path('subpost/new/',views.createSubpost,name="subpost-create"),
     path('subpost/update/<str:pk>/',views.updateSubpost,name="subpost-update"),
     path('subpost/delete/<str:pk>',views.deleteSubpost,name="subpost-delete"),
+    path('post/<int:pk>/comment/', CommentCreateView.as_view(), name='comment-create'),
 ]

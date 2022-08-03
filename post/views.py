@@ -1,4 +1,4 @@
-from .models import Post,SubPost
+from .models import Post,SubPost,Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -12,8 +12,8 @@ from django.views.generic import (
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.urls import reverse
-from .forms import SubPostModelForm
+from django.urls import reverse,reverse_lazy
+from .forms import SubPostModelForm,PostCommentForm
 
 
 
@@ -27,6 +27,24 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model=Post
+    template_name = 'post/post_detail.html'
+    '''
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['comment'] = PostComment.objects.all()
+        context['form'] = PostCommentForm()
+        return context
+    '''    
+
+class CommentCreateView(CreateView):
+    model = Comment
+    form_class = PostCommentForm
+    template_name='post/add_comment.html'
+    #fields = '__all__'
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+    success_url="/post/{post_id}"
 
 class PostCreateView(LoginRequiredMixin,CreateView):
     model=Post
