@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
 {% block content%}
-  {% for post in posts %}
+{% for post in posts %}
 <style>
   @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
 
@@ -128,7 +128,7 @@ font-family: "Jost", sans-serif;
             <small class="card_text">{{ post.topic.name }}</small><br>
             <a class="mr-2" href="#">By {{post.author }}</a>
             <small class="text2">on {{ post.date_posted|date:"F d,Y"}}</small></center>
-            <button class="btn1"><a class="new" href="{% url 'post-subpost' %}">Detailed Roadmap</a></button>
+            <button class="btn1"><a class="new" href="post/{{ post.id }}">Detailed Roadmap</a></button>
           </div>
         </div>
      

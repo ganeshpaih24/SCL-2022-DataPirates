@@ -81,7 +81,7 @@ def flowchart(request):
 def subpost(request):
     subposts = SubPost.objects.all()
     context = {'subposts': subposts}
-    return render(request,'post/subpost_home.html',context)
+    return render(request,'post/post_detail.html',context)
 
 
 @login_required

@@ -2,24 +2,27 @@
 <header id="header" class="">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo me-auto"><a href="../base.html">WalkThrough</a></h1>
+        <h1 class="logo me-auto"><a href="{% url 'user-home' %}">WalkThrough</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo me-auto"><img src="{% static 'assets/img/logo.png' %}" alt="" class="img-fluid"></a> -->
 
         <nav id="navbar" class="navbar light">
             <ul>
-                <li><a class="nav-link scrollto" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#stories">Stories</a></li>
-                <li><a class="nav-link scrollto" href="#about">About</a></li>
+                <li><a class="nav-link scrollto" href="{% url 'user-home' %}">Home</a></li>
+                <!-- <li><a class="nav-link scrollto" href="#stories">Stories</a></li> -->
+                <li><a class="nav-link scrollto" href="#about">Our Story</a></li>
                 <!-- <li><a class="nav-link scrollto" href="#services">Services</a></li>
                 <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
                 <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
-                <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
+               
                         {% if user.is_authenticated %}
+                        <li class="dropdown"><a href="{% url 'profile' %}"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
                         <li><a href="{% url 'post-create' %}">Create Post</a></li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
+                        <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
                         <li><a href="{% url 'register' %}">Register</a></li>
                         <li><a href="{% url 'login' %}">Login</a></li>
                         {% endif %}
