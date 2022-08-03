@@ -75,7 +75,7 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 def flowchart(request):
     subpost = SubPost.objects.all()
     context = {'subpost': subpost}
-    return render(request, 'post/flow.html',context)
+    return render(request, 'post/flow2.html',context)
     
 @login_required
 def subpost(request):
