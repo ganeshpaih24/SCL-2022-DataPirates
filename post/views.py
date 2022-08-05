@@ -1,4 +1,4 @@
-from .models import Post,SubPost
+from .models import Post,SubPost,Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -12,8 +12,8 @@ from django.views.generic import (
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.urls import reverse
-from .forms import SubPostModelForm
+from django.urls import reverse,reverse_lazy
+from .forms import SubPostModelForm,PostCommentForm
 
 
 
@@ -27,12 +27,27 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model=Post
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['subposts']=SubPost.objects.all()
-
+    template_name = 'post/post_detail.html'
+    '''
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['comment'] = PostComment.objects.all()
+        context['form'] = PostCommentForm()
         return context
+      
+    def get_queryset(self, *args, **kwargs):
+        return SubPost.objects.filter(post_id=self.kwargs['pk'])
+        '''
+
+class CommentCreateView(CreateView):
+    model = Comment
+    form_class = PostCommentForm
+    template_name='post/add_comment.html'
+    #fields = '__all__'
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+    success_url="/post/{post_id}"
 
 class PostCreateView(LoginRequiredMixin,CreateView):
     model=Post
@@ -83,15 +98,17 @@ def flowchart(request):
     context = {'subpost': subpost}
     return render(request, 'post/flow2.html',context)
     
+'''    
 @login_required
-def subpost(request):
-    subposts = SubPost.objects.all()
+def subpost(request,pk):
+    subposts = SubPost.objects.filter(pk=pk)
     context = {'subposts': subposts}
     return render(request,'post/post_detail.html',context)
-
+'''
 
 @login_required
-def createSubpost(request):
+def createSubpost(request,pk):
+    post=Post.objects.get(id=pk)
     form = SubPostModelForm()
     if request.method == 'POST':
         form=SubPostModelForm(request.POST)
@@ -115,9 +132,18 @@ def createSubpost(request):
             messages.error(request, f'Something is wrong in your input')
         return redirect('subpost')
 '''
+class SubPostCreateView(CreateView):
+    model = SubPost
+    form_class = SubPostModelForm
+    template_name='post/subpost_form.html'
+    #fields = '__all__'
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+    success_url="/post/{post_id}"
 
 @login_required
-def updateSubpost(request, pk):
+def updateSubpost(request,id, pk):
     subpost = SubPost.objects.get(id=pk)
     
     if request.method == 'GET':
@@ -135,11 +161,11 @@ def updateSubpost(request, pk):
             messages.success(request, f'Your subpost information has been updated')
         else:
             messages.error(request, f'Something is wrong in your input')
-        return redirect('post-subpost')
+        return redirect('post-detail', pk=id)
 
 
 @login_required
-def deleteSubpost(request, pk):
-    subpost = SubPost.objects.get(id=pk, user=request.user).delete()
+def deleteSubpost(request,id, pk):
+    subpost = SubPost.objects.get(id=pk).delete()
     messages.success(request, f'Your subpost information has been deleted')
-    return redirect('post-subpost')
+    return redirect('post-detail', pk=id)
