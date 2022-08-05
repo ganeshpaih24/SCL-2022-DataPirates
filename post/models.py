@@ -35,7 +35,7 @@ class Post(models.Model):
         return reverse('post-detail',kwargs={'pk':self.pk})
 
 class SubPost(models.Model):
-    post=models.ForeignKey(Post,on_delete=models.CASCADE)  
+    post=models.ForeignKey(Post,related_name="subposts", on_delete=models.CASCADE)  
     title=models.CharField(max_length=100)
     description=models.TextField(null=True, blank=True)
     resources=models.TextField(null=True, blank=True)

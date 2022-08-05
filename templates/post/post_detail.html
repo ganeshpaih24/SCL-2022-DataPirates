@@ -22,24 +22,32 @@
         <small class="text-muted">With faded secondary text</small>
         <h2 class="article-title">{{ object.id }}</h2>
       <p class="article-content">{{ object.content }}</p>
-      {% for subpost in subposts %}
-        {% if object.id == subpost.post.id %}
-        <!-- <p>{{subpost.post.id}} </p> -->
+      
+      {%if not post.subposts.all%}
+        No SubPosts Yet... 
+        {% if post.author == request.user %}
+          <a href="{%url 'subpost-create' post.pk%}">Create SubPost</a>
+        {% endif %}
+      {%else%}
+          {%for subpost in post.subposts.all%}
             <div class="card">
               <!-- <div class="card-img-body">
-              <img class="card-img" src="https://picsum.photos/500/230" alt="Card image cap"> -->
-              
+              <img class="card-img" src="https://picsum.photos/500/230" alt="Card image cap"> --> 
               <div class="card-body">
                 <h4 class="card-title">{{subpost.title}} </h4>
                 <p class="card-text">{{subpost.description}} </p>
                 <!-- <a href="#" class="btn btn-outline-primary">Primary</a> -->
+                <a href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
+                <a href="subpost/{{ subpost.pk }}/delete/" class="card-link">Delete</a>
               </div>
             </div>
+          {% endfor %}
+          {% if post.author == request.user %}
+            <a href="{%url 'subpost-create' post.pk%}">Add more SubPosts</a>
           {% endif %}
-      {% endfor %}
-
           </div>
           </div>
+      {%endif%}
       
     </div>
   </article>

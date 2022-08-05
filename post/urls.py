@@ -6,6 +6,7 @@ from .views import (
     PostUpdateView,
     PostDeleteView,
     CommentCreateView,
+    SubPostCreateView,
 )
 from . import views
 
@@ -16,9 +17,9 @@ urlpatterns = [
     path('<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('flow/', views.flowchart, name='flowchart'),
-    path('subpost/',views.subpost,name="post-subpost"),
-    path('subpost/new/',views.createSubpost,name="subpost-create"),
-    path('subpost/update/<str:pk>/',views.updateSubpost,name="subpost-update"),
-    path('subpost/delete/<str:pk>',views.deleteSubpost,name="subpost-delete"),
+    #path('subpost/',views.subpost,name="post-subpost"),
+    path('post/<int:pk>/subpost/new/',SubPostCreateView.as_view(),name="subpost-create"),
+    path('post/<int:id>/subpost/<int:pk>/update/',views.updateSubpost,name="subpost-update"),
+    path('post/<int:id>/subpost/<int:pk>/delete/',views.deleteSubpost,name="subpost-delete"),
     path('post/<int:pk>/comment/', CommentCreateView.as_view(), name='comment-create'),
 ]
