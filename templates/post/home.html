@@ -128,7 +128,7 @@ font-family: "Jost", sans-serif;
             <small class="card_text">{{ post.topic.name }}</small><br>
             <a class="mr-2" href="#">By {{post.author }}</a>
             <small class="text2">on {{ post.date_posted|date:"F d,Y"}}</small></center>
-            <button class="btn1"><a class="new" href="post/{{ post.id }}">Detailed Roadmap</a></button>
+            <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
           </div>
         </div>
      
