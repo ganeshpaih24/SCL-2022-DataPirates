@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{%load crispy_forms_tags%}
 {% block content %}
   <article class="media content-section">
     <!-- <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}"> -->
@@ -18,7 +19,7 @@
             </div>
             <h1 class="display-2 ">{{ object.title }}</h1>
             <small class="text-muted">{{ object.content }}</small>
-      
+            <hr>
             {%if not post.subposts.all%}
               No SubPosts Yet... 
               {% if post.author == request.user %}
@@ -46,25 +47,47 @@
           </div>
         </div>
       {%endif%}
+      <!-- COMMENTS  -->
+      <hr>
+      <h5>Leave your comment!</h5>
+      <div id="comments_section">
+      
+        {% if user.is_authenticated %}
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            {{ comment_form|crispy }}
+            <button class="btn btn-info" type="submit">Add comment <i class="fas fa-comments"></i></button>
+          </div>
+        </form>
+        {% else %}
+        <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to add a comment!</a><br>
+        {% endif %}
+      
+        {% if comments %}
+        <hr>
+        <ul>
+          {% for comment in comments %}
+          <li>
+            <div>
+              <span>
+                <strong class="text-info">{{ comment.user }} </strong>
+                <small class="text-muted">{{ comment.date_added }}</small>
+              </span>
+              <p>
+                {{ comment.body|safe }}
+              </p>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <strong class="text-secondary">No comments yet...</strong>
+        {% endif %}
+      
+      </div>
     </div>
   </article>
-  <h4>Comments...</h4>
-  {%if not post.comments.all%}
-    No Comments Yet... <a href="{%url 'comment-create' post.pk%}">Add One</a>
-  {%else%}
-    <a href="{%url 'comment-create' post.pk%}">Add Comment</a>
-    {%for comment in post.comments.all%}
-      <br>
-      <strong>
-        {{comment.name}}....
-        {{comment.date_added}}
-      </strong>
-      <br>
-      {{comment.body}}
-      <br>
-    {%endfor%}
-  {%endif%}
-  <br>
 
   <script>
     // sandbox disable popups

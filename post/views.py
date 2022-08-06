@@ -14,7 +14,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.urls import reverse,reverse_lazy
 from .forms import SubPostModelForm,PostCommentForm
-
+#from django.shortcuts import get_object_or_404
+#from django.http import HttpResponseRedirect
 
 
 
@@ -28,17 +29,23 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model=Post
     template_name = 'post/post_detail.html'
-    '''
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['comment'] = PostComment.objects.all()
-        context['form'] = PostCommentForm()
+        context ['comments'] = Comment.objects.filter(post=self.get_object()).order_by('-created')
+        if self.request.user.is_authenticated:
+            context['comment_form'] = PostCommentForm(instance=self.request.user)
         return context
-      
+    '''
     def get_queryset(self, *args, **kwargs):
         return SubPost.objects.filter(post_id=self.kwargs['pk'])
-        '''
-
+    '''
+    def post(self, request, *args, **kwargs):
+        new_comment = Comment(body=request.POST.get('body'), user=self.request.user, post=self.get_object())
+        new_comment.save()
+        return self.get(self, request, *args, **kwargs)
+        
+'''
 class CommentCreateView(CreateView):
     model = Comment
     form_class = PostCommentForm
@@ -48,26 +55,15 @@ class CommentCreateView(CreateView):
         form.instance.post_id = self.kwargs['pk']
         return super().form_valid(form)
     success_url="/post/{post_id}"
-
+'''
 class PostCreateView(LoginRequiredMixin,CreateView):
     model=Post
     fields=['title','content']
 
-    def get_template_names(self):
-        if self.request.htmx:
-            return ["post/htmx_form.html"]
-        else:
-            return ["post/post_form.html"]
     
     def form_valid(self,form):
         form.instance.author=self.request.user
-        super().form_valid(form)
-
-        self.object=form.save(commit=False)
-        if self.request.htmx:
-            return render(self.request, 'post/htmx_form.html')
-        else:
-            return reverse('post-detail', kwargs={'pk': self.object.id})
+        return super().form_valid(form)
 
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model=Post
@@ -169,3 +165,18 @@ def deleteSubpost(request,pk, id):
     subpost = SubPost.objects.get(id=id).delete()
     messages.success(request, f'Your subpost information has been deleted')
     return redirect('post-detail', pk=pk)
+'''
+@login_required
+def starred_post(request,pk):
+    post=get_object_or_404(Post,id=id)
+    if post.stars.filter(id=request.user.id).exists():
+        post.stars.remove(request.user)
+    else:
+        post.stars.add(request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+@login_required
+def starred_list(request):
+    stars=Post.author.filter(stars=request.user)
+    return render(request,"post/stars.html",{'stars':stars})
+'''
