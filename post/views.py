@@ -143,8 +143,8 @@ class SubPostCreateView(CreateView):
     success_url="/post-{post_id}"
 
 @login_required
-def updateSubpost(request,id, pk):
-    subpost = SubPost.objects.get(id=pk)
+def updateSubpost(request,pk, id):
+    subpost = SubPost.objects.get(id=id)
     
     if request.method == 'GET':
         form = SubPostModelForm(instance=subpost)
@@ -161,11 +161,11 @@ def updateSubpost(request,id, pk):
             messages.success(request, f'Your subpost information has been updated')
         else:
             messages.error(request, f'Something is wrong in your input')
-        return redirect('post-detail', pk=id)
+        return redirect('post-detail', pk=pk)
 
 
 @login_required
-def deleteSubpost(request,id, pk):
-    subpost = SubPost.objects.get(id=pk).delete()
+def deleteSubpost(request,pk, id):
+    subpost = SubPost.objects.get(id=id).delete()
     messages.success(request, f'Your subpost information has been deleted')
-    return redirect('post-detail', pk=id)
+    return redirect('post-detail', pk=pk)

@@ -37,10 +37,8 @@
                 <h4 class="card-title">{{subpost.title}} </h4>
                 <p class="card-text">{{subpost.description}} </p>
                 <!-- <a href="#" class="btn btn-outline-primary">Primary</a> -->
-                {% if post.author == request.user %}
                 <a href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
                 <a href="subpost/{{ subpost.pk }}/delete/" class="card-link">Delete</a>
-                {% endif %}
               </div>
             </div>
           {% endfor %}
@@ -48,30 +46,66 @@
             <a href="{%url 'subpost-create' post.pk%}">Add more SubPosts</a>
           {% endif %}
           </div>
-          </div>
+        </div>
       {%endif%}
-      
     </div>
-    <h4>Comments...</h4>
-    {%if not post.comments.all%}
-      No Comments Yet... <a href="{%url 'comment-create' post.pk%}">Add One</a>
-    {%else%}
-      <a href="{%url 'comment-create' post.pk%}">Add Comment</a>
-  
-      {%for comment in post.comments.all%}
-        <br>
-        <strong>
-          {{comment.name}}....
-          {{comment.date_added}}
-        </strong>
-        <br>
-        {{comment.body}}
-        <br>
-      {%endfor%}
-    {%endif%}
-    <br>
   </article>
+  <h4>Comments...</h4>
+  {%if not post.comments.all%}
+    No Comments Yet... <a href="{%url 'comment-create' post.pk%}">Add One</a>
+  {%else%}
+    <a href="{%url 'comment-create' post.pk%}">Add Comment</a>
 
+    {%for comment in post.comments.all%}
+      <br>
+      <strong>
+        {{comment.name}}....
+        {{comment.date_added}}
+      </strong>
+      <br>
+      {{comment.body}}
+      <br>
+    {%endfor%}
+  {%endif%}
+  <br>
 
+  <script>
+    // sandbox disable popups
+    if (window.self !== window.top && window.name!="view1") {;
+      window.alert = function(){/*disable alert*/};
+      window.confirm = function(){/*disable confirm*/};
+      window.prompt = function(){/*disable prompt*/};
+      window.open = function(){/*disable open*/};
+    }
+    
+    // prevent href=# click jump
+    document.addEventListener("DOMContentLoaded", function() {
+      var links = document.getElementsByTagName("A");
+      for(var i=0; i < links.length; i++) {
+        if(links[i].href.indexOf('#')!=-1) {
+          links[i].addEventListener("click", function(e) {
+          console.debug("prevent href=# click");
+              if (this.hash) {
+                if (this.hash=="#") {
+                  e.preventDefault();
+                  return false;
+                }
+                else {
+                  /*
+                  var el = document.getElementById(this.hash.replace(/#/, ""));
+                  if (el) {
+                    el.scrollIntoView(true);
+                  }
+                  */
+                }
+              }
+              return false;
+          })
+        }
+      }
+    }, false);
+  </script>
+  
+  <!--scripts loaded here-->
   
 {% endblock content %}
