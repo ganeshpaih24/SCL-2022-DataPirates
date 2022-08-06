@@ -140,7 +140,7 @@ class SubPostCreateView(CreateView):
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
         return super().form_valid(form)
-    success_url="/post/{post_id}"
+    success_url="/post-{post_id}"
 
 @login_required
 def updateSubpost(request,id, pk):

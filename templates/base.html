@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/htmx.org@1.8.0"></script>
 </head>
 
-<body>
+<class="d-flex flex-column min-vh-100">
 
     {% include 'includes/navbar.html' %}
 
@@ -27,6 +27,7 @@
     {%endif%}
 
     {% block content %}
+    
     {% endblock %}
 
     {% include 'includes/style.html' %}
@@ -35,6 +36,6 @@
     {% block custom_js %}{% endblock %}
     {% include 'includes/notification.html' %}
 
-</body>
+</class=>
 
 </html>

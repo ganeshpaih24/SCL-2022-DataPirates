@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
-{% block content%}
-  <div>
-    <form method="POST" action="">
-        {%csrf_token%}
-        {{form.as_p}}
-        <input type="Submit" value="Submit"/>
-    </form>
-  </div>  
-{%endblock content%}
+{% block content %}
+<div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center ">
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <br><center><legend class="border-bottom mb-4">Add subpost</legend></center>
+                {{form.as_p}}
+            </fieldset>
+        </form>
+    </div>
+</div>
+{% endblock content %}
