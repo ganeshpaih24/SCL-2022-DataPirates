@@ -155,7 +155,8 @@ class SubPostCreateView(CreateView):
 @login_required
 def updateSubpost(request,pk, id):
     subpost = SubPost.objects.get(id=id)
-    
+    context={}
+    '''
     if request.method == 'GET':
         form = SubPostModelForm(instance=subpost)
         context = {
@@ -165,13 +166,14 @@ def updateSubpost(request,pk, id):
         return render(request, 'post/subpost_form.html', context=context)
     
     if request.method == 'POST':
-        form = SubPostModelForm(request.POST, instance=subpost)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Your subpost information has been updated')
-        else:
-            messages.error(request, f'Something is wrong in your input')
-        return redirect('post-detail', pk=pk)
+    '''
+    form = SubPostModelForm(request.POST or None, instance=subpost)
+    if form.is_valid():
+        form.save()
+        messages.success(request, f'Subpost updated!')
+        return redirect('post-detail',pk=pk)
+    context["form"] = form
+    return render(request,"post/subpost-update.html", context)
 
 
 @login_required

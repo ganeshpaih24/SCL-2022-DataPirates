@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{%load crispy_forms_tags%}
+{% block content%}
+<style>
+    .content-section {
+        padding-left: 70px;
+    }
+</style>
+<div class="offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center ">
+
+    <div class="center" style="width: 700px;">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="" style="text-align: center; margin-bottom: 10px; margin-top: 15px;">SubPost</legend>
+            </fieldset>
+
+            <label for="id_title" style="margin-top: 15px;">Title:*</label>
+            <input type="text" name="title" value="{{ form.title.value }}" maxlength="100"
+                class="textinput textInput form-control" required="" id="id_title">
+
+            <label for="id_description" style="margin-top: 15px; margin-bottom: 10px;">Description:*</label>
+            <textarea name="description" cols="40" rows="15" class="textarea form-control"
+                id="id_description">{{ form.description.value }}</textarea>
+
+            <label for="id_resources" style="margin-top: 15px; margin-bottom: 10px;">Resources:*</label>
+            <textarea name="resources" cols="40" rows="15" class="textarea form-control"
+                id="id_resources">{{ form.resources.value }}</textarea>
+
+            <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px;">Post</button>
+            </center>
+        </form>
+    </div>
+</div>
+
+{%endblock content%}
