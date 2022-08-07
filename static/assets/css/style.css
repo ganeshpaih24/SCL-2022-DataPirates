@@ -8,9 +8,15 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-body {
+body,
+html {
   font-family: "Open Sans", sans-serif;
   color: #444444;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
 }
 
 a {
@@ -242,7 +248,7 @@ h6 {
 }
 
 .navbar .dropdown ul a i {
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .navbar .dropdown ul a:hover,
@@ -1510,6 +1516,47 @@ section {
   padding-bottom: 8px;
 }
 
+/* .form-group {
+  width: 50%;
+} */
+.div-to-align {
+  width: 500px;
+}
+
+.content-section {
+  width: 400px;
+}
+
+.textInput {
+  padding: 10px;
+  margin-top: 15px;
+  /* margin-bottom: 15px; */
+}
+
+.emailinput {
+  margin-top: 15px;
+  /* margin-bottom: 15px; */
+}
+
+.requiredField {
+  margin-top: 15px;
+  /* margin-bottom: 25px; */
+}
+
+.form-text {
+  /* background-color: gray; */
+  margin-bottom: 100px;
+}
+
+.btn-outline-info {
+  margin-top: 15px;
+}
+
+.pt-3 {
+  margin-bottom: 50px;
+  align-items: center;
+}
+
 .contact .php-email-form .validate {
   display: none;
   color: red;
@@ -1670,7 +1717,9 @@ section {
 #footer {
   font-size: 14px;
   background: #37517e;
+
 }
+
 
 #footer .footer-newsletter {
   padding: 50px 0;
@@ -1841,6 +1890,7 @@ section {
 
 @media (max-width: 768px) {
   #footer .footer-bottom {
+
     padding-top: 20px;
     padding-bottom: 20px;
   }
