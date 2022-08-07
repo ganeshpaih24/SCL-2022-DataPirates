@@ -2,132 +2,110 @@
 {%load crispy_forms_tags%}
 {% block content %}
 
-    <!-- <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}"> -->
-    <div class="media-body">
-      <div class="article-metadata">
-        <div class="container my-4">
-          <div class="row ">
-            <div class="col-6">
-              <a class="mr-2" href="#">{{ object.author }}</a>
-              <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-              {% if object.author == user %}
-                <div>
-                  <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-                  <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
-                </div>
-              {% endif %}
-            </div>
-            <h1 class="display-2 ">{{ object.title }}</h1>
-            <small class="text-muted">{{ object.content }}</small>
-            <hr>
-            {%if not post.subposts.all%}
-              No SubPosts Yet... 
-              {% if post.author == request.user %}
-                <a href="{%url 'subpost-create' post.pk%}">Create SubPost</a>
-              {% endif %}
-            {%else%}
-              {%for subpost in post.subposts.all%}
-                <div class="card">
-                  <!-- <div class="card-img-body">
-                  <img class="card-img" src="https://picsum.photos/500/230" alt="Card image cap"> --> 
-                  <div class="card-body">
-                    <h4 class="card-title">{{subpost.title}} </h4>
-                    <p class="card-text">{{subpost.description}} </p>
-                    <p class="card-text">{{subpost.resources}} </p>
-                    <!-- <a href="#" class="btn btn-outline-primary">Primary</a> -->
-                    {% if post.author == request.user %}
-                      <a href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
-                      <a href="subpost/{{ subpost.pk }}/delete/" class="card-link">Delete</a>
-                    {% endif %}
-                  </div>
-                </div>
-            {% endfor %}
-            {% if post.author == request.user %}
-              <a href="{%url 'subpost-create' post.pk%}">Add more SubPosts</a>
-            {% endif %}
-          </div>
+<div class="col-2 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center " style="margin-top: 35px; margin-bottom: 35px;">
+  <div class="col-lg-7">
+    <div class="card" style="padding: 15px">
+      <div class="">
+        <h1 class="">{{ object.title }}</h1>
+        <a class="" href="#">{{ object.author }}</a>
+        <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+        {% if object.author == user %}
+        <div>
+          <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
         </div>
-      {%endif%}
-      <!-- COMMENTS  -->
-      <!-- <hr>
-      <h5>Leave your comment!</h5>
-      <div id="comments_section">
-      
-        {% if user.is_authenticated %}
-        <form method="POST">
-          {% csrf_token %}
-          <div class="form-group">
-            {{ comment_form|crispy }}
-            <button class="btn btn-info" type="submit">Add comment <i class="fas fa-comments"></i></button>
-          </div>
-        </form>
-        {% else %}
-        <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to add a comment!</a><br>
         {% endif %}
-      
-        {% if comments %}
-        <hr>
-        <ul>
-          {% for comment in comments %}
-          <li>
-            <div>
-              <span>
-                <strong class="text-info">{{ comment.user }} </strong>
-                <small class="text-muted">{{ comment.date_added }}</small>
-              </span>
-              <p>
-                {{ comment.body|safe }}
-              </p>
-            </div>
-          </li>
-          {% endfor %}
-        </ul>
-        {% else %}
-        <strong class="text-secondary">No comments yet...</strong>
-        {% endif %}
-      
-      </div> -->
+      </div>
+      <br>
+
+      <div class="d-flex justify-content-between">
+        {{object.content}}
+      </div>
     </div>
   </div>
 
+  <div class="col-lg-4" style="margin-top: 0px;">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body text-center">
+            {%if not post.subposts.all%}
+            No SubPosts Yet.
+            {% if post.author == request.user %}
+            <div>
+              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{%url 'subpost-create' post.pk%}">Create SubPost</a>
 
-  <script>
-    // sandbox disable popups
-    if (window.self !== window.top && window.name!="view1") {;
-      window.alert = function(){/*disable alert*/};
-      window.confirm = function(){/*disable confirm*/};
-      window.prompt = function(){/*disable prompt*/};
-      window.open = function(){/*disable open*/};
-    }
-    
-    // prevent href=# click jump
-    document.addEventListener("DOMContentLoaded", function() {
-      var links = document.getElementsByTagName("A");
-      for(var i=0; i < links.length; i++) {
-        if(links[i].href.indexOf('#')!=-1) {
-          links[i].addEventListener("click", function(e) {
+            </div>
+            {% endif %}
+            {%else%}
+            {%for subpost in post.subposts.all%}
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-title">{{subpost.title}} </h4>
+                  <p class="card-text">{{subpost.description}} </p>
+                  <p class="card-text">{{subpost.resources}} </p>
+                  {% if post.author == request.user %}
+                  <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
+                  <a class="btn btn-danger btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/delete/" class="card-link">Delete</a>
+                  {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+            <div class="justify-content-between" style="margin-top: 5px;">
+              {% if post.author == request.user %}
+              <a class="btn btn-success btn-sm mt-1 mb-1 justify-content-between" href="{%url 'subpost-create' post.pk%}">Add more SubPosts</a>
+              {% endif %}
+            </div>
+
+          </div>
+          {%endif%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  // sandbox disable popups
+  if (window.self !== window.top && window.name != "view1") {
+    ;
+    window.alert = function () {/*disable alert*/ };
+    window.confirm = function () {/*disable confirm*/ };
+    window.prompt = function () {/*disable prompt*/ };
+    window.open = function () {/*disable open*/ };
+  }
+
+  // prevent href=# click jump
+  document.addEventListener("DOMContentLoaded", function () {
+    var links = document.getElementsByTagName("A");
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].href.indexOf('#') != -1) {
+        links[i].addEventListener("click", function (e) {
           console.debug("prevent href=# click");
-              if (this.hash) {
-                if (this.hash=="#") {
-                  e.preventDefault();
-                  return false;
-                }
-                else {
-                  /*
-                  var el = document.getElementById(this.hash.replace(/#/, ""));
-                  if (el) {
-                    el.scrollIntoView(true);
-                  }
-                  */
-                }
-              }
+          if (this.hash) {
+            if (this.hash == "#") {
+              e.preventDefault();
               return false;
-          })
-        }
+            }
+            else {
+              /*
+              var el = document.getElementById(this.hash.replace(/#/, ""));
+              if (el) {
+                el.scrollIntoView(true);
+              }
+              */
+            }
+          }
+          return false;
+        })
       }
-    }, false);
-  </script>
-  
-  <!--scripts loaded here-->
-  
+    }
+  }, false);
+</script>
+</div>
+
+<!--scripts loaded here-->
+
 {% endblock content %}
