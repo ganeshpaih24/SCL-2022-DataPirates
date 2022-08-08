@@ -4,15 +4,8 @@
 
 <head>
     <link rel="icon" type="image/x-icon" href="/media/favicon1.png">
-    <script src='https://cdn.tiny.cloud/1/cfqb6c91jvlqn540uv9jyp4cpsewybr9rgabi05kdus75q12/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: 'textarea#id_description'
-        });
-        tinymce.init({
-            selector: 'textarea#id_content'
-        });
-    </script>
+    <script src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+    <script src="/static/ckeditor/ckeditor/ckeditor.js"></script>
     {% if title %}
     <title>WalkThrough | {{ title }}</title>
     {% else %}
@@ -22,20 +15,20 @@
 
 </head>
 
-<class="d-flex flex-column min-vh-100">
+<class = "d-flex flex-column min-vh-100">
 
     {% include 'includes/navbar.html' %}
 
     {%if messages%}
-        {%for message in messages%}
-            <div class="alert alert-{{message.tags}}">
-                {{message}}
-            </div>
-        {%endfor%}
+    {%for message in messages%}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {%endfor%}
     {%endif%}
 
     {% block content %}
-    
+
     {% endblock %}
 
     {% include 'includes/style.html' %}
@@ -44,6 +37,6 @@
     {% block custom_js %}{% endblock %}
     {% include 'includes/notification.html' %}
 
-</class=>
+    </class=>
 
 </html>
