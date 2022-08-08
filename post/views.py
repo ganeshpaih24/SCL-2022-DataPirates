@@ -13,8 +13,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.urls import reverse,reverse_lazy
-from .forms import SubPostModelForm,PostCommentForm
-#from django.shortcuts import get_object_or_404
+from .forms import SubPostModelForm,PostCommentForm,PostForm
+from django.shortcuts import get_object_or_404
 #from django.http import HttpResponseRedirect
 
 
@@ -63,8 +63,10 @@ class PostCreateView(LoginRequiredMixin,CreateView):
     
     def form_valid(self,form):
         form.instance.author=self.request.user
+        messages.success(self.request, f'New Post Created! Enter details..')
         return super().form_valid(form)
 
+'''
 class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model=Post
     fields=['title','content']
@@ -78,6 +80,18 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
         if self.request.user==post.author:
             return True
         return False
+'''
+@login_required
+def postUpdateView(request, pk):
+    context ={} 
+    obj = get_object_or_404(Post, id = pk)
+    form = PostForm(request.POST or None, instance = obj)
+    if form.is_valid():
+        form.save()
+        messages.success(request, f'Post Updated!')
+        return redirect('post-detail',pk=pk)
+    context["form"] = form
+    return render(request, "post/post_update.html", context)
 
 class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model=Post
@@ -89,11 +103,6 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
             return True
         return False
 
-def flowchart(request):
-    subpost = SubPost.objects.all()
-    context = {'subpost': subpost}
-    return render(request, 'post/flow2.html',context)
-    
 '''    
 @login_required
 def subpost(request,pk):
@@ -141,7 +150,8 @@ class SubPostCreateView(CreateView):
 @login_required
 def updateSubpost(request,pk, id):
     subpost = SubPost.objects.get(id=id)
-    
+    context={}
+    '''
     if request.method == 'GET':
         form = SubPostModelForm(instance=subpost)
         context = {
@@ -151,13 +161,14 @@ def updateSubpost(request,pk, id):
         return render(request, 'post/subpost_form.html', context=context)
     
     if request.method == 'POST':
-        form = SubPostModelForm(request.POST, instance=subpost)
-        if form.is_valid():
-            form.save()
-            messages.success(request, f'Your subpost information has been updated')
-        else:
-            messages.error(request, f'Something is wrong in your input')
-        return redirect('post-detail', pk=pk)
+    '''
+    form = SubPostModelForm(request.POST or None, instance=subpost)
+    if form.is_valid():
+        form.save()
+        messages.success(request, f'Subpost updated!')
+        return redirect('post-detail',pk=pk)
+    context["form"] = form
+    return render(request,"post/subpost-update.html", context)
 
 
 @login_required
