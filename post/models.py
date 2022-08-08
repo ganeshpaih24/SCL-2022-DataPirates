@@ -37,8 +37,8 @@ class Post(models.Model):
 class SubPost(models.Model):
     post=models.ForeignKey(Post,related_name="subposts", on_delete=models.CASCADE)  
     title=models.CharField(max_length=100)
-    description=models.TextField(max_length=100,null=True, blank=True)
-    resources=models.TextField(max_length=100,null=True, blank=True)
+    description=models.TextField(max_length=1000,null=True, blank=True)
+    resources=models.TextField(max_length=1000,null=True, blank=True)
     date_posted=models.DateTimeField(default=timezone.now)
     
     '''
