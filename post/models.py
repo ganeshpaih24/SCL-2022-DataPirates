@@ -23,7 +23,7 @@ class SubForm(ModelForm):
 class Post(models.Model):
     # topic=models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     title=models.CharField(max_length=100)
-    image = models.ImageField(default='default.jpg', upload_to='post_img')
+    image = models.ImageField( upload_to='post_img')
     # content=models.TextField(null=True, blank=True)
     content=HTMLField()
     #subpost=models.ForeignKey(Post,on_delete=models.CASCADE)  
