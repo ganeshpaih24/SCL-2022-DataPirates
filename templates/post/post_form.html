@@ -9,12 +9,13 @@
 
 <div class="offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center ">
     <div class="center" style="width: 700px;">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
             <fieldset class="form-group">
                 <legend class="" style="text-align: center; margin-bottom: 10px; margin-top: 15px;">User Post</legend>
             </fieldset>
+            
 
             <label for="id_title" style="margin-top: 15px;">Title:*</label>
             <input type="text" name="title" value="" maxlength="100" class="textinput textInput form-control" required="" id="id_title">
