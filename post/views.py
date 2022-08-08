@@ -17,6 +17,15 @@ from .forms import SubPostModelForm,PostCommentForm
 #from django.shortcuts import get_object_or_404
 #from django.http import HttpResponseRedirect
 
+def search(request):
+    if request.method=="POST":
+        Searched= request.post['Searched']
+        return render(request, 
+        'post/search.html', 
+    {'Seached':Searched})
+    else:
+         return render(request, 'post/search.html', 
+    {})
 
 
 

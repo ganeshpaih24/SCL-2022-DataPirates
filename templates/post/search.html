@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{%load crispy_forms_tags%}
+{% block content%}
+{% for post in posts %}
+    {% if searched %}
+        <h1>You Searched For{{
+            Searched}}</h1>
+    {% else %}
+         <h1>Hey! You Forgot To Search 
+            For Roadmap</h1>
+    {% endif %}
+
+    
+
+{% endfor %}
+
+{%endblock content%}
