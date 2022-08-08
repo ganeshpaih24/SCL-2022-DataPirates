@@ -32,9 +32,9 @@ class PostDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['comments'] = Comment.objects.filter(post=self.get_object()).order_by('-created')
         if self.request.user.is_authenticated:
-            context['comment_form'] = PostCommentForm(instance=self.request.user)
+            context ['comments'] = Comment.objects.filter(post=self.get_object())
+            #context['comment_form'] = PostCommentForm(instance=self.request.user)
         return context
     '''
     def get_queryset(self, *args, **kwargs):
@@ -45,17 +45,17 @@ class PostDetailView(DetailView):
         new_comment.save()
         return self.get(self, request, *args, **kwargs)
         
-'''
-class CommentCreateView(CreateView):
-    model = Comment
-    form_class = PostCommentForm
-    template_name='post/add_comment.html'
-    #fields = '__all__'
-    def form_valid(self, form):
-        form.instance.post_id = self.kwargs['pk']
-        return super().form_valid(form)
-    success_url="/post/{post_id}"
-'''
+def postComment(request,pk):
+    if request.method == "POST":
+        body=request.POST.get('body')
+        user=request.user
+        postSno =request.POST.get('postSno')
+        post= Post.objects.get(pk=pk)
+        comment=Comment(body= body, user=user, post=post)
+        comment.save()
+        messages.success(request, "Comment posted successfully!")
+    return redirect('post-detail',pk=pk)
+
 class PostCreateView(LoginRequiredMixin,CreateView):
     model=Post
     fields=['title','content']

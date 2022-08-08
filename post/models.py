@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.forms import ModelForm
 from tinymce.models import HTMLField
 #from tinymce import HTMLField
+from django.utils.timezone import now
 
 # class Topic(models.Model):
 #     name = models.CharField(max_length=200)
@@ -52,7 +53,7 @@ class SubPost(models.Model):
         return self.title
         
 class Comment(models.Model):
-    post = models.ForeignKey(Post,related_name="comments", on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 #    comment = HTMLField()
 #    name=models.CharField(max_length=255)
@@ -60,6 +61,9 @@ class Comment(models.Model):
     updated=models.DateTimeField(auto_now=True)
     created=models.DateTimeField(auto_now_add=True)
     date_added=models.DateTimeField(auto_now_add=True)
+    sno= models.AutoField(primary_key=True)
+    parent=models.ForeignKey('self',on_delete=models.CASCADE, null=True )
+    timestamp= models.DateTimeField(default=now)
 
     def __str__(self):
         return self.body[0:50]

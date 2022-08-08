@@ -63,6 +63,30 @@
       </div>
     </div>
   </div>
+  <!--COMMENT SECTION-->
+  <div class="container">
+    <h2> Comments ({{comments.count}})</h2>
+    <div class="my-2">
+      {% if user.is_authenticated %}
+      <form action="{%url 'postComment' post.pk%}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Post Comment </label>
+          <input type="text" class="form-control" name="body" placeholder="Enter comment here">
+        </div>
+        <input type="hidden" name="postSno" value="{{post.sno}}">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      {% else %}
+      Please login to post a comment
+      {% endif %}
+    </div>
+    {% for comment in comments %}
+    <img style="width:50px; height:50px;" src="/media/default.jpg" alt="user">
+    <b> {{comment.user.username}} </b> at {{comment.timestamp}}
+    <div> {{comment.body}} </div>
+    {% endfor %}
+  </div>
 </div>
 
 
