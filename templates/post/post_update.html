@@ -22,14 +22,13 @@
 
             <!-- <img src="{{ user.profile.image.url }}" class="img-fluid" loading="lazy"> -->
 
-            
 
             <!-- Fix this issue -->
 
             <div id="div_id_image" class="form-group">
-                <label for="id_image" class=" requiredField">Image<span class="asteriskField">*</span> </label>
-                <div>
-                    Currently: <a href=""></a><br>
+                <label for="id_image" class=" requiredField">Thumbnail:*</label>
+                <div style="margin-top: 5px;">
+                    Currently: <a href="{{ post.post.image }}">{{ post.post.image.url }}</a><br>
                     Change:
                     <input type="file" name="image" accept="image/*" class="form-control-file" id="id_image">
                 </div>
