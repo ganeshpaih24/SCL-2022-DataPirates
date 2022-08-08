@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.forms import ModelForm
+from tinymce.models import HTMLField
 #from tinymce import HTMLField
 
 # class Topic(models.Model):
@@ -21,7 +22,8 @@ class SubForm(ModelForm):
 class Post(models.Model):
     # topic=models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     title=models.CharField(max_length=100)
-    content=models.TextField(null=True, blank=True)
+    # content=models.TextField(null=True, blank=True)
+    content=HTMLField()
     #subpost=models.ForeignKey(Post,on_delete=models.CASCADE)  
     date_posted=models.DateTimeField(default=timezone.now)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
