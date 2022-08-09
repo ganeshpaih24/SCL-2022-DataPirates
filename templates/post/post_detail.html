@@ -2,7 +2,7 @@
 {%load crispy_forms_tags%}
 {% block content %}
 
-<div class="col-2 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center " style="margin-top: 35px; margin-bottom: 35px;">
+<div class="  col-lg-7 offset-lg-4 div-wrapper justify-content-center " style="margin-top: 35px; margin-bottom: 35px;">
   <div class="col-lg-7">
     <div class="card" style="padding: 15px">
       <div class="">
@@ -21,78 +21,85 @@
           <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
         </div>
         {% endif %}
-      </div>
+      
       <br>
 
       <div class="">
         {{object.content | safe}}
 
       </div>
+      
     </div>
-  </div>
-
-  <div class="col-lg-4" style="margin-top: 0px;">
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body text-center">
-            {%if not post.subposts.all%}
-            No SubPosts Yet.
-            {% if post.author == request.user %}
-            <div>
-              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{%url 'subpost-create' post.pk%}">Create SubPost</a>
-
-            </div>
-            {% endif %}
-            {%else%}
-            {%for subpost in post.subposts.all%}
-            <div class="card">
-              <div class="card-body">
-                <h3 class="card-title">{{subpost.title}} </h4>
-                  <p class="card-text"> {{subpost.description | safe}} </p>
-                  <p class="card-text">{{subpost.resources}} </p>
-                  {% if post.author == request.user %}
-                  <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
-                  <a class="btn btn-danger btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/delete/" class="card-link">Delete</a>
-                  {% endif %}
-              </div>
-            </div>
-            {% endfor %}
-            <div class="justify-content-between" style="margin-top: 5px;">
+    </div>
+    <br>     <br>   
+    <div class="col-lg-7" >
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body text-center">
+              {%if not post.subposts.all%}
+              No SubPosts Yet.
               {% if post.author == request.user %}
-              <a class="btn btn-success btn-sm mt-1 mb-1 justify-content-between" href="{%url 'subpost-create' post.pk%}">Add more SubPosts</a>
+              <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{%url 'subpost-create' post.pk%}">Create SubPost</a>
+  
+              </div>
               {% endif %}
+              {%else%}
+              {%for subpost in post.subposts.all%}
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title">{{subpost.title}} </h4>
+                    <p class="card-text"> {{subpost.description | safe}} </p>
+                    <p class="card-text">{{subpost.resources}} </p>
+                    {% if post.author == request.user %}
+                    <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/delete/" class="card-link">Delete</a>
+                    {% endif %}
+                </div>
+              </div>
+              {% endfor %}
+              <div class="justify-content-between" style="margin-top: 5px;">
+                {% if post.author == request.user %}
+                <a class="btn btn-success btn-sm mt-1 mb-1 justify-content-between" href="{%url 'subpost-create' post.pk%}">Add more SubPosts</a>
+                {% endif %}
+              </div>
+  
             </div>
-
+            {%endif%}
           </div>
-          {%endif%}
         </div>
       </div>
     </div>
-  </div>
-  <!--COMMENT SECTION-->
-  <div class="container">
-    <h2> Comments ({{comments.count}})</h2>
-    <div class="my-2">
-      {% if user.is_authenticated %}
-      <form action="{%url 'postComment' post.pk%}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="exampleInputEmail1">Post Comment </label>
-          <input type="text" class="form-control" name="body" placeholder="Enter comment here">
-        </div>
-        <input type="hidden" name="postSno" value="{{post.sno}}">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-      {% else %}
-      Please login to post a comment
-      {% endif %}
+
+    <br>     <br> 
+
+    <!--COMMENT SECTION-->
+    <div class="container">
+      <h2> Comments ({{comments.count}})</h2>
+      <div class="my-2">
+        {% if user.is_authenticated %}
+        <form action="{%url 'postComment' post.pk%}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">Post Comment </label>
+            <input type="text" class="form-control w-50" name="body" placeholder="Enter comment here">
+          </div>
+          <input type="hidden" name="postSno" value="{{post.sno}}">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% else %}
+        Please login to post a comment
+        {% endif %}
+      </div>
+      {% for comment in comments %}
+      <img style="width:50px; height:50px;" src="/media/default.jpg" alt="user">
+      <b> {{comment.user.username}} </b> at {{comment.timestamp}}
+      <div> {{comment.body}} </div>
+      {% endfor %}
     </div>
-    {% for comment in comments %}
-    <img style="width:50px; height:50px;" src="/media/default.jpg" alt="user">
-    <b> {{comment.user.username}} </b> at {{comment.timestamp}}
-    <div> {{comment.body}} </div>
-    {% endfor %}
+  </div>
+
   </div>
 </div>
 
