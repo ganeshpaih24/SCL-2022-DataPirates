@@ -9,6 +9,12 @@
         <h1 class="">{{ object.title }}</h1>
         <a class="" href="#">{{ object.author }}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+        {% if object.stars_count == 0 %}
+          <a href="{% url 'postStar' object.id %}">Star<i class="fa far fa-star"></i></a>
+        {% else %}
+          <a href="{% url 'postStar' object.id %}">Unstar<i class="fa fas fa-star"></i></a>
+        {% endif %}
+        </div>
         {% if object.author == user %}
         <div>
           <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
@@ -18,8 +24,9 @@
       </div>
       <br>
 
-      <div class="d-flex justify-content-between">
-        {{object.content|safe}}
+      <div class="">
+        {{object.content | safe}}
+
       </div>
     </div>
   </div>
@@ -42,7 +49,7 @@
             <div class="card">
               <div class="card-body">
                 <h3 class="card-title">{{subpost.title}} </h4>
-                  <p class="card-text">{{subpost.description|safe}} </p>
+                  <p class="card-text"> {{subpost.description | safe}} </p>
                   <p class="card-text">{{subpost.resources}} </p>
                   {% if post.author == request.user %}
                   <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
@@ -62,6 +69,30 @@
         </div>
       </div>
     </div>
+  </div>
+  <!--COMMENT SECTION-->
+  <div class="container">
+    <h2> Comments ({{comments.count}})</h2>
+    <div class="my-2">
+      {% if user.is_authenticated %}
+      <form action="{%url 'postComment' post.pk%}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Post Comment </label>
+          <input type="text" class="form-control" name="body" placeholder="Enter comment here">
+        </div>
+        <input type="hidden" name="postSno" value="{{post.sno}}">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      {% else %}
+      Please login to post a comment
+      {% endif %}
+    </div>
+    {% for comment in comments %}
+    <img style="width:50px; height:50px;" src="/media/default.jpg" alt="user">
+    <b> {{comment.user.username}} </b> at {{comment.timestamp}}
+    <div> {{comment.body}} </div>
+    {% endfor %}
   </div>
 </div>
 

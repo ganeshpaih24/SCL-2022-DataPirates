@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{%load crispy_forms_tags%}
+{% block content%}
+{% for post in star_list.posts.all %}
+<style>
+    /* Design */
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        background-color: #ecf9ff;
+    }
+
+
+
+    .main {
+        display: inline-block;
+        margin: 0 auto;
+        width: 33%
+    }
+
+    h1 {
+        font-size: 24px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    img {
+        height: auto;
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    .btn1 {
+        color: #ffffff;
+        padding: 0.8rem;
+        font-size: 14px;
+        text-transform: uppercase;
+        border-radius: 4px;
+        font-weight: 400;
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: transparent;
+        font-family: "Jost", sans-serif;
+    }
+
+    .btn1:hover {
+        background-color: rgba(255, 255, 255, 0.12);
+    }
+
+
+
+    .card1 {
+        background-color: white;
+        border-radius: 0.8rem;
+        box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        margin: 1rem;
+    }
+
+    .text {
+        color: #ffffff;
+        font-size: 1.7rem;
+
+    }
+
+    .text:hover {
+        color: rgb(36, 106, 117);
+    }
+
+    .card_content {
+        padding: 1rem;
+        background-color: #738bdc;
+        background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
+    }
+
+    .card_title {
+        color: #ffffff;
+        font-family: "Jost", sans-serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        margin: 0px;
+    }
+
+    .card_text {
+        color: #ffffff;
+        font-family: 'Jost', sans-serif;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+
+    .mr-2,
+    .text2 {
+        color: #ffffff;
+        font-family: "Jost", sans-serif;
+    }
+
+    .mr-2:hover {
+        color: rgb(36, 106, 117);
+    }
+
+    .new {
+        color: #ffffff;
+    }
+
+    .new:hover {
+        color: #ffffff;
+    }
+</style>
+<h1>Starred Posts</h1>
+<div class="d-flex justify-content-center ">
+    <div class="main col-6">
+
+        <div class="card1">
+            <div class="card_content">
+                <img src="{{ post.image.url }}" class="img-fluid" loading="lazy">
+                <center><a class="text" href="url{ 'post-detail' post.id }">{{ post.title }}</a><br>
+                    <small class="card_text">{{ post.topic.name }}</small><br>
+                    <a class="mr-2" href="#">By {{post.author }}</a>
+                    <small class="text2">on {{ post.date_posted|date:"F d,Y"}}</small>
+                </center>
+                <a class="new" href="{% url 'post-detail' post.id %}"><button class="btn1">Detailed Roadmap</button></a>
+                <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endfor %}
+
+{%endblock content%}
