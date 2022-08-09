@@ -3,7 +3,7 @@
 {% block content%}
 {% for post in posts %}
 <style>
-  @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
 
   /* Design */
   *,
@@ -16,14 +16,7 @@
     background-color: #ecf9ff;
   }
 
-  body {
-    color: #272727;
-    font-family: 'Quicksand', serif;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0;
-
-  }
+ 
 
   .main {
     display: inline-block;
@@ -77,7 +70,7 @@
   .text {
     color: #ffffff;
     font-size: 1.7rem;
-    font-family: "Jost", sans-serif;
+ 
   }
 
   .text:hover {
@@ -131,6 +124,7 @@
 
     <div class="card1">
       <div class="card_content">
+        <img src="{{ post.image.url }}" class="img-fluid" loading="lazy">
         <center><a class="text" href="post/{{ post.id }}">{{ post.title }}</a><br>
           <small class="card_text">{{ post.topic.name }}</small><br>
           <a class="mr-2" href="#">By {{post.author }}</a>

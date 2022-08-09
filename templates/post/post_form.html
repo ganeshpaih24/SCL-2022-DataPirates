@@ -6,18 +6,22 @@
         padding-left: 70px;
     }
 </style>
-<div class="col-10 offset-1 col-lg-9 offset-lg-1  ">
-    <div class="content-section">
-        <form method="POST">
+<div class="offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center ">
+    <div class="center" style="width: 700px;">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4 ">User Post</legend>
-                {{ form|crispy }}
+                <legend class="" style="text-align: center; margin-bottom: 10px; margin-top: 15px;">User Post</legend>
             </fieldset>
-            <div class="form-group"><br>
-                <center> <button class="btn btn-outline-info" type="submit">Post</button></center>
-                <br>
-            </div>
+            
+
+            <label for="id_title" style="margin-top: 15px;">Title:*</label>
+            <input type="text" name="title" value="" maxlength="100" class="textinput textInput form-control" required="" id="id_title">
+
+            <label for="id_content" style="margin-top: 15px; margin-bottom: 10px;">Content:*</label>
+            <textarea name="content" cols="40" rows="15" class="textarea form-control" id="id_content"></textarea>
+
+            <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px;">Post</button></center>
         </form>
     </div>
 </div>

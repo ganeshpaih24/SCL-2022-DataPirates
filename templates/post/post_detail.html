@@ -19,7 +19,7 @@
       <br>
 
       <div class="d-flex justify-content-between">
-        {{object.content}}
+        {{object.content|safe}}
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@
             <div class="card">
               <div class="card-body">
                 <h3 class="card-title">{{subpost.title}} </h4>
-                  <p class="card-text">{{subpost.description}} </p>
+                  <p class="card-text">{{subpost.description|safe}} </p>
                   <p class="card-text">{{subpost.resources}} </p>
                   {% if post.author == request.user %}
                   <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
