@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.forms import ModelForm
+from django.utils.timezone import now
 from ckeditor.fields import RichTextField
 
 # class Topic(models.Model):
@@ -30,6 +31,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    stars_count= models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -70,3 +72,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.body[0:50]
+
+class Star(models.Model):
+    posts=models.ManyToManyField(Post)
+    user=models.ForeignKey(User,on_delete=models.CASCADE,related_name="star_user")
