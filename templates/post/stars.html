@@ -123,7 +123,7 @@
         <div class="card1">
             <div class="card_content">
                 <img src="{{ post.image.url }}" class="img-fluid" loading="lazy">
-                <center><a class="text" href="url{ 'post-detail' post.id }">{{ post.title }}</a><br>
+                <center><a class="text" href="{% url 'post-detail' post.id %}">{{ post.title }}</a><br>
                     <small class="card_text">{{ post.topic.name }}</small><br>
                     <a class="mr-2" href="#">By {{post.author }}</a>
                     <small class="text2">on {{ post.date_posted|date:"F d,Y"}}</small>
