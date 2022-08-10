@@ -2,26 +2,60 @@
 {%load crispy_forms_tags%}
 {% block content %}
 
-<div class="col-2 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center " style="margin-top: 35px; margin-bottom: 35px;">
+<div class="  col-lg-7 offset-lg-4 div-wrapper justify-content-center " style="margin-top: 35px; margin-bottom: 35px;">
   <div class="col-lg-7">
     <div class="card" style="padding: 15px">
       <div class="">
         <h1 class="">{{ object.title }}</h1>
         <a class="" href="#">{{ object.author }}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+        {% if object.stars_count == 0 %}
+          <!-- <a href="">Star<i class="fa far fa-star"></i></a> -->
+        {% else %}
+          <!-- <a href="">Unstar<i class="fa fas fa-star"></i></a> -->
+        {% endif %}
+        </div>
         {% if object.author == user %}
         <div>
           <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+          <!-- <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a> -->
+          <!-- <a class="btn btn-danger btn-sm mt-1 mb-1" data-bs-toggle="modal" data-bs-target="#delete">Delete</a> -->
+          <a type="button" class="btn btn-danger btn-sm mt-1 mb-1" data-bs-toggle="modal" data-bs-target="#deletePost">
+            Delete
+          </a>
+
+          <!-- Modal -->
+          <div class="modal fade" id="deletePost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Delete SubPost</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to delete the post "{{object.title}}"?
+                </div>
+                <div class="modal-footer">
+                  <div class="clearfix">
+                    <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1" data-bs-dismiss="modal">Close</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
+
         {% endif %}
-      </div>
+      
       <br>
     
    
 
-      <div class="d-flex justify-content-between">
-        {{object.content}}
+      <div class="">
+        {{object.content | safe}}
+
       </div>
     </div>
   </div>
@@ -44,13 +78,34 @@
             <div class="card">
               <div class="card-body">
                 <h3 class="card-title">{{subpost.title}} </h4>
-                  <p class="card-text">{{subpost.description}} </p>
+                  <p class="card-text">{{subpost.description|safe}} </p>
                   <p class="card-text">{{subpost.resources}} </p>
                   {% if post.author == request.user %}
                   <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
-                  <a class="btn btn-danger btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/delete/" class="card-link">Delete</a>
+                  <a type="button" class="btn btn-danger btn-sm mt-1 mb-1" data-bs-toggle="modal" data-bs-target="#deleteSubPost">Delete</a>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="deleteSubPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Delete SubPost</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-start">
+                          Are you sure you want to delete the post "{{object.title}}"?
+                        </div>
+                        <div class="modal-footer">
+                          <div class="clearfix">
+                            <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1" data-bs-dismiss="modal">Close</a>
+                            <a class="btn btn-danger btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/delete/">Delete</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   {% endif %}
-              </div>
+                </div>
             </div>
             {% endfor %}
             <div class="justify-content-between" style="margin-top: 5px;">
@@ -65,9 +120,31 @@
       </div>
     </div>
   </div>
+  <!--COMMENT SECTION-->
+  <div class="container">
+    <h2> Comments ({{comments.count}})</h2>
+    <div class="my-2">
+      {% if user.is_authenticated %}
+      <form action="{%url 'postComment' post.pk%}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleInputEmail1">Post Comment </label>
+          <input type="text" class="form-control" name="body" placeholder="Enter comment here">
+        </div>
+        <input type="hidden" name="postSno" value="{{post.sno}}">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      {% else %}
+      Please login to post a comment
+      {% endif %}
+    </div>
+    {% for comment in comments %}
+    <img style="width:50px; height:50px;" src="/media/default.jpg" alt="user">
+    <b> {{comment.user.username}} </b> at {{comment.timestamp}}
+    <div> {{comment.body}} </div>
+    {% endfor %}
+  </div>
 </div>
-
-
 
 <script>
   // sandbox disable popups
