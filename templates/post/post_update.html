@@ -28,21 +28,11 @@
             <div id="div_id_image" class="form-group">
                 <label for="id_image" class=" requiredField">Thumbnail:*</label>
                 <div style="margin-top: 5px;">
-                    Currently: <a href="{{ post.post.image }}">{{ post.post.image.url }}</a><br>
+                    Currently: <a href="{{ post.image.url }}">{{ post.image.url }}</a><br>
                     Change:
                     <input type="file" name="image" accept="image/*" class="form-control-file" id="id_image">
                 </div>
             </div>
-
-
-            <!-- <label for="id_image" style="margin-top: 5px; margin-bottom: 5px;">Thumbnail:</label>
-            <div>
-                <input type="file" name="image" href="{{ post.image.url }}" accept="image/*" id="id_image" class="form-control-file">
-            </div> -->
-
-
-
-
 
 
 
