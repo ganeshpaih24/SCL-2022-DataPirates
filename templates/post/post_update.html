@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
 {% block content%}
+
 <style>
     .content-section {
         padding-left: 70px;
@@ -11,6 +12,7 @@
     <div class="center" style="width: 700px;">
         <form method="POST">
             {% csrf_token %}
+            <!-- {{ form.as_p}} -->
             <fieldset class="form-group">
                 <legend class="" style="text-align: center; margin-bottom: 10px; margin-top: 15px;">User Post</legend>
             </fieldset>
@@ -18,10 +20,37 @@
             <label for="id_title" style="margin-top: 15px;">Title:*</label>
             <input type="text" name="title" value="{{ form.title.value }}" maxlength="100" class="textinput textInput form-control" required="" id="id_title">
 
-            <label for="id_content" style="margin-top: 15px; margin-bottom: 10px;">Content:*</label>
-            <textarea name="content" cols="40" rows="15" class="textarea form-control" id="id_content">{{ form.content.value }}</textarea>
-            
-            <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px;">Post</button></center>
+            <!-- <img src="{{ user.profile.image.url }}" class="img-fluid" loading="lazy"> -->
+
+
+            <!-- Fix this issue -->
+
+            <div id="div_id_image" class="form-group">
+                <label for="id_image" class=" requiredField">Thumbnail:*</label>
+                <div style="margin-top: 5px;">
+                    Currently: <a href="{{ post.image.url }}">{{ post.image.url }}</a><br>
+                    Change:
+                    <input type="file" name="image" accept="image/*" class="form-control-file" id="id_image">
+                </div>
+            </div>
+
+
+
+            <p></p>
+
+            <p>
+                <label for="id_content">Content:</label>
+
+
+            <div class="django-ckeditor-widget" data-field-id="id_content" style="display: inline-block; width: 100px">
+                <textarea name="content" cols="30" rows="10" id="id_content" data-processed="0" data-config="{&quot;skin&quot;: &quot;moono-lisa&quot;, &quot;toolbar_Basic&quot;: [[&quot;Source&quot;, &quot;-&quot;, &quot;Bold&quot;, &quot;Italic&quot;]], &quot;toolbar_Full&quot;: [[&quot;Styles&quot;, &quot;Format&quot;, &quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;Strike&quot;, &quot;SpellChecker&quot;, &quot;Undo&quot;, &quot;Redo&quot;], [&quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;], [&quot;Image&quot;, &quot;Flash&quot;, &quot;Table&quot;, &quot;HorizontalRule&quot;], [&quot;TextColor&quot;, &quot;BGColor&quot;], [&quot;Smiley&quot;, &quot;SpecialChar&quot;]], &quot;toolbar&quot;: &quot;Full&quot;, &quot;height&quot;: 291, &quot;width&quot;: 700, &quot;filebrowserWindowWidth&quot;: 940, &quot;filebrowserWindowHeight&quot;: 725, &quot;language&quot;: &quot;en-us&quot;}" data-external-plugin-resources="[]" data-id="id_content" data-type="ckeditortype">{{ form.content.value }}</textarea>
+            </div>
+            </p>
+
+
+
+
+            <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px; margin-top: 0px;">Post</button></center>
         </form>
     </div>
 </div>
