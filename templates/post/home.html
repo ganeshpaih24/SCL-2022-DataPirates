@@ -12,122 +12,97 @@
     box-sizing: border-box;
   }
 
-  html {
-    background-color: #ecf9ff;
-  }
 
-  body {
-    color: #272727;
-    font-family: 'Quicksand', serif;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0;
+.card {
+    border: none;
+    border-radius: 10px
+}
 
-  }
+.c-details span {
+    font-weight: 300;
+    font-size: 13px
+}
 
-  .main {
-    display: inline-block;
-    margin: 0 auto;
-    width: 33%
-  }
-
-  h1 {
-    font-size: 24px;
-    font-weight: 400;
-    text-align: center;
-  }
-
-  img {
-    height: auto;
-    max-width: 100%;
-    vertical-align: middle;
-  }
-
-  .btn1 {
-    color: #ffffff;
-    padding: 0.8rem;
-    font-size: 14px;
-    text-transform: uppercase;
-    border-radius: 4px;
-    font-weight: 400;
-    display: block;
-    width: 100%;
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
-    font-family: "Jost", sans-serif;
-  }
-
-  .btn1:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-  }
-
-
-
-  .card1 {
-    background-color: white;
-    border-radius: 0.8rem;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+.icon {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(49, 49, 49) !important;
+    border-radius: 15px;
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    margin: 1rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 39px
+}
+
+/* .badge span {
+    background-color: #fffbec;
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: #8df162;
+    justify-content: center;
+    align-items: center
+} */
+
+/* .progress {
+    height: 10px;
+    border-radius: 10px
+}
+
+.progress div {
+    background-color: red
+} */
+
+.text1 {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.text2 {
+    color: #a5aec0
+}
+
+.thumbnail{
+    padding: .25rem;
+    background-color: #fff;
+    /* border: 1px solid #dee2e6; */
+    border-radius: .75rem;
+    max-width: 100%;
+    height: auto;}
+
+
+    .button {
+      padding: .70rem;
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
   }
 
-  .text {
-    color: #ffffff;
-    font-size: 1.7rem;
-    font-family: "Jost", sans-serif;
-  }
+.button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
 
-  .text:hover {
-    color: rgb(36, 106, 117);
-  }
-
-  .card_content {
-    padding: 1rem;
-    background-color: #738bdc;
-    background-image: linear-gradient(315deg, #738bdc 0%, #48c3eb 74%);
-  }
-
-  .card_title {
-    color: #ffffff;
-    font-family: "Jost", sans-serif;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: capitalize;
-    margin: 0px;
-  }
-
-  .card_text {
-    color: #ffffff;
-    font-family: 'Jost', sans-serif;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    font-weight: 400;
-  }
-
-  .mr-2,
-  .text2 {
-    color: #ffffff;
-    font-family: "Jost", sans-serif;
-  }
-
-  .mr-2:hover {
-    color: rgb(36, 106, 117);
-  }
-
-  .new {
-    color: #ffffff;
-  }
-
-  .new:hover {
-    color: #ffffff;
-  }
 </style>
-<div class="d-flex justify-content-center ">
+<div class="d-flex justify-content-center my-3 myDiv">
 
-  <div class="main col-6">
+  <!-- <div class="main col-6">
 
     <div class="card1">
       <div class="card_content">
@@ -140,10 +115,55 @@
       </div>
     </div>
 
+  </div> -->
+
+
+
+      <div class="col-md-4  ">
+          <div class="card p-3 my-2 ">
+            <img src="https://images.unsplash.com/photo-1660092508077-5ed788afa17c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="card-img-top" alt="...">
+              <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-row align-items-center">
+                      <div class="icon"><img class="thumbnail" src="{{post.author.profile.image.url}}" alt=""> </div>
+                      <div class="ms-2 c-details">
+                          <h6 class="mb-0">{{post.author }}</h6> <span><small class="text2">on {{ post.date_posted|date:"F d,Y"}}</small></span>
+                      </div>
+                  </div>
+                  <span class="badge badge-primary"> <span>Design</span> </span>
+              </div>
+              <div class="my-2">
+                <a class="text"> <h3 class="heading align-items-center d-flex justify-content-center">{{ post.title }}</h3></a>
+                  <div class="mt-3 text-center ">
+                      
+                      <a class="button" href="post/{{ post.id }}">learn more<span></span></a>
+                      
+                      <!-- <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div> -->
+                  </div>
+              </div>
+      
+
+     
   </div>
 </div>
-
-
+</div>
+<script>
+$(function() {  
+  $('.btn-6')
+    .on('mouseenter', function(e) {
+			var parentOffset = $(this).offset(),
+      		relX = e.pageX - parentOffset.left,
+      		relY = e.pageY - parentOffset.top;
+			$(this).find('span').css({top:relY, left:relX})
+    })
+    .on('mouseout', function(e) {
+			var parentOffset = $(this).offset(),
+      		relX = e.pageX - parentOffset.left,
+      		relY = e.pageY - parentOffset.top;
+    	$(this).find('span').css({top:relY, left:relX})
+    });
+  $('[href=#]').click(function(){return false});
+});
+</script>
 
 {% endfor %}
 {%endblock content%}

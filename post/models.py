@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -78,7 +79,7 @@ class Comment(models.Model):
     date_added=models.DateTimeField(auto_now_add=True)
     sno= models.AutoField(primary_key=True)
     parent=models.ForeignKey('self',on_delete=models.CASCADE, null=True )
-    timestamp= models.DateTimeField(default=now)
+    timestamp= models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return self.body[0:50]
