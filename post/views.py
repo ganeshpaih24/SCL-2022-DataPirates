@@ -1,3 +1,7 @@
+from email.policy import HTTP
+import http
+from http.client import HTTPResponse
+from django.shortcuts import HttpResponse
 from .models import Post,SubPost,Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -17,15 +21,6 @@ from .forms import SubPostModelForm,PostCommentForm
 #from django.shortcuts import get_object_or_404
 #from django.http import HttpResponseRedirect
 
-def search(request):
-    if request.method=="POST":
-        Searched= request.post['Searched']
-        return render(request, 
-        'post/search.html', 
-    {'Seached':Searched})
-    else:
-         return render(request, 'post/search.html', 
-    {})
 
 
 
@@ -189,3 +184,12 @@ def starred_list(request):
     stars=Post.author.filter(stars=request.user)
     return render(request,"post/stars.html",{'stars':stars})
 '''
+
+def search(request):
+    query=request.GET['query']
+    #allposts=Post.objects.all()
+    allposts=Post.objects.filter(title__icontains=query)
+    print(allposts[0])
+    params={'allpost':allposts}
+    return render(request, 'post/search.html', params)
+    #return HttpResponse('This is search')
