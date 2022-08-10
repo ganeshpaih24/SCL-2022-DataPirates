@@ -92,7 +92,7 @@ def postUpdateView(request, pk):
         return redirect('post-detail',pk=pk)
     context["form"] = form
     return render(request, "post/post_update.html", context)
-
+'''
 class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model=Post
     success_url='/'
@@ -102,6 +102,12 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
         if self.request.user==post.author:
             return True
         return False
+'''
+@login_required
+def deletePost(request,pk):
+    post = Post.objects.get(id=pk).delete()
+    messages.success(request, f'Your Post information has been deleted')
+    return redirect('user-home')
 
 def flowchart(request):
     subpost = SubPost.objects.all()
