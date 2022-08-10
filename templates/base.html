@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Alertify Js CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Alertify Js Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
     <script src='https://cdn.tiny.cloud/1/cfqb6c91jvlqn540uv9jyp4cpsewybr9rgabi05kdus75q12/tinymce/4/tinymce.min.js' referrerpolicy="origin"></script>
     <script>
         tinymce.init({
@@ -16,6 +20,8 @@
             selector: 'textarea#id_content'
         });
     </script>
+    <!--Alertify Js-->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     {% if title %}
     <title>WalkThrough | {{ title }}</title>
     {% else %}
@@ -29,13 +35,6 @@
 
     {% include 'includes/navbar.html' %}
 
-    {%if messages%}
-        {%for message in messages%}
-            <div class="alert alert-{{message.tags}}">
-                {{message}}
-            </div>
-        {%endfor%}
-    {%endif%}
 
     {% block content %}
     
@@ -48,5 +47,12 @@
     {% include 'includes/notification.html' %}
 
 </class=>
-
+<script>
+    {% if messages %}
+        {% for message in messages %}
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.success('{{ message }}');
+        {% endfor %}
+    {% endif %}
+</script>
 </html>
