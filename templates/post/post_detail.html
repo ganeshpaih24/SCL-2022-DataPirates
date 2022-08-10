@@ -10,9 +10,9 @@
         <a class="" href="#">{{ object.author }}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
         {% if object.stars_count == 0 %}
-          <a href="{% url 'postStar' object.id %}">Star<i class="fa far fa-star"></i></a>
+          <!-- <a href="">Star<i class="fa far fa-star"></i></a> -->
         {% else %}
-          <a href="{% url 'postStar' object.id %}">Unstar<i class="fa fas fa-star"></i></a>
+          <!-- <a href="">Unstar<i class="fa fas fa-star"></i></a> -->
         {% endif %}
         </div>
         {% if object.author == user %}

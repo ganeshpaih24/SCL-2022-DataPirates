@@ -8,7 +8,7 @@ db.sqlite3
 env
 */migrations/0*
 venv
-djangoProject/settings.py
+
 users/signals.py
 
 configs/config.json
