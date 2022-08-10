@@ -1,11 +1,12 @@
+from datetime import datetime
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.forms import ModelForm
-from tinymce.models import HTMLField
-from django.utils.timezone import now
-
+from PIL import Image
+from ckeditor.fields import RichTextField
+#from tinymce import HTMLField
 
 # class Topic(models.Model):
 #     name = models.CharField(max_length=200)
@@ -22,10 +23,12 @@ class SubForm(ModelForm):
 
 class Post(models.Model):
     # topic=models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
-    title=models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    image = models.ImageField(
+        default='wt-logo.png', upload_to='post_img')
     # content=models.TextField(null=True, blank=True)
-    content=HTMLField()
-    # subpost=models.ForeignKey(Post,on_delete=models.CASCADE)
+    content = RichTextField(blank=True, null=True)
+    #subpost=models.ForeignKey(Post,on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
@@ -36,15 +39,27 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post-detail',kwargs={'pk':self.pk})
+        return reverse('post-detail', kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        super(Post, self).save(*args, **kwargs)
+
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+
 
 class SubPost(models.Model):
-    post=models.ForeignKey(Post,related_name="subposts", on_delete=models.CASCADE)  
-    title=models.CharField(max_length=100)
-    description=models.TextField(max_length=100,null=True, blank=True)
-    resources=models.TextField(max_length=100,null=True, blank=True)
-    date_posted=models.DateTimeField(default=timezone.now)
-    
+    post = models.ForeignKey(
+        Post, related_name="subposts", on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    description = RichTextField(blank=True, null=True)
+    resources = models.TextField(max_length=1000, null=True, blank=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+
     '''
     class Meta:
         ordering=['-updated','-created']
@@ -64,7 +79,7 @@ class Comment(models.Model):
     date_added=models.DateTimeField(auto_now_add=True)
     sno= models.AutoField(primary_key=True)
     parent=models.ForeignKey('self',on_delete=models.CASCADE, null=True )
-    timestamp= models.DateTimeField(default=now)
+    timestamp= models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return self.body[0:50]
