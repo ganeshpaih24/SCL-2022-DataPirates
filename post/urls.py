@@ -26,6 +26,6 @@ urlpatterns = [
     path('post/<int:pk>/subpost/<int:id>/delete/',
          views.deleteSubpost, name="subpost-delete"),
     #path('post/<int:pk>/comment/', CommentCreateView.as_view(), name='comment-create'),
-    path('search', views.search, name='search'),
+    path('search/', views.search, name='search'),
 
 ]

@@ -1,3 +1,4 @@
+from ast import Param
 from .models import Post,SubPost,Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -220,8 +221,9 @@ def starred_list(request):
 def search(request):
     query=request.GET['query']
     #allposts=Post.objects.all()
-    allposts=Post.objects.filter(title__icontains=query)
-    print(allposts[0])
-    params={'allpost':allposts}
-    return render(request, 'post/search.html', params)
+    allPosts=Post.objects.filter(title__icontains=query)
+    print(allPosts[0])
+    context={'allposts':allPosts}
+    # params={'allposts':allPosts}
+    return render(request, 'post/search.html', context=context)
     #return HttpResponse('This is search')
