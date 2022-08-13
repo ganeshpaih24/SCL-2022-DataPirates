@@ -70,7 +70,7 @@ class CommentCreateView(CreateView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'content']
+    fields = ['title', 'image', 'content']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -99,7 +99,7 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
 def postUpdateView(request, pk):
     context = {}
     obj = get_object_or_404(Post, id=pk)
-    form = PostForm(request.POST or None, instance=obj)
+    form = PostForm(request.POST or None, request.FILES or None, instance=obj)
     if form.is_valid():
         form.save()
         messages.success(request, f'Post Updated!')
@@ -108,14 +108,11 @@ def postUpdateView(request, pk):
     return render(request, "post/post_update.html", context)
 
 
-
 @login_required
 def deletePost(request, pk):
     post = Post.objects.get(id=pk).delete()
     messages.success(request, f'Your Post information has been deleted')
     return redirect('user-home')
-
-
 
 
 @login_required
@@ -136,8 +133,6 @@ def deleteSubpost(request, pk, id):
     return redirect('post-detail', pk=pk)
 
 
-
-
 @login_required
 def createSubpost(request, pk):
     post = Post.objects.get(id=pk)
@@ -149,7 +144,6 @@ def createSubpost(request, pk):
             return redirect('post-subpost')
     context = {'form': form}
     return render(request, 'post/subpost_form.html', context)
-    
 
 
 class SubPostCreateView(CreateView):
