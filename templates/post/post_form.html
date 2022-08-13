@@ -9,16 +9,18 @@
 
 <div class="offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center ">
     <div class="center" style="width: 700px;">
-        <form method="POST" enctype="multipart/form-data">
+        <div class="form-control">
+            <form method="POST" enctype="multipart/form-data">
 
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="" style="text-align: center; margin-bottom: 10px; margin-top: 15px;">User Post</legend>
-            </fieldset>
-            {{ form.as_p }}
-            <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px; margin-top: 0px;">Post</button></center>
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="" style="text-align: center; margin-bottom: 10px; margin-top: 15px;">User Post</legend>
+                </fieldset>
+                {{ form.as_p }}
+                <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px; margin-top: 0px;">Post</button></center>
 
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 
