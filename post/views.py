@@ -28,7 +28,7 @@ class PostListView(ListView):
     model = Post
     template_name = 'post/home.html'
     context_object_name = 'posts'
-    ordering = ['date_posted']
+    ordering = ['-date_posted']
 
 
 class PostDetailView(DetailView):
@@ -117,7 +117,7 @@ def deletePost(request, pk):
 
 
 
-'''
+
 @login_required
 def deletePost(request,pk):
     post = Post.objects.get(id=pk).delete()
@@ -176,8 +176,6 @@ def updateSubpost(request, pk, id):
     context["form"] = form
     return render(request, "post/subpost-update.html", context)
 
-
-'''
 @login_required
 def star(request,pk):
     user=request.user
@@ -200,4 +198,13 @@ def star(request,pk):
 def starred_list(request):
     stars=Post.author.filter(stars=request.user)
     return render(request,"post/stars.html",{'stars':stars})
-'''
+    
+
+def search(request):
+    query=request.GET['query']
+    #allposts=Post.objects.all()
+    allposts=Post.objects.filter(title__icontains=query)
+    print(allposts[0])
+    params={'allpost':allposts}
+    return render(request, 'post/search.html', params)
+    #return HttpResponse('This is search')

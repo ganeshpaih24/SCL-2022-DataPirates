@@ -26,59 +26,8 @@
     text-align: center;
   }
 
-  img {
-    height: auto;
-    max-width: 100%;
-    vertical-align: middle;
-  }
 
-  .btn1 {
-    color: #ffffff;
-    padding: 0.8rem;
-    font-size: 14px;
-    text-transform: uppercase;
-    border-radius: 4px;
-    font-weight: 400;
-    display: block;
-    width: 100%;
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
-    font-family: "Jost", sans-serif;
-  }
 
-  .btn1:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-  }
-
-  .card1 {
-    background-color: white;
-    border-radius: 0.8rem;
-    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    margin: 1rem;
-  }
-
-  .text {
-    color: #ffffff;
-    font-size: 1.7rem;
-
-  }
-
-.progress div {
-    background-color: red
-} */
-
-.text1 {
-    font-size: 14px;
-    font-weight: 600
-}
-
-.text2 {
-    color: #a5aec0
-}
 
 .thumbnail{
     padding: .25rem;
@@ -88,19 +37,40 @@
     max-width: 100%;
     height: auto;}
 
-  .mr-2,
-  .text2 {
-    color: #ffffff;
-    font-family: "Jost", sans-serif;
-  }
+  
 
-  .mr-2:hover {
-    color: rgb(36, 106, 117);
-  }
+  card-img {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 
-  .new {
-    color: #ffffff;
-  }
+}
+
+.card-title {
+  margin-bottom: 0.3rem;
+}
+
+.cat {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.fa-users {
+  margin-left: 1rem;
+}
+
+.card-footer {
+  font-size: 0.8rem;
+}
+.card-img-top {
+    max-height: 30vh; /*not want to take all vertical space*/
+    object-fit: cover;/*show all image, autosized, no cut, in available space*/
+}
+
+.card-img-overlay{
+  pointer-events: none;
+
+}
+
 
 </style>
 <div class="d-flex justify-content-center container">
@@ -108,15 +78,52 @@
 
   <div class="row">
     <div class="col-3">
-      <div class="sticky-top">
+      <div class="mx-auto my-5 " >
+      <!-- <div class="sticky-top"> -->
         <h3>Left Sidebar</h3>
 
 
-        add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
+          add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
 
       </div>
     </div>
-    <div class="main col-6">
+    <!-- card start  -->
+    
+    <div class="container col-6">
+      {% for post in posts %}
+      <div class="mx-auto my-5 " >
+    
+        <div class="card">
+          <img class="card-img card-img-top img-fluid" src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/pasta.jpg" alt="Bologna">
+          <div class="card-img-overlay">
+            <a href="#" class="btn btn-light btn-sm">Cooking</a>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{post.title}}</h4>
+            <small class="text-muted cat">
+              <i class="far fa-clock text-info"></i> 30 minutes
+              <i class="fas fa-users text-info"></i> 4 portions
+            </small>
+            <p class="card-text">I love quick, simple pasta dishes, and this is one of my favorite.</p>
+            <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
+            <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
+          </div>
+          <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+            <div class="views">Oct 20, 12:45PM
+            </div>
+            <div class="stats">
+               <i class="far fa-eye"></i> 1347
+              <i class="far fa-comment"></i> 12
+            </div>
+             
+          </div>
+        </div>
+        </div>
+      {% endfor %}
+     
+  </div>
+    
+    <!-- <div class="main col-6">
 
       {% for post in posts %}
       <div class="card1">
@@ -134,15 +141,17 @@
         </div>
       </div>
       {% endfor %}
-    </div>
+    </div> -->
     <div class="col-3">
-      <!-- <div class="sticky-top"> -->
-        <h3>Left Sidebar</h3>
-    
-    
-        add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
-    
-      <!-- </div> -->
+      <div class="mx-auto my-5 " >
+        <!-- <div class="sticky-top"> -->
+          <h3>Left Sidebar</h3>
+  
+  
+          add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
+  
+        </div>
+      </div>
     </div>
   </div>
 </div>
