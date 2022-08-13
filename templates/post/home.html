@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
 {% block content%}
-{% for post in posts %}
+
 <style>
-
-
   /* Design */
   *,
   *::before,
@@ -15,8 +13,6 @@
   html {
     background-color: #ecf9ff;
   }
-
- 
 
   .main {
     display: inline-block;
@@ -55,8 +51,6 @@
     background-color: rgba(255, 255, 255, 0.12);
   }
 
-
-
   .card1 {
     background-color: white;
     border-radius: 0.8rem;
@@ -70,7 +64,7 @@
   .text {
     color: #ffffff;
     font-size: 1.7rem;
- 
+
   }
 
   .text:hover {
@@ -118,26 +112,51 @@
     color: #ffffff;
   }
 </style>
-<div class="d-flex justify-content-center ">
+<div class="d-flex justify-content-center container">
 
-  <div class="main col-6">
 
-    <div class="card1">
-      <div class="card_content">
-        <img src="{{ post.image.url }}" class="img-fluid" loading="lazy">
-        <center><a class="text" href="post/{{ post.id }}">{{ post.title }}</a><br>
-          <small class="card_text">{{ post.topic.name }}</small><br>
-          <a class="mr-2" href="#">By {{post.author }}</a>
-          <small class="text2">on {{ post.date_posted|date:"F d,Y"}}</small>
-        </center>
-        <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
+  <div class="row">
+    <div class="col-3">
+      <div class="sticky-top">
+        <h3>Left Sidebar</h3>
+
+
+        add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
+
       </div>
     </div>
+    <div class="main col-6">
 
+      {% for post in posts %}
+      <div class="card1">
+        <div class="card_content">
+          <img src="{{ post.image.url }}" class="img-fluid" loading="lazy">
+
+          <center><a class="text" href="post/{{ post.id }}">{{ post.title }}</a>
+            <small class="card_text">{{ post.topic.name }}</small><br>
+            <a class="mr-2" href="#">By {{post.author }}</a>
+            <small class="text2">on {{ post.date_posted|date:"F d,Y"}}</small>
+          </center>
+
+          <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col-3">
+      <!-- <div class="sticky-top"> -->
+        <h3>Left Sidebar</h3>
+    
+    
+        add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
+    
+      <!-- </div> -->
+    </div>
   </div>
 </div>
 
 
 
-{% endfor %}
+
 {%endblock content%}
