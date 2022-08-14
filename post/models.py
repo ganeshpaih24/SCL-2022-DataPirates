@@ -26,7 +26,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(default='wt-logo.png', upload_to='post_img')
     # content=models.TextField(null=True, blank=True)
-    content = RichTextField(blank=True, null=True)
+    content = RichTextField(blank=True, null=True, )
     # subpost=models.ForeignKey(Post,on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)

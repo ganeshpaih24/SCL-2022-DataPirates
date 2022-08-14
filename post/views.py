@@ -67,7 +67,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     # fields = ['title', 'image', 'content']
     form_class = PostForm
-
     def form_valid(self, form):
         form.instance.author = self.request.user
         messages.success(self.request, f'New Post Created! Enter details..')
