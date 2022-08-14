@@ -24,9 +24,9 @@ urlpatterns = [
     #path('post/<int:pk>/comment/', CommentCreateView.as_view(), name='comment-create'),
     path('search/', views.search, name='search'),
 
-     path('post/<int:pk>/postComment', views.postComment, name="postComment"),
-#     path('post/<int:pk>/star', views.star, name="postStar"),
-#     path('stars/', views.starlist, name="stars"),
+     path('post/<int:pk>/postComment/', views.postComment, name="postComment"),
+     path('<int:pk>/star/', views.star, name="postStar"),
+     path('stars/', views.starlist, name="stars"),
      path('categories/<slug:slug>/',views.categoryList,name='category'),
 
 ]
