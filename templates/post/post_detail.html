@@ -9,6 +9,7 @@
         <h1 class="">{{ object.title }}</h1>
         <a class="" href="#">{{ object.author }}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+        <small class="text-muted">.{{ object.category.title }}</small>
         {% if object.stars_count == 0 %}
           <!-- <a href="">Star<i class="fa far fa-star"></i></a> -->
         {% else %}

@@ -1,4 +1,4 @@
-from .models import Post,SubPost,Comment,Star
+from .models import Post,SubPost,Comment,Star,Category
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -25,6 +25,10 @@ class PostListView(ListView):
     template_name='post/home.html'
     context_object_name='posts'
     ordering=['date_posted']
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['categories_list']=Category.objects.all()
+        return context
 
 class PostDetailView(DetailView):
     model=Post
@@ -58,7 +62,7 @@ def postComment(request,pk):
 
 class PostCreateView(LoginRequiredMixin,CreateView):
     model=Post
-    fields=['title','content']
+    fields=['title','content','category']
 
     
     def form_valid(self,form):
@@ -210,3 +214,8 @@ def star(request,pk):
 def starlist(request):
     star_list=Star.objects.get(user=request.user)
     return render(request,"post/stars.html",{'star_list':star_list})
+
+def categoryList(request,slug):
+    category=Category.objects.get(slug=slug)
+    category_posts=Post.objects.filter(category=category)
+    return render(request,"post/categories.html",{'category_posts':category_posts})

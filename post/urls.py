@@ -30,5 +30,6 @@ urlpatterns = [
      path('post/<int:pk>/postComment', views.postComment, name="postComment"),
 #     path('post/<int:pk>/star', views.star, name="postStar"),
 #     path('stars/', views.starlist, name="stars"),
+     path('categories/<slug:slug>/',views.categoryList,name='category'),
 
 ]

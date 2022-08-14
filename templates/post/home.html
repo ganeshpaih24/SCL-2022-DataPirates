@@ -117,34 +117,54 @@
 
   </div> -->
 
+<div class="d-flex justify-content-center ">
+  <div class="main col-3">
+    {% for category in categories_list %}
+    <div>
+    <a href="{% url 'category' category.slug %}">{{category.title}}</a>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="main col-6">
 
 
-      <div class="col-md-4  ">
-          <div class="card p-3 my-2 ">
-            <img src="https://images.unsplash.com/photo-1660092508077-5ed788afa17c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" class="card-img-top" alt="...">
-              <div class="d-flex justify-content-between">
-                  <div class="d-flex flex-row align-items-center">
-                      <div class="icon"><img class="thumbnail" src="{{post.author.profile.image.url}}" alt=""> </div>
-                      <div class="ms-2 c-details">
-                          <h6 class="mb-0">{{post.author }}</h6> <span><small class="text2">on {{ post.date_posted|date:"F d,Y"}}</small></span>
-                      </div>
-                  </div>
-                  <span class="badge badge-primary"> <span>Design</span> </span>
-              </div>
-              <div class="my-2">
-                <a class="text"> <h3 class="heading align-items-center d-flex justify-content-center">{{ post.title }}</h3></a>
-                  <div class="mt-3 text-center ">
-                      
-                      <a class="button" href="post/{{ post.id }}">learn more<span></span></a>
-                      
-                      <!-- <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div> -->
-                  </div>
-              </div>
-      
 
-     
+    <div class="card p-3 my-2 ">
+      <img
+        src="https://images.unsplash.com/photo-1660092508077-5ed788afa17c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+        class="card-img-top" alt="...">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-row align-items-center">
+          <div class="icon"><img class="thumbnail" src="{{post.author.profile.image.url}}" alt=""> </div>
+          <div class="ms-2 c-details">
+            <h6 class="mb-0">{{post.author }}</h6> <span><small class="text2">on {{ post.date_posted|date:"Fd,Y"}}</small><small>...{{post.category.title}}</small></span>
+          </div>
+        </div>
+        <span class="badge badge-primary"> <span>Design</span> </span>
+      </div>
+      <div class="my-2">
+        <a class="text">
+          <h3 class="heading align-items-center d-flex justify-content-center">{{ post.title }}</h3>
+        </a>
+        <div class="mt-3 text-center ">
+    
+          <a class="button" href="post/{{ post.id }}">learn more<span></span></a>
+    
+          <!-- <div class="mt-3"> <span class="text1">32 Applied <span class="text2">of 50 capacity</span></span> </div> -->
+        </div>
+      </div>
+    
+    
+    
+    </div>
+  </div>
+  <div class="main col-3">
+    #right sidebar
+
   </div>
 </div>
+
+      
 </div>
 <script>
 $(function() {  
