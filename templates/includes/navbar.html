@@ -1,6 +1,6 @@
 {% load static %}
 <header id="header" class="">
-    <div class="container d-flex align-items-center">
+    <div class="container d-flex align-items-center ">
 
         <h1 class="logo me-auto"><a href="{% url 'user-home' %}">WalkThrough</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
@@ -11,7 +11,7 @@
                 <li><a class="nav-link scrollto" href="{% url 'user-home' %}">Home</a></li>
                 <!-- <li><a class="nav-link scrollto" href="#stories">Stories</a></li> -->
                 <li><a class="nav-link scrollto" href="#about">Our Story</a></li>
-               
+                
                         {% if user.is_authenticated %}
                         <li class="dropdown"><a href="{% url 'profile' %}"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
@@ -24,16 +24,16 @@
                         <li><a href="{% url 'register' %}">Register</a></li>
                         <li><a href="{% url 'login' %}">Login</a></li>
                         {% endif %}
-                
+                 
                         
                         
                     </ul>
+                   
                 </li>
+               
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
     </div>
 </header>
-
-                   
