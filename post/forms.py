@@ -20,11 +20,11 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = (
             "title",
-            #"image",
+            "image",
             "content",
         )
-        widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'image': forms.ImageField(attrs={'class': 'form-control'}),
-            'content': forms.Textarea(attrs={'class': 'form-control'}),
-        }
+        # widgets = {
+        #     'title': forms.TextInput(attrs={'class': 'form-control'}),
+        #     'image': forms.ImageField(attrs={'class': 'form-control'}),
+        #     'content': forms.Textarea(attrs={'class': 'form-control'}),
+        # }

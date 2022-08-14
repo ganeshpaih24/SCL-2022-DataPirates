@@ -3,7 +3,7 @@ from .views import (
     PostListView,
     PostDetailView,
     PostCreateView,
-    SubPostCreateView
+    SubPostCreateView,
 )
 from . import views
 
