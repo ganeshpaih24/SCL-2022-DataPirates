@@ -24,11 +24,10 @@ class SubForm(ModelForm):
 class Post(models.Model):
     # topic=models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100)
-    image = models.ImageField(
-        default='wt-logo.png', upload_to='post_img')
+    image = models.ImageField(default='wt-logo.png', upload_to='post_img')
     # content=models.TextField(null=True, blank=True)
     content = RichTextField(blank=True, null=True)
-    #subpost=models.ForeignKey(Post,on_delete=models.CASCADE)
+    # subpost=models.ForeignKey(Post,on_delete=models.CASCADE)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
