@@ -17,6 +17,11 @@ from django.urls import reverse, reverse_lazy
 from .forms import SubPostModelForm, PostCommentForm, PostForm
 from django.shortcuts import get_object_or_404
 #from django.http import HttpResponseRedirect
+from email.policy import HTTP
+import http
+from http.client import HTTPResponse
+from django.shortcuts import HttpResponse
+from .models import Post,SubPost,Comment
 
 
 class PostListView(ListView):
@@ -111,6 +116,17 @@ def deletePost(request, pk):
 
 
 @login_required
+def deletePost(request,pk):
+    post = Post.objects.get(id=pk).delete()
+    messages.success(request, f'Your Post information has been deleted')
+    return redirect('user-home')
+
+def flowchart(request):
+    subpost = SubPost.objects.all()
+    context = {'subpost': subpost}
+    return render(request, 'post/flow2.html',context)
+    
+@login_required
 def deleteSubpost(request, pk, id):
     subpost = SubPost.objects.get(id=id).delete()
     messages.success(request, f'Your subpost information has been deleted')
@@ -154,19 +170,35 @@ def updateSubpost(request, pk, id):
     context["form"] = form
     return render(request, "post/subpost-update.html", context)
 
-
-'''
 @login_required
-def starred_post(request,pk):
-    post=get_object_or_404(Post,id=id)
-    if post.stars.filter(id=request.user.id).exists():
-        post.stars.remove(request.user)
+def star(request,pk):
+    user=request.user
+    post=get_object_or_404(Post,id=pk)
+    current_stars=post.stars_count
+    s,created=star.objects.get_or_create(user=user)
+    if s.posts.filter(id=pk).exists():
+        s.posts.remove(post)
+        current_stars=current_stars-1
+        messages.success(request, f'Post removed from Starred Posts List!')
     else:
-        post.stars.add(request.user)
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+        s.posts.add(post)
+        current_stars=current_stars+1
+        messages.success(request, f'Post added to Starred Posts List!')
+    post.stars_count=current_stars
+    post.save()
+    return redirect('post-detail',pk=pk)
 
 @login_required
 def starred_list(request):
     stars=Post.author.filter(stars=request.user)
     return render(request,"post/stars.html",{'stars':stars})
-'''
+    
+
+def search(request):
+    query=request.GET['query']
+    #allposts=Post.objects.all()
+    allposts=Post.objects.filter(title__icontains=query)
+    print(allposts[0])
+    params={'allpost':allposts}
+    return render(request, 'post/search.html', params)
+    #return HttpResponse('This is search')
