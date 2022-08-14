@@ -80,7 +80,7 @@
     <div class="col-3">
       <div class="mx-auto my-5 " >
       <!-- <div class="sticky-top"> -->
-        <h3>Left Sidebar</h3>
+        <h3>Categories</h3>
   {% for category in categories_list %}
   <div>
     <a href="{% url 'category' category.slug %}">{{category.title}}</a>
@@ -114,7 +114,7 @@
         <div class="card">
           <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
           <div class="card-img-overlay">
-            <a href="#" class="btn btn-light btn-sm">Cooking</a>
+            <a href="#" class="btn btn-light btn-sm">{{post.category.title}}</a>
           </div>
           <div class="card-body">
             <h4 class="card-title">{{post.title}}</h4>
@@ -122,12 +122,12 @@
               <i class="far fa-clock text-info"></i> 30 minutes
               <i class="fas fa-users text-info"></i> 4 portions
             </small>
-            <p class="card-text">I love quick, simple pasta dishes, and this is one of my favorite.</p>
+            <p class="card-text">{{post.content|safe}}</p>
             <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
             <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
           </div>
           <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-            <div class="views">Oct 20, 12:45PM
+            <div class="views">{{ post.date_posted|date:"F d,Y"}}
             </div>
             <div class="stats">
                <i class="far fa-eye"></i> 1347
