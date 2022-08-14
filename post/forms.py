@@ -2,14 +2,18 @@ from turtle import width
 from django.forms import ModelForm
 from django import forms
 from post.models import Post, SubPost, Comment
-from ckeditor.widgets import CKEditorWidget
-
+from ckeditor.fields import RichTextField
 
 
 class SubPostModelForm(ModelForm):
     class Meta:
         model = SubPost
         fields = ['title', 'description', 'resources']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Title for the SubPost',  'class': 'form-control', }),
+            'description': forms.Textarea(attrs={'class': 'form-control', }),
+            'resources': forms.TextInput(attrs={'placeholder': 'Link for resources',  'class': 'form-control', }),
+        }
 
 
 class PostCommentForm(ModelForm):
@@ -27,8 +31,8 @@ class PostForm(forms.ModelForm):
             'content',
         )
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', }),
-            # 'image': forms.ImageField(),
-            'content': forms.Textarea(attrs={'class':'form-control'}),
+            'title': forms.TextInput(attrs={'placeholder': 'Title for the post',  'class': 'form-control', }),
+            # 'image':
+            'content': forms.Textarea(attrs={'placeholder': 'Title for the post', 'class': 'form-control'}),
             # 'content': forms.CharField(),
         }

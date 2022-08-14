@@ -29,87 +29,93 @@
 
 
 
-.thumbnail{
+  .thumbnail {
     padding: .25rem;
     background-color: #fff;
     /* border: 1px solid #dee2e6; */
     border-radius: .75rem;
     max-width: 100%;
-    height: auto;}
+    height: auto;
+  }
+.page-item{
+  margin: 5px;
+}
 
-  
 
   card-img {
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 
-}
+  }
 
-.card-title {
-  margin-bottom: 0.3rem;
-}
+  .card-title {
+    margin-bottom: 0.3rem;
+  }
 
-.cat {
-  display: inline-block;
-  margin-bottom: 1rem;
-}
+  .cat {
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
 
-.fa-users {
-  margin-left: 1rem;
-}
+  .fa-users {
+    margin-left: 1rem;
+  }
 
-.card-footer {
-  font-size: 0.8rem;
-}
-.card-img-top {
-    max-height: 35vh; /*not want to take all vertical space*/
-    object-fit: cover;/*show all image, autosized, no cut, in available space*/
-}
+  .card-footer {
+    font-size: 0.8rem;
+  }
 
-.card-img-overlay{
-  pointer-events: none;
+  .card-img-top {
+    max-height: 35vh;
+    /*not want to take all vertical space*/
+    object-fit: cover;
+    /*show all image, autosized, no cut, in available space*/
+  }
 
-}
+  .card-img-overlay {
+    pointer-events: none;
 
-
+  }
 </style>
 <div class="d-flex justify-content-center container">
 
 
   <div class="row">
     <div class="col-3">
-      <div class="mx-auto my-5 " >
-      <!-- <div class="sticky-top"> -->
+      <div class="mx-auto my-5 ">
+        <!-- <div class="sticky-top"> -->
         <h3>Left Sidebar</h3>
 
 
-          add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
+        add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
 
       </div>
     </div>
     <!-- card start  -->
 
-    
+
     <div class="container col-6">
-      <div class="mx-auto my-5 d-flex" >  
-      <div class="headline headline-md"><h2>Search</h2>
-<div class="input-group margin-bottom-40">
-<form class="input-group" method="get" action="@Url.ArticulateSearchUrl(Model)">
-    <div class="input-group-btn">
-        <input type="text" name="term" class="form-control" placeholder="Search">
-        <span><button type="submit" class="btn-u"><i class="fa fa-search"></i></button></span>
-    </div>
-</form>
-</div>
-      <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
-        <button class="btn btn-outline-success my-2-my-sm-0" type="submit">Search</button>
-</form></div>
-</div>
-      
+      <div class="mx-auto my-5 d-flex">
+        <div class="headline headline-md">
+          <h2>Search</h2>
+          <div class="input-group margin-bottom-40">
+            <form class="input-group" method="get" action="@Url.ArticulateSearchUrl(Model)">
+              <div class="input-group-btn">
+                <input type="text" name="term" class="form-control" placeholder="Search">
+                <span><button type="submit" class="btn-u"><i class="fa fa-search"></i></button></span>
+              </div>
+            </form>
+          </div>
+          <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+            <button class="btn btn-outline-success my-2-my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+
       {% for post in posts %}
-      <div class="mx-auto my-5 " >
-    
+      <div class="mx-auto my-5 ">
+
         <div class="card">
           <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
           <div class="card-img-overlay">
@@ -129,50 +135,65 @@
             <div class="views">Oct 20, 12:45PM
             </div>
             <div class="stats">
-               <i class="far fa-eye"></i> 1347
+              <i class="far fa-eye"></i> 1347
               <i class="far fa-comment"></i> 12
             </div>
-             
+
           </div>
         </div>
-        </div>
+      </div>
       {% endfor %}
-     
+      <!-- Pagination start -->
+      {% if is_paginated %}
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
+          </li>
+
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          {% endif %}
+          {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+          <li class="page-item active" >
+            <a class="page-link" href="?page={{ num }}" aria-current="page">{{ num }}</a>
+          </li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} 
+          <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+            {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            </li>
+            {% endif %}
+        </ul>
+      </nav>
+      
+      {% endif %}
+      <!-- Pagination end -->
+    </div>
   </div>
-    
-    <!-- <div class="main col-6">
+  <div class="col-3">
+    <div class="mx-auto my-5 ">
+      <h3>Left Sidebar</h3>
 
-      {% for post in posts %}
-      <div class="card1">
-        <div class="card_content">
-          <img src="{{ post.image.url }}" class="img-fluid" loading="lazy">
-          <p>{{post.image.url}}</p>
 
-          <center><a class="text" href="post/{{ post.id }}">{{ post.title }}</a>
-            <small class="card_text">{{ post.topic.name }}</small><br>
-            <a class="mr-2" href="#">By {{post.author }}</a>
-            <small class="text2">on {{ post.date_posted|date:"F d,Y"}}</small>
-          </center>
+      add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
 
-          <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
-
-        </div>
-      </div>
-      {% endfor %}
-    </div> -->
-    <div class="col-3">
-      <div class="mx-auto my-5 " >
-        <!-- <div class="sticky-top"> -->
-          <h3>Left Sidebar</h3>
-  
-  
-          add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
-  
-        </div>
-      </div>
     </div>
   </div>
 </div>
+
+
 
 
 
