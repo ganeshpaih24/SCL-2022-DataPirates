@@ -23,4 +23,4 @@ class PostForm(forms.ModelForm):
             "image",
             "content",
             "category",
-        ]
+        )

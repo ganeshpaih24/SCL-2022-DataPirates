@@ -58,6 +58,16 @@ class PostDetailView(DetailView):
         new_comment.save()
         return self.get(self, request, *args, **kwargs)
 
+def postComment(request,pk):
+    if request.method == "POST":
+        body=request.POST.get('body')
+        user=request.user
+        postSno =request.POST.get('postSno')
+        post= Post.objects.get(pk=pk)
+        comment=Comment(body= body, user=user, post=post)
+        comment.save()
+        messages.success(request, "Comment posted successfully!")
+    return redirect('post-detail',pk=pk)
 
 '''
 class CommentCreateView(CreateView):

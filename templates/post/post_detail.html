@@ -295,7 +295,7 @@ body{
     <h2> Comments ({{comments.count}})</h2>
     <div class="my-2">
       {% if user.is_authenticated %}
-      <!-- <form action="" method="POST">
+      <form action="" method="POST">
         {% csrf_token %}
         <div class="form-group">
           <label for="exampleInputEmail1">Post Comment </label>
@@ -303,7 +303,7 @@ body{
         </div>
         <input type="hidden" name="postSno" value="{{post.sno}}">
         <button type="submit" class="btn btn-primary">Submit</button>
-      </form> -->
+      </form>
       {% else %}
       Please login to post a comment
       {% endif %}
