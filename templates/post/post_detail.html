@@ -152,7 +152,7 @@ body{
     <div class="card" style="padding: 15px">
       <div class="">
         <h1 class="">{{ object.title }}</h1>
-        <a class="" href="#">{{ object.author }}</a>
+        <a href="{% url 'user-info' post.id %}">{{object.author}}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
         <small class="text-muted">.{{ object.category.title }}</small>
         </div>

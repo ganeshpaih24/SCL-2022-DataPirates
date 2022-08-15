@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 from post.models import Post
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from post.models import Post
+from .models import Profile
+from django.http import HttpResponseRedirect
 
 def login_home(request):
     post = Post.objects.all()
@@ -47,3 +48,28 @@ def profile(request):
         'p_form': p_form
     }
     return render(request, 'user/profile.html', context)
+
+@login_required
+def userInfo(request,pk):
+    user=Post.objects.get(id=pk).author
+    profile=Profile.objects.get(user=user)
+    posts=Post.objects.filter(author=user)
+    context={
+        'profile':profile,
+        'posts':posts
+        }
+    return render(request,'user/user_info.html',context)
+
+@login_required
+def follow(request,id):
+    author =Profile.objects.get(id=id)
+    currentUser = Profile.objects.get(user=request.user)
+    followers = author.followers.all()
+    if author != currentUser:
+        if currentUser in followers:
+            author.followers.remove(currentUser.id)
+            messages.success(request, f'You unfollowed a user!')
+        else:
+            author.followers.add(currentUser.id)
+            messages.success(request, f'You followed a user!')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
