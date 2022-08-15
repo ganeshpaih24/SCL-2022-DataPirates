@@ -130,8 +130,11 @@
                     <div class="d-flex flex-row align-items-center">
                         <div class="icon"><img class="thumbnail" src="{{post.author.profile.image.url}}" alt=""> </div>
                         <div class="ms-2 c-details">
-                            <h6 class="mb-0">{{post.author }}</h6> <span><small class="text2">on {{
-                                    post.date_posted|date:"Fd,Y"}}</small><small>...{{post.category.title}}</small></span>
+                            <h6 class="mb-0">{{post.author }}</h6> 
+                            <span>
+                                <small class="text2">on {{post.date_posted|date:"Fd,Y"}}</small>
+                                <small>...{{post.category.title}}</small>
+                            </span>
                         </div>
                     </div>
                     <span class="badge badge-primary"> <span>Design</span> </span>
