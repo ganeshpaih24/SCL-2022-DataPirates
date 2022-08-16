@@ -4,21 +4,19 @@
 
 <head>
     <link rel="icon" type="image/x-icon" href="/media/favicon1.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Alertify Js CSS -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <!-- Alertify Js Default theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 
-    <script src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/"
-        id="ckeditor-init-script"></script>
+    <script src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
     <script src="/static/ckeditor/ckeditor/ckeditor.js"></script>
 
-    
 
+    <!--Alertify Js-->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     {% if title %}
     <title>WalkThrough | {{ title }}</title>
     {% else %}
@@ -32,7 +30,7 @@
     {% include 'includes/navbar.html' %}
 
     {% block content %}
-    
+
     {% endblock %}
 
     {% include 'includes/style.html' %}
@@ -41,14 +39,15 @@
     {% block custom_js %}{% endblock %}
     {% include 'includes/notification.html' %}
 
-</class=>
-<script>
-    {% if messages %}
+    </class=>
+    <script>
+        {% if messages %}
         {% for message in messages %}
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success('{{ message }}');
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.success('{{ message }}');
         {% endfor %}
-    {% endif %}
-</script>
+        {% endif %}
+    </script>
 </body>
+
 </html>

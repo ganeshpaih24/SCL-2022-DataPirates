@@ -32,7 +32,7 @@ class PostForm(forms.ModelForm):
             'category',
         )
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control'}),
-            # 'image': forms.ImageField(attrs={'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'placeholder': 'Title for the Post', 'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
         }
