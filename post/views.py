@@ -9,7 +9,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -21,7 +21,7 @@ from email.policy import HTTP
 import http
 from http.client import HTTPResponse
 from django.shortcuts import HttpResponse
-from .models import Post,SubPost,Comment
+from .models import Post, SubPost, Comment
 
 
 class PostListView(ListView):
@@ -29,6 +29,9 @@ class PostListView(ListView):
     template_name = 'post/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 2
+
+
 
 
 class PostDetailView(DetailView):
@@ -70,7 +73,8 @@ class CommentCreateView(CreateView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'image', 'content']
+    form_class = PostForm
+    required_css_class = 'required'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -116,16 +120,18 @@ def deletePost(request, pk):
 
 
 @login_required
-def deletePost(request,pk):
+def deletePost(request, pk):
     post = Post.objects.get(id=pk).delete()
     messages.success(request, f'Your Post information has been deleted')
     return redirect('user-home')
 
+
 def flowchart(request):
     subpost = SubPost.objects.all()
     context = {'subpost': subpost}
-    return render(request, 'post/flow2.html',context)
-    
+    return render(request, 'post/flow2.html', context)
+
+
 @login_required
 def deleteSubpost(request, pk, id):
     subpost = SubPost.objects.get(id=id).delete()
@@ -170,35 +176,40 @@ def updateSubpost(request, pk, id):
     context["form"] = form
     return render(request, "post/subpost-update.html", context)
 
+
 @login_required
-def star(request,pk):
-    user=request.user
-    post=get_object_or_404(Post,id=pk)
-    current_stars=post.stars_count
-    s,created=Star.objects.get_or_create(user=user)
+def star(request, pk):
+    user = request.user
+    post = get_object_or_404(Post, id=pk)
+    current_stars = post.stars_count
+    s, created = star.objects.get_or_create(user=user)
     if s.posts.filter(id=pk).exists():
         s.posts.remove(post)
-        current_stars=current_stars-1
+        current_stars = current_stars-1
         messages.success(request, f'Post removed from Starred Posts List!')
     else:
         s.posts.add(post)
-        current_stars=current_stars+1
+        current_stars = current_stars+1
         messages.success(request, f'Post added to Starred Posts List!')
-    post.stars_count=current_stars
+    post.stars_count = current_stars
     post.save()
-    return redirect('post-detail',pk=pk)
+    return redirect('post-detail', pk=pk)
+
 
 @login_required
 def starred_list(request):
-    stars=Post.author.filter(stars=request.user)
-    return render(request,"post/stars.html",{'stars':stars})
-    
+    stars = Post.author.filter(stars=request.user)
+    return render(request, "post/stars.html", {'stars': stars})
+
 
 def search(request):
-    query=request.GET['query']
-    #allposts=Post.objects.all()
-    allposts=Post.objects.filter(title__icontains=query)
+    query = request.GET['query']
+    # allposts=Post.objects.all()
+    allposts = Post.objects.filter(title__icontains=query)
     print(allposts[0])
-    params={'allpost':allposts}
+    params = {'allpost': allposts}
     return render(request, 'post/search.html', params)
-    #return HttpResponse('This is search')
+    # return HttpResponse('This is search')
+
+
+

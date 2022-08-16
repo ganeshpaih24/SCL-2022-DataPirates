@@ -4,30 +4,26 @@
 
 <div class="offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center ">
 
-    <div class="center" style="width: 700px;">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <br>
-                <center>
-                    <legend class="mb-4">Add subpost</legend>
-                </center>
-            </fieldset>
-
-            <label for="id_title" >Title:*</label>
-            <input type="text" name="title" maxlength="100" class="textinput textInput form-control" required id="id_title">
+    <div class="center card" style="width: 700px;">
+        <div class="form-control">
 
 
-            <label for="id_description" style="margin-top: 15px; margin-bottom: 10px;">Description:</label>
-            <textarea name="description" cols="40" rows="7" class="textinput textInput form-control" maxlength="100" id="id_description"></textarea>
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <br>
+                    <center>
+                        <legend class="mb-4">Add subpost</legend>
+                    </center>
+                </fieldset>
+
+                {{ form.as_p }}
 
 
-            <label for="id_resources" style="margin-top: 15px;">Resources:</label>
-            <textarea name="resources" cols="40" rows="7" class="textinput textInput form-control" maxlength="100" id="id_resources"></textarea>
 
-
-            <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px;">Submit</button></center>
-        </form>
+                <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px;">Submit</button></center>
+            </form>
+        </div>
     </div>
 </div>
 

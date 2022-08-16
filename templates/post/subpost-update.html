@@ -8,28 +8,25 @@
 </style>
 <div class="offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center ">
 
-    <div class="center" style="width: 700px;">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="" style="text-align: center; margin-bottom: 10px; margin-top: 15px;">Edit Subpost</legend>
-            </fieldset>
+    <div class="center card" style="width: 700px;">
+        <div class="form-control">
 
-            <label for="id_title" style="margin-top: 15px;">Title:*</label>
-            <input type="text" name="title" value="{{ form.title.value }}" maxlength="100"
-                class="textinput textInput form-control" required="" id="id_title">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <br>
+                    <center>
+                        <legend class="mb-4">Update subpost</legend>
+                    </center>
+                </fieldset>
 
-            <label for="id_description" style="margin-top: 15px; margin-bottom: 10px;">Description:</label>
-            <textarea name="description" cols="40" rows="7" class="textarea form-control"
-                id="id_description">{{ form.description.value }}</textarea>
+                {{ form.as_p }}
 
-            <label for="id_resources" style="margin-top: 15px; margin-bottom: 10px;">Resources:</label>
-            <textarea name="resources" cols="40" rows="7" class="textarea form-control"
-                id="id_resources">{{ form.resources.value }}</textarea>
 
-            <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px;">Post</button>
-            </center>
-        </form>
+
+                <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px;">Submit</button></center>
+            </form>
+        </div>
     </div>
 </div>
 

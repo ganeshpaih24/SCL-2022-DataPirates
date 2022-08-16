@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tinymce',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +147,11 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_ID')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 # EMAIL_HOST_USER = 'nprateek17@gmail.com'
 # EMAIL_HOST_PASSWORD = 'pscyclhhrepkmlcc'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 250,
+        'width': 670,
+    },
+}
+
