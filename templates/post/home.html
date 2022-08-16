@@ -82,36 +82,35 @@
 
   <div class="row">
     <div class="col-3">
-      <div class="mx-auto my-5 ">
-        <!-- <div class="sticky-top"> -->
-        <h3>Left Sidebar</h3>
-
-
-        add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
-
+      <div class="mx-auto my-5 " >
+      <!-- <div class="sticky-top"> -->
+        <h3>Categories</h3>
+  {% for category in categories_list %}
+  <div>
+    <a href="{% url 'category' category.slug %}">{{category.title}}</a>
+  </div>
+  {% endfor %}
       </div>
     </div>
     <!-- card start  -->
 
 
     <div class="container col-6">
-      <div class="mx-auto my-5 d-flex">
-        <div class="headline headline-md">
-          <h2>Search</h2>
-          <div class="input-group margin-bottom-40">
-            <form class="input-group" method="get" action="@Url.ArticulateSearchUrl(Model)">
-              <div class="input-group-btn">
-                <input type="text" name="term" class="form-control" placeholder="Search">
-                <span><button type="submit" class="btn-u"><i class="fa fa-search"></i></button></span>
-              </div>
-            </form>
-          </div>
-          <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
-            <button class="btn btn-outline-success my-2-my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
+      <div class="mx-auto my-5 d-flex" >  
+      <div class="headline headline-md"><h2>Search</h2>
+<div class="input-group margin-bottom-40">
+<form class="input-group" method="get" action="@Url.ArticulateSearchUrl(Model)">
+    <div class="input-group-btn">
+        <input type="text" name="term" class="form-control" placeholder="Search">
+        <span><button type="submit" class="btn-u"><i class="fa fa-search"></i></button></span>
+    </div>
+</form>
+</div>
+      <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+        <button class="btn btn-outline-success my-2-my-sm-0" type="submit">Search</button>
+</form></div>
+</div>
 
       {% for post in posts %}
       <div class="mx-auto my-5 ">
@@ -119,20 +118,26 @@
         <div class="card">
           <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
           <div class="card-img-overlay">
-            <a href="#" class="btn btn-light btn-sm">Cooking</a>
+            <a href="#" class="btn btn-light btn-sm">{{post.category.title}}</a>
           </div>
           <div class="card-body">
             <h4 class="card-title">{{post.title}}</h4>
             <small class="text-muted cat">
               <i class="far fa-clock text-info"></i> 30 minutes
               <i class="fas fa-users text-info"></i> 4 portions
+              {% if post.stars_count == 0 %}
+                <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
+              {% else %}
+                <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
+              {% endif %}
             </small>
-            <p class="card-text">I love quick, simple pasta dishes, and this is one of my favorite.</p>
+            <a href="{% url 'user-info' post.id %}">{{post.author}}</a>
+            <p class="card-text">{{post.content|safe}}</p>
             <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
             <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
           </div>
           <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-            <div class="views">Oct 20, 12:45PM
+            <div class="views">{{ post.date_posted|date:"F d,Y"}}
             </div>
             <div class="stats">
               <i class="far fa-eye"></i> 1347

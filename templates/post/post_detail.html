@@ -152,13 +152,9 @@ body{
     <div class="card" style="padding: 15px">
       <div class="">
         <h1 class="">{{ object.title }}</h1>
-        <a class="" href="#">{{ object.author }}</a>
+        <a href="{% url 'user-info' post.id %}">{{object.author}}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-        {% if object.stars_count == 0 %}
-          <!-- <a href="">Star<i class="fa far fa-star"></i></a> -->
-        {% else %}
-          <!-- <a href="">Unstar<i class="fa fas fa-star"></i></a> -->
-        {% endif %}
+        <small class="text-muted">.{{ object.category.title }}</small>
         </div>
         {% if object.author == user %}
         <div>
@@ -294,7 +290,7 @@ body{
     <h2> Comments ({{comments.count}})</h2>
     <div class="my-2">
       {% if user.is_authenticated %}
-      <!-- <form action="" method="POST">
+      <form action="" method="POST">
         {% csrf_token %}
         <div class="form-group">
           <label for="exampleInputEmail1">Post Comment </label>
@@ -302,7 +298,7 @@ body{
         </div>
         <input type="hidden" name="postSno" value="{{post.sno}}">
         <button type="submit" class="btn btn-primary">Submit</button>
-      </form> -->
+      </form>
       {% else %}
       Please login to post a comment
       {% endif %}
