@@ -1,5 +1,5 @@
+from .models import Post,SubPost,Comment,Star,Category
 from multiprocessing import context
-from .models import Post, SubPost, Comment
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
@@ -23,21 +23,33 @@ from http.client import HTTPResponse
 from django.shortcuts import HttpResponse
 from .models import Post, SubPost, Comment
 
+def flowchart(request):
+    subpost = SubPost.objects.all()
+    context = {'subpost': subpost}
+    return render(request, 'post/flow2.html',context)
 
 class PostListView(ListView):
+    model=Post
+    template_name='post/home.html'
+    context_object_name='posts'
+    ordering=['-date_posted']
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['categories_list']=Category.objects.all()
+        return context
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    template_name = 'post/home.html'
-    context_object_name = 'posts'
-    ordering = ['-date_posted']
-    paginate_by = 2
-
-
-
+    fields = ['title', 'image', 'content','category']
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        messages.success(self.request, f'New Post Created! Enter details..')
+        return super().form_valid(form)
 
 class PostDetailView(DetailView):
     model = Post
     template_name = 'post/post_detail.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comments'] = Comment.objects.filter(
@@ -50,7 +62,6 @@ class PostDetailView(DetailView):
     def get_queryset(self, *args, **kwargs):
         return SubPost.objects.filter(post_id=self.kwargs['pk'])
     '''
-
     def post(self, request, *args, **kwargs):
         new_comment = Comment(body=request.POST.get(
             'body'), user=self.request.user, post=self.get_object())
@@ -73,8 +84,7 @@ class CommentCreateView(CreateView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    form_class = PostForm
-    required_css_class = 'required'
+    fields = ['title', 'image', 'content']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -111,7 +121,6 @@ def postUpdateView(request, pk):
     context["form"] = form
     return render(request, "post/post_update.html", context)
 
-
 @login_required
 def deletePost(request, pk):
     post = Post.objects.get(id=pk).delete()
@@ -120,18 +129,16 @@ def deletePost(request, pk):
 
 
 @login_required
-def deletePost(request, pk):
+def deletePost(request,pk):
     post = Post.objects.get(id=pk).delete()
     messages.success(request, f'Your Post information has been deleted')
     return redirect('user-home')
-
 
 def flowchart(request):
     subpost = SubPost.objects.all()
     context = {'subpost': subpost}
-    return render(request, 'post/flow2.html', context)
-
-
+    return render(request, 'post/flow2.html',context)
+    
 @login_required
 def deleteSubpost(request, pk, id):
     subpost = SubPost.objects.get(id=id).delete()
@@ -157,12 +164,10 @@ class SubPostCreateView(CreateView):
     form_class = SubPostModelForm
     template_name = 'post/subpost_form.html'
     #fields = '__all__'
-
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
         return super().form_valid(form)
     success_url = "/post/{post_id}"
-
 
 @login_required
 def updateSubpost(request, pk, id):
@@ -176,13 +181,12 @@ def updateSubpost(request, pk, id):
     context["form"] = form
     return render(request, "post/subpost-update.html", context)
 
-
 @login_required
-def star(request, pk):
-    user = request.user
-    post = get_object_or_404(Post, id=pk)
-    current_stars = post.stars_count
-    s, created = star.objects.get_or_create(user=user)
+def star(request,pk):
+    user=request.user
+    post=get_object_or_404(Post,id=pk)
+    current_stars=post.stars_count
+    s,created=Star.objects.get_or_create(user=user)
     if s.posts.filter(id=pk).exists():
         s.posts.remove(post)
         current_stars = current_stars-1
@@ -193,8 +197,7 @@ def star(request, pk):
         messages.success(request, f'Post added to Starred Posts List!')
     post.stars_count = current_stars
     post.save()
-    return redirect('post-detail', pk=pk)
-
+    return redirect('post-detail',pk=pk)
 
 @login_required
 def starred_list(request):
@@ -203,13 +206,31 @@ def starred_list(request):
 
 
 def search(request):
-    query = request.GET['query']
-    # allposts=Post.objects.all()
-    allposts = Post.objects.filter(title__icontains=query)
+    query=request.GET['query']
+    #allposts=Post.objects.all()
+    allposts=Post.objects.filter(title__icontains=query)
     print(allposts[0])
-    params = {'allpost': allposts}
+    params={'allpost':allposts}
     return render(request, 'post/search.html', params)
-    # return HttpResponse('This is search')
+    #return HttpResponse('This is search')
 
+def postComment(request,pk):
+    if request.method == "POST":
+        body=request.POST.get('body')
+        user=request.user
+        postSno =request.POST.get('postSno')
+        post= Post.objects.get(pk=pk)
+        comment=Comment(body= body, user=user, post=post)
+        comment.save()
+        messages.success(request, "Comment posted successfully!")
+    return redirect('post-detail',pk=pk)
 
+@login_required
+def starlist(request):
+    star_list=Star.objects.get(user=request.user)
+    return render(request,"post/stars.html",{'star_list':star_list})
 
+def categoryList(request,slug):
+    category=Category.objects.get(slug=slug)
+    category_posts=Post.objects.filter(category=category)
+    return render(request,"post/categories.html",{'category_posts':category_posts})
