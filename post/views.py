@@ -213,3 +213,24 @@ def search(request):
     params={'allpost':allposts}
     return render(request, 'post/search.html', params)
     #return HttpResponse('This is search')
+
+def postComment(request,pk):
+    if request.method == "POST":
+        body=request.POST.get('body')
+        user=request.user
+        postSno =request.POST.get('postSno')
+        post= Post.objects.get(pk=pk)
+        comment=Comment(body= body, user=user, post=post)
+        comment.save()
+        messages.success(request, "Comment posted successfully!")
+    return redirect('post-detail',pk=pk)
+
+@login_required
+def starlist(request):
+    star_list=Star.objects.get(user=request.user)
+    return render(request,"post/stars.html",{'star_list':star_list})
+
+def categoryList(request,slug):
+    category=Category.objects.get(slug=slug)
+    category_posts=Post.objects.filter(category=category)
+    return render(request,"post/categories.html",{'category_posts':category_posts})

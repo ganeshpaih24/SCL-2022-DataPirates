@@ -1,208 +1,169 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
 {% block content%}
-
 <style>
-  /* Design */
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  html {
-    background-color: #ecf9ff;
-  }
-
-  .main {
-    display: inline-block;
-    margin: 0 auto;
-    width: 33%
-  }
-
-  h1 {
-    font-size: 24px;
-    font-weight: 400;
-    text-align: center;
-  }
-
-
-
-
-  .thumbnail {
-    padding: .25rem;
-    background-color: #fff;
-    /* border: 1px solid #dee2e6; */
-    border-radius: .75rem;
-    max-width: 100%;
-    height: auto;
-  }
-
-  .page-item {
-    margin: 5px;
-  }
-
-
-  card-img {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-
-  }
-
-  .card-title {
-    margin-bottom: 0.3rem;
-  }
-
-  .cat {
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
-
-  .fa-users {
-    margin-left: 1rem;
-  }
-
-  .card-footer {
-    font-size: 0.8rem;
-  }
-
-  .card-img-top {
-    max-height: 35vh;
-    /*not want to take all vertical space*/
-    object-fit: cover;
-    /*show all image, autosized, no cut, in available space*/
-  }
-
-  .card-img-overlay {
-    pointer-events: none;
-
-  }
+   html {
+   background-color: #ecf9ff;
+   }
+   .main {
+   display: inline-block;
+   margin: 0 auto;
+   width: 33%
+   }
+   h1 {
+   font-size: 24px;
+   font-weight: 400;
+   text-align: center;
+   }
+   .thumbnail {
+   padding: .25rem;
+   background-color: #fff;
+   /* border: 1px solid #dee2e6; */
+   border-radius: .75rem;
+   max-width: 100%;
+   height: auto;
+   }
+   .page-item {
+   margin: 5px;
+   }
+   card-img {
+   border-bottom-left-radius: 0px;
+   border-bottom-right-radius: 0px;
+   }
+   .card-title {
+   margin-bottom: 0.3rem;
+   }
+   .cat {
+   display: inline-block;
+   margin-bottom: 1rem;
+   }
+   .fa-users {
+   margin-left: 1rem;
+   }
+   .card-footer {
+   font-size: 0.8rem;
+   }
+   .card-img-top {
+   max-height: 35vh;
+   /*not want to take all vertical space*/
+   object-fit: cover;
+   /*show all image, autosized, no cut, in available space*/
+   }
+   .card-img-overlay {
+   pointer-events: none;
+   }
 </style>
 <div class="d-flex justify-content-center container">
-
-
-  <div class="row">
-    <div class="col-3">
-      <div class="mx-auto my-5 " >
-      <!-- <div class="sticky-top"> -->
-        <h3>Categories</h3>
-  {% for category in categories_list %}
-  <div>
-    <a href="{% url 'category' category.slug %}">{{category.title}}</a>
-  </div>
-  {% endfor %}
-      </div>
-    </div>
-    <!-- card start  -->
-
-
-    <div class="container col-6">
-      <div class="mx-auto my-5 d-flex" >  
-      <div class="headline headline-md"><h2>Search</h2>
-<div class="input-group margin-bottom-40">
-<form class="input-group" method="get" action="@Url.ArticulateSearchUrl(Model)">
-    <div class="input-group-btn">
-        <input type="text" name="term" class="form-control" placeholder="Search">
-        <span><button type="submit" class="btn-u"><i class="fa fa-search"></i></button></span>
-    </div>
-</form>
-</div>
-      <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
-        <button class="btn btn-outline-success my-2-my-sm-0" type="submit">Search</button>
-</form></div>
-</div>
-
-
-
-      {% for post in posts %}
-      <div class="mx-auto my-5">
-
-        <div class="card">
-          <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
-          <div class="card-img-overlay">
-            <a href="#" class="btn btn-light btn-sm">{{post.category.title}}</a>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">{{post.title}}</h4>
-            <small class="text-muted cat">
-              <i class="far fa-clock text-info"></i> 30 minutes
-              <i class="fas fa-users text-info"></i> 4 portions
-              {% if post.stars_count == 0 %}
-                <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
-              {% else %}
-                <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
-              {% endif %}
-            </small>
-            <a href="{% url 'user-info' post.id %}">{{post.author}}</a>
-            <p class="card-text">{{post.content|safe}}</p>
-            <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
-            <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
-          </div>
-          <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-            <div class="views">{{ post.date_posted|date:"F d,Y"}}
+   <div class="row">
+      <div class="col-3">
+         <div class="mx-auto my-5 " >
+            <!-- <div class="sticky-top"> -->
+            <h3>Categories</h3>
+            {% for category in categories_list %}
+            <div>
+               <a href="{% url 'category' category.slug %}">{{category.title}}</a>
             </div>
-            <div class="stats">
-              <i class="far fa-eye"></i> 1347
-              <i class="far fa-comment"></i> 12
-            </div>
-
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-      <!-- Pagination start -->
-      {% if is_paginated %}
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
-          </li>
-
-          <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
-          {% endif %}
-          {% for num in page_obj.paginator.page_range %}
-          {% if page_obj.number == num %}
-          <li class="page-item active">
-            <a class="page-link" href="?page={{ num }}" aria-current="page">{{ num }}</a>
-          </li>
-          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <li class="page-item">
-            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-            </li>
-            {% endif %}
             {% endfor %}
-            {% if page_obj.has_next %}
-            <li class="page-item">
-              <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-            </li>
-            {% endif %}
-        </ul>
-      </nav>
-
-      {% endif %}
-      <!-- Pagination end -->
-    </div>
-  </div>
-  <div class="col-3">
-    <div class="mx-auto my-5 ">
-      <h3>Left Sidebar</h3>
-
-
-      add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
-
-    </div>
-  </div>
+         </div>
+      </div>
+      <!-- card start  -->
+      <div class="container col-6">
+         <div class="mx-auto my-5 " >
+            <div class="headline headline-md">
+               <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
+               <div class ="row d-flex">
+                  <div class="col-10">
+                    <div class="form-outline">
+                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+                     <!-- <label class="form-label" for="form1">Example label</label> -->
+                    </div>
+                  </div>
+                  <div class="col-md-2 ">
+                     <button class="btn btn-outline-success my-2-my-sm-0" type="submit">s</button>
+                  </div>
+                </div>
+               
+               </form>
+            </div>
+         </div>
+         {% for post in posts %}
+         <div class="mx-auto my-5">
+            <div class="card">
+               <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
+               <div class="card-img-overlay">
+                  <a href="#" class="btn btn-light btn-sm">{{post.category.title}}</a>
+               </div>
+               <div class="card-body">
+                  <h4 class="card-title">{{post.title}}</h4>
+                  <small class="text-muted cat">
+                  <i class="far fa-clock text-info"></i> 30 minutes
+                  <i class="fas fa-users text-info"></i> 4 portions
+                  {% if post.stars_count == 0 %}
+                  <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
+                  {% else %}
+                  <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
+                  {% endif %}
+                  </small>
+                  <a href="{% url 'user-info' post.id %}">{{post.author}}</a>
+                  <p class="card-text">{{post.content|safe}}</p>
+                  <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
+                  <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
+               </div>
+               <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+                  <div class="views">{{ post.date_posted|date:"F d,Y"}}
+                  </div>
+                  <div class="stats">
+                     <i class="far fa-eye"></i> 1347
+                     <i class="far fa-comment"></i> 12
+                  </div>
+               </div>
+            </div>
+         </div>
+         {% endfor %}
+         <!-- Pagination start -->
+         {% if is_paginated %}
+         <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+               {% if page_obj.has_previous %}
+               <li class="page-item">
+                  <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
+               </li>
+               <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+               </li>
+               {% endif %}
+               {% for num in page_obj.paginator.page_range %}
+               {% if page_obj.number == num %}
+               <li class="page-item active">
+                  <a class="page-link" href="?page={{ num }}" aria-current="page">{{ num }}</a>
+               </li>
+               {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} 
+               <li class="page-item">
+                  <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+               </li>
+               {% endif %}
+               {% endfor %}
+               {% if page_obj.has_next %}
+               <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+               </li>
+               <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+               </li>
+               {% endif %}
+            </ul>
+         </nav>
+         {% endif %}
+         <!-- Pagination end -->
+      </div>
+   
+   <div class="col-3">
+      <div class="mx-auto my-5 ">
+         <h3>Left Sidebar</h3>
+         add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
+      </div>
+   </div>
 </div>
-
-
-
-
-
+</div>
 
 {%endblock content%}
