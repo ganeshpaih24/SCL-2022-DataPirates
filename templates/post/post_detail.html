@@ -155,6 +155,11 @@ body{
         <a href="{% url 'user-info' post.id %}">{{object.author}}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
         <small class="text-muted">.{{ object.category.title }}</small>
+        {% if object.stars_count == 0 %}
+          <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
+        {% else %}
+          <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
+        {% endif %}
         </div>
         {% if object.author == user %}
         <div>

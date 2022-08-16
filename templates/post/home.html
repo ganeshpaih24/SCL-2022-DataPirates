@@ -121,11 +121,6 @@
             <small class="text-muted cat">
               <i class="far fa-clock text-info"></i> 30 minutes
               <i class="fas fa-users text-info"></i> 4 portions
-              {% if post.stars_count == 0 %}
-                <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
-              {% else %}
-                <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
-              {% endif %}
             </small>
             <a href="{% url 'user-info' post.id %}">{{post.author}}</a>
             <p class="card-text">{{post.content|safe}}</p>
