@@ -29,6 +29,7 @@ class PostForm(forms.ModelForm):
             'title',
             'image',
             'content',
+            'category',
         )
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Title for the post',  'class': 'form-control', }),
