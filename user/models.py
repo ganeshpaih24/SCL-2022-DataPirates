@@ -11,6 +11,7 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     name = models.CharField(max_length=50, null=True, blank=True)
     profession = models.CharField(max_length=50,null=True, blank=True)
+    followers = models.ManyToManyField("self", blank=True, related_name="following", symmetrical=False)
 
     def __str__(self):
         return f'{self.user.username} Profile'
