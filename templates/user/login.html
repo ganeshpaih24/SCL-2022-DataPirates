@@ -1,36 +1,34 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="content-section form-control align-self-center" style="width: 500px;">
-    <form method="POST">
-        {% csrf_token %}
 
-
-        <fieldset class="form-group">
-            <br>
-            <center>
-                <legend style="text-align: center; margin-bottom: 0px;">Log In</legend>
-            </center>
-
-
-            <div id="div_id_username" class=""> <label for="id_username" class=" requiredField">Username<span class="asteriskField">*</span> </label>
-                <div> <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" class="textinput textInput form-control" required="" id="id_username"> </div>
-            </div>
-            <div id="div_id_password" class="form-group"> <label for="id_password" class=" requiredField">Password<span class="asteriskField">*</span> </label>
-                <div class="" style="display: inline;">
-                    <a class="ml-2" href="{% url 'password_reset' %}" style="float: right; margin-top: 15px;">Forgot Password?</a>
+<div class="d-flex justify-content-center align-items-center my-3">
+    <div class="form-control my-3" style="width: 600px; border-radius: 10px;">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <center>
+                    <legend class="text-center mt-3">
+                        <h3>Log In</h3>
+                    </legend>
+                </center>
+                <div id="div_id_username" class=""> <label for="id_username" class=" requiredField">Username<span class="asteriskField">*</span> </label>
+                    <div> <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" class="textinput textInput form-control" required="" id="id_username"> </div>
                 </div>
-                <div> <input type="password" name="password" autocomplete="current-password" class="textinput textInput form-control" required="" id="id_password"> </div>
+                <div id="div_id_password" class="form-group"> <label for="id_password" class=" requiredField">Password<span class="asteriskField">*</span> </label>
+                    <div class="" style="display: inline;">
+                        <a class="ml-2" href="{% url 'password_reset' %}" style="float: right; margin-top: 15px;">Forgot Password?</a>
+                    </div>
+                    <div> <input type="password" name="password" autocomplete="current-password" class="textinput textInput form-control" required="" id="id_password"> </div>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <center><button class="btn btn-outline-info my-3" type="submit">Login</button></center>
             </div>
-
-        </fieldset>
-
-        <div class="form-group">
-            <center><button class="btn btn-outline-info" type="submit" style="margin-top: 25px; margin-bottom: 10px;">Login</button></center>
+        </form>
+        <div class="my-3">
+            Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
         </div>
-    </form>
-    <div class="pt-3">
-        Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
     </div>
-</div> 
+</div>
 {% endblock content %}

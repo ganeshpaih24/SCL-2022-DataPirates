@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<center>
-    <h2><br>You have been successfully logged out.</h2>
-</center>
-<div class="pt-3">
-    <center><a class="btn btn-outline-info" href="{% url 'login' %}" type="submit">Login again</a></center>
+<div class="my-3 content-section form-control align-self-center align-items-center" style="width: 700px; border-radius: 10px;">    <center>
+        <h2><br>You have been successfully logged out.</h2>
+    </center>
+    <div class="pt-3">
+        <center><a class="btn btn-outline-info" href="{% url 'login' %}" type="submit">Login again</a></center>
+    </div>
 </div>
 {% endblock content %}

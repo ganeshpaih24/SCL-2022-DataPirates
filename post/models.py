@@ -44,9 +44,6 @@ class Post(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
-    
-        
-
 
 class SubPost(models.Model):
     post = models.ForeignKey(
