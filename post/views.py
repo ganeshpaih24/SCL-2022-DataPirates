@@ -62,9 +62,12 @@ class PostDetailView(DetailView):
         return SubPost.objects.filter(post_id=self.kwargs['pk'])
     '''
     def post(self, request, *args, **kwargs):
-        new_comment = Comment(body=request.POST.get(
-            'body'), user=self.request.user, post=self.get_object())
-        new_comment.save()
+        if request.POST.get('body')=='':
+            messages.success(request, f'Your comment cannot be empty!')
+        else:
+            new_comment = Comment(body=request.POST.get('body'), user=self.request.user, post=self.get_object())
+            new_comment.save()
+            messages.success(request, f'Your comment has been added!')
         return self.get(self, request, *args, **kwargs)
 
 @login_required
@@ -130,7 +133,7 @@ def postComment(request,pk):
         post= Post.objects.get(pk=pk)
         comment=Comment(body= body, user=user, post=post)
         comment.save()
-        messages.success(request, "Comment posted successfully!")
+        messages.success(request, f'Comment posted successfully!')
     return redirect('post-detail',pk=pk)
 
 @login_required
