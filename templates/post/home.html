@@ -55,15 +55,11 @@
 </style>
 <div class="d-flex justify-content-center container">
    <div class="row">
-      <div class="col-3">
+      <div class="col-2">
          <div class="mx-auto my-5 " >
             <!-- <div class="sticky-top"> -->
-            <h3>Categories</h3>
-            {% for category in categories_list %}
-            <div>
-               <a href="{% url 'category' category.slug %}">{{category.title}}</a>
-            </div>
-            {% endfor %}
+               <h3>Left Sidebar</h3>
+               add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
          </div>
       </div>
       <!-- card start  -->
@@ -71,15 +67,15 @@
          <div class="mx-auto my-5 " >
             <div class="headline headline-md">
                <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
-               <div class ="row d-flex">
+               <div class ="row mx-auto">
                   <div class="col-10">
                     <div class="form-outline">
                      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
                      <!-- <label class="form-label" for="form1">Example label</label> -->
                     </div>
                   </div>
-                  <div class="col-md-2 ">
-                     <button class="btn btn-outline-success my-2-my-sm-0" type="submit">s</button>
+                  <div class="col-2 ">
+                     <button class="btn btn-outline-success my-2-my-sm-0" type="submit"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
                
@@ -94,27 +90,27 @@
                   <a href="#" class="btn btn-light btn-sm">{{post.category.title}}</a>
                </div>
                <div class="card-body">
-                  <h4 class="card-title">{{post.title}}</h4>
+                  
+                  <h2 class="card-title">{{post.title}}</h2>
                   <small class="text-muted cat">
-                  <i class="far fa-clock text-info"></i> 30 minutes
-                  <i class="fas fa-users text-info"></i> 4 portions
-                  {% if post.stars_count == 0 %}
-                  <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
-                  {% else %}
-                  <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
-                  {% endif %}
+                  <!-- <i class="far fa-clock text-info"></i> 30 minutes
+                  <i class="fas fa-users text-info"></i> 4 portions -->
+                  
                   </small>
                   <a href="{% url 'user-info' post.id %}">{{post.author}}</a>
-                  <p class="card-text">{{post.content|safe}}</p>
-                  <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
-                  <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
+                  <p class="card-text">{{ post.content|truncatechars:300|safe }}</p>
+                  <a href="post/{{post.id}}" class="btn btn-info">Read More</a>
+                  <!-- <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a> -->
                </div>
                <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                   <div class="views">{{ post.date_posted|date:"F d,Y"}}
                   </div>
                   <div class="stats">
-                     <i class="far fa-eye"></i> 1347
-                     <i class="far fa-comment"></i> 12
+                     {% if post.stars_count == 0 %}
+                  <a href="{% url 'postStar' post.id %}"><i class="far fa-star"></i></a>
+                  {% else %}
+                  <a href="{% url 'postStar' post.id %}"><i class="fa fas fa-star"></i></a>
+                  {% endif %}
                   </div>
                </div>
             </div>
@@ -157,10 +153,15 @@
          <!-- Pagination end -->
       </div>
    
-   <div class="col-3">
+   <div class="col-2">
       <div class="mx-auto my-5 ">
-         <h3>Left Sidebar</h3>
-         add backend code here for left sidebar Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cupiditate, molestias neque unde possimus consequuntur voluptate ad vero veritatis aliquam dignissimos enim. Excepturi quae fuga, exercitationem molestiae minima maiores accusamus?
+         <h3>Categories</h3>
+            {% for category in categories_list %}
+            <div>
+               <a href="{% url 'category' category.slug %}">{{category.title}}</a>
+            </div>
+            {% endfor %}
+         
       </div>
    </div>
 </div>

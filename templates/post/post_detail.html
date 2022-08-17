@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
 {% block content %}
+
+<!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+<!-- THIS LINE -->
+<!-- <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
 <style>
 
 body{
@@ -146,12 +150,14 @@ body{
 
 </style>
 
-<div class="  col-lg-7 offset-lg-4 div-wrapper justify-content-center " style="margin-top: 35px; margin-bottom: 35px;">
-  <div class="col-lg-7">
-  
-    <div class="card" style="padding: 15px">
+
+<div class="row  ">
+  <div class="col-8 ">
+    <div class="mx-auto my-5 ">
+    <div class="jumbotron jumbotron-fluid mt-3 ">
+    <div class="container py-3 ">
+      <h1 class="display-3">{{ object.title }}</h1>
       <div class="">
-        <h1 class="">{{ object.title }}</h1>
         <a href="{% url 'user-info' post.id %}">{{object.author}}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
         <small class="text-muted">.{{ object.category.title }}</small>
@@ -198,120 +204,149 @@ body{
         {{object.content | safe}}
 
       </div>
-    </div>
-  </div>
-
-  <!-- <div class="col-lg-4" style="margin-top: 0px;"> -->
-    <div class="row">
-      <div class="col-12">
-        <!-- <div class="card">
-          <div class="card-body text-center"> -->
-            {%if not post.subposts.all%}
-            No SubPosts Yet.
-            {% if post.author == request.user %}
-            <div>
-              <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{%url 'subpost-create' post.pk%}">Create SubPost</a>
-
-            </div>
-            {% endif %}
-            {%else%}
-            {%for subpost in post.subposts.all%}
-            <ol>
-              <li>
-                <div class="card card-html">
-                    <div class="card-header">
-                        <i class="fab fa-html5"></i>{{subpost.title}} 
-                    </div>
-                    <div class="card-body">
-                      {{subpost.description|safe}}
-                    </div>
-                    <div class="card-footer">
-                    <div class="clearfix">
-                        <div class="float-left">
-                            <!-- <div class="progress">
-                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div> -->
-                        </div>
-                        <div class="float-right">
-                            <button class="btn btn-success">Botão de Acesso</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-             </li>
-            </ol>
-            <div class="card">
-              <div class="card-body">
-                <h3 class="card-title">{{subpost.title}} </h4>
-                  <p class="card-text">{{subpost.description|safe}} </p>
-                  <p class="card-text">{{subpost.resources}} </p>
-                  {% if post.author == request.user %}
-                  <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
-                  <a type="button" class="btn btn-danger btn-sm mt-1 mb-1" data-bs-toggle="modal" data-bs-target="#deleteSubPost">Delete</a>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="deleteSubPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Delete SubPost</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body text-start">
-                          Are you sure you want to delete the post "{{subpost.title}}"?
-                        </div>
-                        <div class="modal-footer">
-                          <div class="clearfix">
-                            <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1" data-bs-dismiss="modal">Close</a>
-                            <a class="btn btn-danger btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/delete/">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {% endif %}
-                </div>
-            </div>
-            {% endfor %}
-            <div class="justify-content-between" style="margin-top: 5px;">
-              {% if post.author == request.user %}
-              <a class="btn btn-success btn-sm mt-1 mb-1 justify-content-between" href="{%url 'subpost-create' post.pk%}">Add more SubPosts</a>
-              {% endif %}
-            </div>
-
+      <div class="container">
+        <a href="#demo" data-toggle="collapse"><span class=”icon”>Collapsible</span></a>
+    
+        <div id="demo" class="collapse">
+         <!--COMMENT SECTION-->
+    <div class="container">
+      <h2> Comments ({{comments.count}})</h2>
+      <div class="my-2">
+        {% if user.is_authenticated %}
+        <form action="" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">Post Comment </label>
+            <input type="text" class="form-control" name="body" placeholder="Enter comment here">
           </div>
-          {%endif%}
-        </div>
+          <input type="hidden" name="postSno" value="{{post.sno}}">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% else %}
+        Please login to post a comment
+        {% endif %}
       </div>
+      {% for comment in comments %}
+      <img style="width:50px; height:50px;" src="/media/default.jpg" alt="user">
+      <b> {{comment.user.username}} </b> at {{comment.timestamp}}
+      <div> {{comment.body}} </div>
+      {% endfor %}
     </div>
-  </div>
-  <!--COMMENT SECTION-->
-  <div class="container">
-    <h2> Comments ({{comments.count}})</h2>
-    <div class="my-2">
-      {% if user.is_authenticated %}
-      <form action="" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="exampleInputEmail1">Post Comment </label>
-          <input type="text" class="form-control" name="body" placeholder="Enter comment here">
         </div>
-        <input type="hidden" name="postSno" value="{{post.sno}}">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-      {% else %}
-      Please login to post a comment
-      {% endif %}
     </div>
-    {% for comment in comments %}
-    <img style="width:50px; height:50px;" src="/media/default.jpg" alt="user">
-    <b> {{comment.user.username}} </b> at {{comment.timestamp}}
-    <div> {{comment.body}} </div>
-    {% endfor %}
+    </div>
+</div>
+
+<div class=" container " >
+  <!-- <div class="col-lg-7"> -->
+  
+    
+          <!-- <div class="card">
+            <div class="card-body text-center"> -->
+              {%if not post.subposts.all%}
+              No SubPosts Yet.
+              {% if post.author == request.user %}
+              <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{%url 'subpost-create' post.pk%}">Create SubPost</a>
+  
+              </div>
+              {% endif %}
+              {%else%}
+              {%for subpost in post.subposts.all%}
+             
+                  <div class="card card-html">
+                      <div class="card-header">
+                          {{subpost.title}} 
+                      </div>
+                      
+                      <div class="card-body">
+                        <h3 class="card-title">{{subpost.title}} </h4>
+                          <p class="card-text">{{subpost.description|safe}} </p>
+                          <p class="card-text">{{subpost.resources}} </p>
+                
+                      </div>
+                      <div class="card-footer">
+                      <div class="clearfix">
+                          <div class="float-left">
+                            <div class="">
+                              <div class="">
+                                
+                                  {% if post.author == request.user %}
+                                  <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
+                                  <a type="button" class="btn btn-danger btn-sm mt-1 mb-1" data-bs-toggle="modal" data-bs-target="#deleteSubPost">Delete</a>
+                
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="deleteSubPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Delete SubPost</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-start">
+                                          Are you sure you want to delete the post "{{subpost.title}}"?
+                                        </div>
+                                        <div class="modal-footer">
+                                          <div class="clearfix">
+                                            <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1" data-bs-dismiss="modal">Close</a>
+                                            <a class="btn btn-danger btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/delete/">Delete</a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  {% endif %}
+                                </div>
+                            </div>
+                          </div>
+                          
+                      </div>
+                      </div>
+                  </div>
+    
+              
+              {% endfor %}
+              <div class="justify-content-between" style="margin-top: 5px;">
+                {% if post.author == request.user %}
+                <a class="btn btn-success btn-sm mt-1 mb-1 justify-content-between" href="{%url 'subpost-create' post.pk%}">Add more SubPosts</a>
+                {% endif %}
+              </div>
+  
+            
+            {%endif%}
+          </div>
+          </div>
+        </div>
+  <div class="col-2">
+
+      <div class="mx-auto my-5 ">
+        sng kjkjbbbbbbb jbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      bjb bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      bbbbbbbbbbbb
+      bbbbbbbb
+      bbbbbbbbbbbb
+      bbbbbbbbbb
+      bbbbbbbbbbbbbbb
+      bbbbbbbbbbbbb
+      bbbbbbbbbbbbb
+      bbbbbbbbbbbbbbbbbb
+      bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        
+     </div>
   </div>
 </div>
 
-<script>
+
+
+
+
+
+
+
+
+
+<!-- <script>
   // sandbox disable popups
   if (window.self !== window.top && window.name != "view1") {
     ;
@@ -347,8 +382,9 @@ body{
       }
     }
   }, false);
-</script>
-</div>
+</script> -->
+
+
 
 <!--scripts loaded here-->
 
