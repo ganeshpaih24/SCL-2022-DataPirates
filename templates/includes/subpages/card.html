@@ -1,6 +1,4 @@
-
 <div class="mx-auto my-3">
-
     <div class="card">
         <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
         <div class="card-img-overlay">
@@ -8,11 +6,16 @@
         </div>
         <div class="card-body">
             <h4 class="card-title">{{post.title}}</h4>
-            <small class="text-muted cat">
-                <i class="far fa-clock text-info"></i> 30 minutes
-                <i class="fas fa-users text-info"></i> 4 portions
-            </small>
-            <p class="card-text">I love quick, simple pasta dishes, and this is one of my favorite.</p>
+            
+            <div class="d-flex justify-content-start my-2">
+                <div class="me-3">
+                    <i class="bx bxs-user"></i><a href="{% url 'user-info' post.id %}"><small>{{post.author}}</small></a>
+                </div>
+                <div class="me-5">
+                    <i class="bx bx-time"></i><small>{{ post.date_posted|date:"F d, Y" }}</small>
+                </div>
+            </div>
+            <p class="card-text">{{post.content|safe}}</p>
             <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
             <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
         </div>

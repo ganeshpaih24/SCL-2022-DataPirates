@@ -93,9 +93,7 @@
                                     <p class="small text-muted mb-1">Following</p>
                                     <p class="mb-0"><strong>{{ profile.following.count }}</strong></p>
                                 </div>
-
                             </div>
-
                             {% if profile.user == request.user %}
                             <div class="d-flex pt-1">
                                 <a href="{% url 'profile' %}" class="btn btn-primary">Edit Profile</a>
@@ -129,15 +127,9 @@
                     <hr>
                     {% include 'post/gallery.html' %}
                 </div>
-
-
             </div>
         </div>
     </div>
-
-
-
-
 </div>
 
 
