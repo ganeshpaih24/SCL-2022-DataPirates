@@ -120,10 +120,7 @@ def updateSubpost(request, pk, id):
         return redirect('post-detail', pk=pk)
     context["form"] = form
     return render(request, "post/subpost_update.html", context)
-<<<<<<< HEAD
-=======
 
->>>>>>> bc44de554b273284f140b4a7743f8d7b04bdd636
 
 @login_required
 def deleteSubpost(request, pk, id):
