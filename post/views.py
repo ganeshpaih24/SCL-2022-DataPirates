@@ -226,6 +226,24 @@ def postComment(request,pk):
     return redirect('post-detail',pk=pk)
 
 @login_required
+def star(request,pk):
+    user=request.user
+    post=get_object_or_404(Post,id=pk)
+    current_stars=post.stars_count
+    s,created=Star.objects.get_or_create(user=user)
+    if s.posts.filter(id=pk).exists():
+        s.posts.remove(post)
+        current_stars=current_stars-1
+        messages.success(request, f'Post removed from Starred Posts List!')
+    else:
+        s.posts.add(post)
+        current_stars=current_stars+1
+        messages.success(request, f'Post added to Starred Posts List!')
+    post.stars_count=current_stars
+    post.save()
+    return redirect('post-detail',pk=pk)
+
+@login_required
 def starlist(request):
     star_list=Star.objects.get(user=request.user)
     return render(request,"post/stars.html",{'star_list':star_list})
