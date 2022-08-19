@@ -17,15 +17,17 @@ html {
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
-  
-    
+
+
 }
 
 
 
 
-
-
+label.required::after {
+  content: ' *';
+  color: red;
+}
 
 
 
@@ -154,6 +156,7 @@ body {
     height: 0%;
   }
 }
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/

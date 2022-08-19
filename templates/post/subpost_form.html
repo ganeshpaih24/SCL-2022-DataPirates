@@ -1,34 +1,27 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
-{% block content %}
-
-<div class="offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center ">
-
-    <div class="center" style="width: 700px;">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <br>
-                <center>
-                    <legend class="mb-4">Add subpost</legend>
-                </center>
-            </fieldset>
-
-            <label for="id_title" >Title:*</label>
-            <input type="text" name="title" maxlength="100" class="textinput textInput form-control" required id="id_title">
-
-
-            <label for="id_description" style="margin-top: 15px; margin-bottom: 10px;">Description:</label>
-            <textarea name="description" cols="40" rows="7" class="textinput textInput form-control" maxlength="100" id="id_description"></textarea>
-
-
-            <label for="id_resources" style="margin-top: 15px;">Resources:</label>
-            <textarea name="resources" cols="40" rows="7" class="textinput textInput form-control" maxlength="100" id="id_resources"></textarea>
-
-
-            <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px;">Submit</button></center>
-        </form>
+{% block content%}
+<style>
+    .django-ckeditor-widget {
+        width: 100%;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="my-3">
+            <div class="form-control" style="border-radius: 15px;">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="text-center my-3">
+                            <h2>Add subpost</h2>
+                        </legend>
+                    </fieldset>
+                    {{ form.as_p }}
+                    <center><button class="btn btn-primary mb-3" type="submit">Post</button></center>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
-
 {% endblock content %}
