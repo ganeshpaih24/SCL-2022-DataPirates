@@ -3,8 +3,8 @@
     <div class="container d-flex align-items-center">
         <h1 class="logo me-5"><a href="{% url 'user-home' %}">WalkThrough</a></h1>
         <div class="col-xl-6 ms-4">
-            <form class="d-flex container-fluid">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <form method="GET" action="{% url 'search' %}" class="d-flex container-fluid">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
                 <button class="btn btn-danger" type="submit">Search</button>
             </form>
         </div>

@@ -170,7 +170,6 @@
   }
 </style>
 
-<<<<<<< HEAD
 
 <div class="row  ">
   <div class="col-8 ">
@@ -178,40 +177,18 @@
     <div class="jumbotron jumbotron-fluid mt-3 ">
     <div class="container py-3 ">
       <h1 class="display-3">{{ object.title }}</h1>
-=======
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
 
 <div class="  col-lg-7 offset-lg-4 div-wrapper justify-content-center " style="margin-top: 35px; margin-bottom: 35px;">
   <div class="col-lg-7">
     <div class="card" style="padding: 15px">
->>>>>>> bc44de554b273284f140b4a7743f8d7b04bdd636
       <div class="">
         <a href="{% url 'user-info' post.id %}">{{object.author}}</a>
         <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
         <small class="text-muted">.{{ object.category.title }}</small>
 
       </div>
-      {% if object.author == user %}
-      <div>
-        <a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-        <a type="button" class="btn btn-danger btn-sm mt-1 mb-1" data-bs-toggle="modal" data-bs-target="#deletePost">
-          Delete
-        </a>
 
-        <!-- Modal -->
-        <div class="modal fade" id="deletePost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete SubPost</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                Are you sure you want to delete the post "{{object.title}}"?
-              </div>
-              <div class="modal-footer">
-                <div class="clearfix">
-                  <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1" data-bs-dismiss="modal">Close</a>
                   <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
 
         {% if object.stars_count == 0 %}
