@@ -1,24 +1,27 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
 {% block content%}
-
-<div class="offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center ">
-
-    <div class="center card" style="width: 700px;">
-        <div class="form-control">
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="" style="text-align: center; margin-bottom: 10px; margin-top: 15px;">Update Post</legend>
-                </fieldset>
-
-                {{ form.as_p }}
-
-
-                <center><button class="btn btn-outline-info" type="submit" style="margin-bottom: 15px; margin-top: 0px;">Post</button></center>
-            </form>
+<style>
+    .django-ckeditor-widget {
+        width: 100%;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="my-3">
+            <div class="form-control" style="border-radius: 15px;">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="text-center my-3">
+                            <h2>Update Post</h2>
+                        </legend>
+                    </fieldset>
+                    {{ form.as_p }}
+                    <center><button class="btn btn-primary mb-3" type="submit">Post</button></center>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 {%endblock content%}

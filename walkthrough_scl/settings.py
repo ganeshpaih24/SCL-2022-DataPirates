@@ -151,7 +151,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 CKEDITOR_CONFIGS = {
     'default': {
         'height': 250,
-        'width': 670,
+        'width': '80hv',
     },
 }
 

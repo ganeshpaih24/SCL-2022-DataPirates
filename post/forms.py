@@ -26,15 +26,13 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = (
-            "title",
-            "image",
-            "content",
-            "category",
+            'title',
+            'image',
+            'content',
+            'category',
         )
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'Title for the post',  'class': 'form-control', }),
-            # 'image':
-            'content': forms.Textarea(attrs={'placeholder': 'Title for the post', 'class': 'form-control'}),
-            # 'content': forms.CharField(),
-            # 'category': forms.Textarea(attrs={'placeholder': 'Title for the post', 'class': 'form-control'}),
+            'title': forms.TextInput(attrs={'placeholder': 'Title for the Post', 'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
         }
