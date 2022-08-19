@@ -26,10 +26,12 @@
             {% endif %}
             {% for comment in comments %}
             <div class="text-box d-flex justify-content-start mt-2">
-                <div class="icon-box px-2"><img style="width:60px; height:60px;" src="/media/default.jpg" alt="user"></div>
+                <div class="icon-box px-2">
+                    <img style="width:60px; height:60px;" src="/media/default.jpg" alt="user">
+                </div>
                 <div>
-                    <h4 class="m-b-0"><strong>{{comment.user.username}}</strong></h5>
-                        <p>{{comment.body}}</p>
+                    <span><strong>{{comment.user.username}}</strong></span><span class="ms-3">{{comment.timestamp}}</span>
+                    <p>{{comment.body}}</p>
                 </div>
             </div>
             {% endfor %}
