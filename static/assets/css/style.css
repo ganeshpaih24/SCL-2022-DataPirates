@@ -2018,12 +2018,6 @@ section {
   grid-area: icon;
 }
 
-.card {
-  grid-area: text;
-  border-radius: 0px;
-  box-shadow: 0 0 5px 1px #ddd;
-  margin-top: 0.5rem;
-}
 
 .card-html .card-header:after {
   right: 100%;
@@ -2133,4 +2127,11 @@ section {
 .card-php .btn-success {
   background-color: #8b92bd;
   border-color: #8b92bd;
+}
+
+.sticky-div {
+  background-color: green;
+  position: sticky;
+  top: 0px;
+  padding: 10px 0px;
 }
