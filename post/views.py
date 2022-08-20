@@ -180,3 +180,8 @@ def categoryList(request, slug):
     category = Category.objects.get(slug=slug)
     category_posts = Post.objects.filter(category=category)
     return render(request, "post/categories.html", {'category_posts': category_posts})
+
+def landing(request):
+    subpost = SubPost.objects.all()
+    context = {'subpost': subpost}
+    return render(request, 'post/landingpage.html', context)
