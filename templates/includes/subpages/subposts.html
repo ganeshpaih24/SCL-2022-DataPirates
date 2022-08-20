@@ -1,0 +1,88 @@
+{% if post.author == request.user %}
+    {% if not post.subposts.all%}
+        <div class="card text-center py-2">
+            <h4>
+                No SubPosts yet.
+            </h4>
+        </div>
+        <div class="card">
+            <a class="btn btn-primary" href="{%url 'subpost-create' post.pk%}">Add a SubPost</a>
+        </div>
+    {% else %}
+        {%for subpost in post.subposts.all%}
+        <div class="ps-3">
+            <div class="card card-html">
+                <div class="card-header">
+                    <i class="fab fa-html5 me-2"></i>{{subpost.title}}
+                </div>
+                <div class="card-body">
+                    {{subpost.description|safe}}
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-start">
+                        <div class="me-2">
+                            <h6><strong>Resource:</strong></h6><a href="https://{{subpost.resources}}">{{subpost.resources}}</a>
+                        </div>
+                    </div>
+                </div>    
+                <div class="card-body">
+                    <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
+                    <a type="button" class="btn btn-danger btn-sm mt-1 mb-1" data-bs-toggle="modal" data-bs-target="#deleteSubPost">Delete</a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteSubPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete SubPost</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body text-start">
+                                    Are you sure you want to delete the subpost "{{subpost.title}}"?
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="clearfix">
+                                        <a type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</a>
+                                        <a class="btn btn-danger btn-sm" href="subpost/{{ subpost.pk }}/delete/">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="card">
+            <a class="btn btn-primary" href="{%url 'subpost-create' post.pk%}">Add another SubPost</a>
+        </div>
+    {% endif %}
+{% else %}
+{% if not post.subposts.all%}
+<div class="card text-center py-2">
+    <h4>
+        No SubPosts yet.
+    </h4>
+</div>
+{% endif %}
+{%for subpost in post.subposts.all%}
+<div class="ps-3">
+    <div class="card card-html">
+        <div class="card-header">
+            <i class="fab fa-html5 me-2"></i>{{subpost.title}}
+        </div>
+        <div class="card-body">
+            {{subpost.description|safe}}
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-start">
+                <div class="me-2">
+                    <h6><strong>Resource:</strong></h6><a href="https://{{subpost.resources}}">{{subpost.resources}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+
