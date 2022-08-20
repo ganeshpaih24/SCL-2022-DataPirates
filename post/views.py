@@ -167,7 +167,7 @@ def star(request, pk):
         messages.success(request, f'Post added to Starred Posts List!')
     post.stars_count = current_stars
     post.save()
-    return redirect('post-detail',pk=pk)
+    return redirect('post-detail', pk=pk)
 
 
 @login_required

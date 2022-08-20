@@ -1,25 +1,3 @@
-<div class="">
-    <div class="container">
-        <div class="mx-auto">
-            <div class="headline headline-md">
-                <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
-                    <div class="row d-flex">
-                        <div class="col-10">
-                            <div class="form-outline">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
-                                <!-- <label class="form-label" for="form1">Example label</label> -->
-                            </div>
-                        </div>
-                        <div class="col-md-2 ">
-                            <button class="btn btn-outline-success my-2-my-sm-0" type="submit">s</button>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-        {% for post in posts %}
-        {% include 'includes/subpages/card.html' %}
-        {% endfor %}
-    </div>
-</div>
+{% for post in posts %}
+{% include 'includes/subpages/card_home.html' %}
+{% endfor %}

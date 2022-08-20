@@ -2090,13 +2090,6 @@ section {
   top: 10px;
 }
 
-.card .card-header {
-  background-color: #8abe3e;
-  color: #fff;
-  font-size: 22px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
-}
 
 .btn-success {
   background-color: #8abe3e;
