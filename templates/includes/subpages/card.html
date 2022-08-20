@@ -16,15 +16,15 @@
                 </div>
             </div>
             <p class="card-text">{{post.content|safe}}</p>
-            <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
-            <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
+            <a href="post/{{post.id}}" class="btn btn-info">Read More</a>
+            <!-- <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a> -->
         </div>
         <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
             <div class="views">Oct 20, 12:45PM
             </div>
             <div class="stats">
                 <i class="far fa-eye"></i> 1347
-                <i class="far fa-comment"></i> 12
+                <i class="far fa-comment"></i> {{comments.count}}
             </div>
         </div>
     </div>
