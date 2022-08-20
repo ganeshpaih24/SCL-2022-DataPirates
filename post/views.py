@@ -133,9 +133,9 @@ def search(request):
     query = request.GET['query']
     # allposts=Post.objects.all()
     allposts = Post.objects.filter(title__icontains=query)
-    print(allposts[0])
-    params = {'allpost': allposts}
-    return render(request, 'post/search.html', params)
+    print(allposts)
+    context = {'allpost': allposts}
+    return render(request, 'post/search.html', context)
     # return HttpResponse('This is search')
 
 

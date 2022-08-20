@@ -12,7 +12,7 @@ class SubPostModelForm(ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Title for the SubPost',  'class': 'form-control', }),
             'description': forms.Textarea(attrs={'class': 'form-control', }),
-            'resources': forms.TextInput(attrs={'placeholder': 'Link for resources',  'class': 'form-control', }),
+            'resources': forms.TextInput(attrs={'placeholder': 'Add only resource links',  'class': 'form-control', }),
         }
 
 
@@ -27,9 +27,9 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = (
             'title',
+            'category',
             'image',
             'content',
-            'category',
         )
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Title for the Post', 'class': 'form-control'}),
