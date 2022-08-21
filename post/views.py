@@ -52,6 +52,11 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comments'] = Comment.objects.filter(post=self.get_object()).order_by('-created')
+        if Star.objects.filter(posts=self.get_object(),user=self.request.user).exists():
+            starred=True
+        else:
+            starred=False
+        context['starred']=starred
         return context
 
 @login_required
