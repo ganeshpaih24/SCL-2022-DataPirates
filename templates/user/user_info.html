@@ -69,7 +69,6 @@
     } */
 </style>
 <div class="">
-
     <div class="container mt-3 mb-3">
         <div class="row d-flex justify-content-center align-items-center ">
             <div class="card" style="border-radius: 15px;">
@@ -94,9 +93,7 @@
                                     <p class="small text-muted mb-1">Following</p>
                                     <p class="mb-0"><strong>{{ profile.following.count }}</strong></p>
                                 </div>
-
                             </div>
-
                             {% if profile.user == request.user %}
                             <div class="d-flex pt-1">
                                 <a href="{% url 'profile' %}" class="btn btn-primary">Edit Profile</a>
@@ -120,55 +117,16 @@
     </div>
 
 
-
-
-
-
-
     <div class="container card mt-3 mb-3" style="border-radius: 15px;">
         <div class="row">
-            <div class="col-lg-12 ">
-                <div class="row ">
-                    <div class="card-body pb-0">
-                        <center>
-                            <h1>Posts</h1>
-                        </center>
-                        <hr>
-                    </div>
-
-                    {% for post in posts %}
-                    <div class="col-4">
-                        <div class="card mb-3 mt-3" style="border-radius: 15px;">
-                            <div>
-                                <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
-                                <div class="card-img-overlay">
-                                    <a href="#" class="btn btn-light btn-sm">{{post.category.title}}</a>
-                                </div>
-                            </div>
-                            <div class="card-body">
-
-                                <h2 class="card-title"><a href="{% url 'post-detail' post.id %}" class="">{{post.title}}</a></h2>
-
-                                <!-- <a href="{% url 'user-info' post.id %}">{{post.author}}</a> -->
-                                <!-- <p class="card-text">{{ post.content|truncatechars:300|safe }}</p> -->
-                                <!-- <a href="{% url 'post-detail' post.id %}" class="btn btn-info">Read More</a> -->
-                                <!-- <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a> -->
-                            </div>
-                            <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-                                <!-- <div class="views">{{ post.date_posted|date:"F d,Y"}}
-                            </div> -->
-                                <div class="stats">
-                                    {% if post.stars_count == 0 %}
-                                    <a href="{% url 'postStar' post.id %}"><span id="boot-icon" class="bi bi-star" style="font-size: 25px; color: rgb(237, 95, 30); opacity: 1; -webkit-text-stroke-width: 2.5px;"></span></a>
-                                    {% else %}
-                                    <a href="{% url 'postStar' post.id %}"><span id="boot-icon" class="bi bi-star-fill" style="font-size: 25px; color: rgb(237, 95, 30); opacity: 1; -webkit-text-stroke-width: 2.5px;"></span></a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End sidebar -->
-                    {% endfor %}
-                </div><!-- End blog sidebar -->
+            <div class="">
+                <div class="card-body pb-0">
+                    <center>
+                        <h1>Posts</h1>
+                    </center>
+                    <hr>
+                    {% include 'post/gallery.html' %}
+                </div>
             </div>
         </div>
     </div>

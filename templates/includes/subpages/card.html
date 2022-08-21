@@ -1,0 +1,31 @@
+<div class="mx-auto my-3">
+    <div class="card">
+        <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
+        <div class="card-img-overlay">
+            <a href="#" class="btn btn-light btn-sm">Cooking</a>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">{{post.title}}</h4>
+            
+            <div class="d-flex justify-content-start my-2">
+                <div class="me-3">
+                    <i class="bx bxs-user"></i><a href="{% url 'user-info' post.id %}"><small>{{post.author}}</small></a>
+                </div>
+                <div class="me-5">
+                    <i class="bx bx-time"></i><small>{{ post.date_posted|date:"F d, Y" }}</small>
+                </div>
+            </div>
+            <p class="card-text">{{post.content|safe}}</p>
+            <a href="post/{{post.id}}" class="btn btn-info">Read More</a>
+            <!-- <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a> -->
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+            <div class="views">Oct 20, 12:45PM
+            </div>
+            <div class="stats">
+                <i class="far fa-eye"></i> 1347
+                <i class="far fa-comment"></i> {{comments.count}}
+            </div>
+        </div>
+    </div>
+</div>
