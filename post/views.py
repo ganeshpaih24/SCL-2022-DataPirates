@@ -184,4 +184,5 @@ def categoryList(request, slug):
 def landing(request):
     subpost = SubPost.objects.all()
     context = {'subpost': subpost}
-    return render(request, 'post/landingpage.html', context)
+    return render(request, 'post/landing.html', context)
+
