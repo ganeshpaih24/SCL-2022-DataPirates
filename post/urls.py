@@ -21,5 +21,5 @@ urlpatterns = [
     path('post/<int:pk>/star/', views.star, name="postStar"),
     path('stars/', views.starlist, name="stars"),
     path('categories/<slug:slug>/',views.categoryList,name='category'),
-    #path('flow/', views.flowchart, name='flowchart'),
+    path('flow/', views.landing, name='landing-page'),
 ]

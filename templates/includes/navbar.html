@@ -1,11 +1,11 @@
 {% load static %}
 <header id="header" class="sticky-top">
     <div class="container d-flex align-items-center">
-        <h1 class="logo me-5"><a href="{% url 'user-home' %}">WalkThrough</a></h1>
+        <h1 class="logo me-5"><a href="{% url 'user-home' %}"><span>Walk</span><span class="navspan">Through</span></a></h1>
         <div class="col-xl-6 ms-4">
-            <form class="d-flex container-fluid">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-danger" type="submit">Search</button>
+            <form method="GET" action="{% url 'search' %}" class="d-flex container-fluid">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+                <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
         <nav class="navbar navbar-expand-lg">
