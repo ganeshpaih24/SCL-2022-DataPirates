@@ -14,18 +14,21 @@
     ;
 </style>
 
-<div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center">
-    <div class="div-to-align" style="width: 500px;"><br>
-        <form class="mx-4" method="POST">
+<div class="d-flex justify-content-center align-items-center my-3">
+    <div class="form-control my-3" style="width: 600px; border-radius: 10px;">
+        <form class="" method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend style="text-align: center; margin-bottom: 0px;">Join Today</legend>
+                <legend class="text-center mt-3">
+                    <h3>Join Today</h3>
+                </legend>
+
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
                 <center><button class="btn btn-outline-info" type="submit">Sign Up</button></center>
             </div>
-            <div  style="margin: 30px 0 40px 0;">
+            <div style="margin: 30px 0 40px 0;">
 
                 <small class="text-muted">
                     Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>

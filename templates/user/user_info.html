@@ -1,71 +1,179 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="card">
-    <div class="card-body">
-        <div class="d-flex flex-column align-items-center text-center">
-            <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}" class="rounded-circle" width="150" />
-            <div class="mt-3">
-                <h4>{{ profle.user.username }}</h4>
-                <p class="text-secondary">{{ profile.user.email }}</p>
-                <div class="row">
-                    <b> Following : </b>
-                    <p class="text-muted"> {{ profile.following.count }} </p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <b> Followers : </b>
-                    <p class="text-muted"> {{ profile.followers.count }} </p>
+<style>
+    html {
+        background-color: #ecf9ff;
+    }
+
+    .main {
+        display: inline-block;
+        margin: 0 auto;
+        width: 33%
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+
+    .thumbnail {
+        padding: .25rem;
+        background-color: #fff;
+        /* border: 1px solid #dee2e6; */
+        border-radius: .75rem;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .page-item {
+        margin: 5px;
+    }
+
+    card-img {
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    .card-title {
+        margin-bottom: 0.3rem;
+    }
+
+    .cat {
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+
+    .fa-users {
+        margin-left: 1rem;
+    }
+
+    .card-footer {
+        font-size: 0.8rem;
+    }
+
+    .card-img-top {
+        max-height: 30vh;
+        /*not want to take all vertical space*/
+        object-fit: cover;
+        /*show all image, autosized, no cut, in available space*/
+    }
+
+    .card-img-overlay {
+        pointer-events: none;
+    }
+
+    /* .customMargin {
+        margin: 15px 0px;
+        border-radius: 15px;
+
+    } */
+</style>
+<div class="">
+
+    <div class="container mt-3 mb-3">
+        <div class="row d-flex justify-content-center align-items-center ">
+            <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-4">
+                    <div class="d-flex text-black">
+                        <div class="flex-shrink-0">
+                            <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}" class="img-fluid" style="width: 300px; border-radius: 10px;">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h1>{{ profile.user.username }}</h1>
+                            <p class="mb-2 pb-1" style="color: #2b2a2a;">Walkthrough member</p>
+                            <div class="d-flex justify-content-start rounded-3 p-2 mb-2" style="background-color: #efefef;">
+                                <div class="px-3">
+                                    <p class="small text-muted mb-1">Posts</p>
+                                    <p class="mb-0"><strong>{{ posts.count }}</strong></p>
+                                </div>
+                                <div class="px-3">
+                                    <p class="small text-muted mb-1">Followers</p>
+                                    <p class="mb-0"><strong>{{ profile.followers.count }}</strong></p>
+                                </div>
+                                <div class="px-3">
+                                    <p class="small text-muted mb-1">Following</p>
+                                    <p class="mb-0"><strong>{{ profile.following.count }}</strong></p>
+                                </div>
+
+                            </div>
+
+                            {% if profile.user == request.user %}
+                            <div class="d-flex pt-1">
+                                <a href="{% url 'profile' %}" class="btn btn-primary">Edit Profile</a>
+                            </div>
+                            {% else %}
+                            {% if request.user.profile in profile.followers.all %}
+                            <div class="d-flex pt-1">
+                                <a href="{% url 'follow' profile.id  %}" class="btn btn-danger"> Unfollow </a>
+                            </div>
+                            {% else %}
+                            <div class="d-flex pt-1">
+                                <a href="{% url 'follow' profile.id  %}" class="btn btn-primary"> Follow </a>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-                <!--
-                <h6 class="text-muted font-size-sm">
-                    {{ profile.user.bio }}
-                </h6>
-                -->
-                {% if profile.user == request.user %}
-                    <a href="{% url 'profile' %}" class="btn btn-primary">Edit Profile</a>
-                {% else %}
-                    {% if request.user.profile in profile.followers.all %}
-                        <a href="{% url 'follow' profile.id  %}" class="btn btn-primary"> Unfollow </a>
-                    {% else %}
-                        <a href="{% url 'follow' profile.id  %}" class="btn btn-primary"> Follow </a>
-                    {% endif %}   
-                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="container card mt-3 mb-3" style="border-radius: 15px;">
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="row ">
+                    <div class="card-body pb-0">
+                        <center>
+                            <h1>Posts</h1>
+                        </center>
+                        <hr>
+                    </div>
+
+                    {% for post in posts %}
+                    <div class="col-4">
+                        <div class="card mb-3 mt-3" style="border-radius: 15px;">
+                            <div>
+                                <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
+                                <div class="card-img-overlay">
+                                    <a href="#" class="btn btn-light btn-sm">{{post.category.title}}</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                                <h2 class="card-title"><a href="{% url 'post-detail' post.id %}" class="">{{post.title}}</a></h2>
+
+                                <!-- <a href="{% url 'user-info' post.id %}">{{post.author}}</a> -->
+                                <!-- <p class="card-text">{{ post.content|truncatechars:300|safe }}</p> -->
+                                <!-- <a href="{% url 'post-detail' post.id %}" class="btn btn-info">Read More</a> -->
+                                <!-- <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a> -->
+                            </div>
+                            <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+                                <!-- <div class="views">{{ post.date_posted|date:"F d,Y"}}
+                            </div> -->
+                                <div class="stats">
+                                    {% if post.stars_count == 0 %}
+                                    <a href="{% url 'postStar' post.id %}"><span id="boot-icon" class="bi bi-star" style="font-size: 25px; color: rgb(237, 95, 30); opacity: 1; -webkit-text-stroke-width: 2.5px;"></span></a>
+                                    {% else %}
+                                    <a href="{% url 'postStar' post.id %}"><span id="boot-icon" class="bi bi-star-fill" style="font-size: 25px; color: rgb(237, 95, 30); opacity: 1; -webkit-text-stroke-width: 2.5px;"></span></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End sidebar -->
+                    {% endfor %}
+                </div><!-- End blog sidebar -->
             </div>
         </div>
     </div>
 </div>
-<h1>Posts</h1>
-{% for post in posts %}
-<div class="mx-auto my-5 ">
-    <div class="card">
-        <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
-        <div class="card-img-overlay">
-            <a href="#" class="btn btn-light btn-sm">{{post.category.title}}</a>
-        </div>
-        <div class="card-body">
-            <h4 class="card-title">{{post.title}}</h4>
-            <small class="text-muted cat">
-                <i class="far fa-clock text-info"></i> 30 minutes
-                <i class="fas fa-users text-info"></i> 4 portions
-                
-                {% if post.stars_count == 0 %}
-                <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
-                {% else %}
-                <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
-                {% endif %}
-            </small>
-            <a href="{% url 'user-info' post.id %}">{{post.author}}</a>
-            <p class="card-text">{{post.content|safe}}</p>
-            <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
-            <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
-        </div>
-        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-            <div class="views">{{ post.date_posted|date:"F d,Y"}}
-            </div>
-            <div class="stats">
-                <i class="far fa-eye"></i> 1347
-                <i class="far fa-comment"></i> 12
-            </div>
-        </div>
-    </div>
-</div>
-{% endfor %}
+
+
+
 {% endblock content %}
