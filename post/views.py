@@ -108,7 +108,7 @@ def updateSubpost(request, pk, id):
         messages.success(request, f'Subpost updated!')
         return redirect('post-detail', pk=pk)
     context["form"] = form
-    return render(request, "post/subpost-update.html", context)
+    return render(request, "post/subpost_update.html", context)
 
 @login_required
 def deleteSubpost(request, pk, id):
