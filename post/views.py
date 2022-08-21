@@ -51,24 +51,8 @@ class PostDetailView(DetailView):
     template_name = 'post/post_detail.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = Comment.objects.filter(
-            post=self.get_object()).order_by('-created')
-        if self.request.user.is_authenticated:
-            context['comment_form'] = PostCommentForm(
-                instance=self.request.user)
+        context['comments'] = Comment.objects.filter(post=self.get_object()).order_by('-created')
         return context
-    '''
-    def get_queryset(self, *args, **kwargs):
-        return SubPost.objects.filter(post_id=self.kwargs['pk'])
-    '''
-    def post(self, request, *args, **kwargs):
-        if request.POST.get('body')=='':
-            messages.success(request, f'Your comment cannot be empty!')
-        else:
-            new_comment = Comment(body=request.POST.get('body'), user=self.request.user, post=self.get_object())
-            new_comment.save()
-            messages.success(request, f'Your comment has been added!')
-        return self.get(self, request, *args, **kwargs)
 
 @login_required
 def postUpdateView(request, pk):
@@ -128,12 +112,15 @@ def search(request):
 def postComment(request,pk):
     if request.method == "POST":
         body=request.POST.get('body')
-        user=request.user
-        postSno =request.POST.get('postSno')
-        post= Post.objects.get(pk=pk)
-        comment=Comment(body= body, user=user, post=post)
-        comment.save()
-        messages.success(request, f'Comment posted successfully!')
+        if body=="":
+            messages.success(request, "Comment cannot be empty!")
+        else:
+            user=request.user
+            postSno =request.POST.get('postSno')
+            post= Post.objects.get(pk=pk)
+            comment=Comment(body= body, user=user, post=post)
+            comment.save()
+            messages.success(request, "Comment posted successfully!")
     return redirect('post-detail',pk=pk)
 
 @login_required

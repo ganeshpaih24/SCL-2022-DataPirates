@@ -295,7 +295,7 @@ body{
     <h2> Comments ({{comments.count}})</h2>
     <div class="my-2">
       {% if user.is_authenticated %}
-      <form action="" method="POST">
+      <form action="{%url 'postComment' post.pk%}" method="POST">
         {% csrf_token %}
         <div class="form-group">
           <label for="exampleInputEmail1">Post Comment </label>
