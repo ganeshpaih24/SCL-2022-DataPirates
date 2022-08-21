@@ -1,36 +1,37 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<div class="mx-auto my-3">
-    <div class="card">
-        <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
-        <div class="card-img-overlay">
-            <a href="#" class="btn btn-light btn-sm">Cooking</a>
-        </div>
-        <div class="card-body" >
-            <h4 class="card-title">{{post.title}}</h4>
+<div class="my-3">
+    <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
+    <div class="card-img-overlay">
+        <a href="#" class="btn btn-light btn-sm">Cooking</a>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">{{post.title}}</h4>
 
-            <div class="d-flex justify-content-start my-2">
-                <div class="me-3">
-                    <i class="bx bxs-user"></i><a href="{% url 'user-info' post.id %}"><small>{{post.author}}</small></a>
-                </div>
-                <div class="me-5">
-                    <i class="bx bx-time"></i><small>{{ post.date_posted|date:"F d, Y" }}</small>
-                </div>
+        <div class="d-flex justify-content-start my-2">
+            <div class="me-3">
+                <i class="bx bxs-user"></i><a href="{% url 'user-info' post.id %}"><small>{{post.author}}</small></a>
             </div>
-            <p class="card-text">{{post.content|safe}}</p>
-            <a href="post/{{post.id}}" class="btn btn-info">Read More</a>
-            <!-- <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a> -->
+            <div class="me-5">
+                <i class="bx bx-time"></i><small>{{ post.date_posted|date:"F d, Y" }}</small>
+            </div>
         </div>
-        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-            <div class="views">Oct 20, 12:45PM
-            </div>
-            <div class="stats">
-                {% if object.stars_count == 0 %}
-                <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
-                {% else %}
-                <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
-                {% endif %}
-            </div>
+        <p class="card-text">{{post.content|truncatechars:250|safe }}</p>
+        <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
+        <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
+    </div>
+    <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+        <div class="views">
+            Oct 20, 12:45PM <h2>
+{{post.stars_count}}
+            </h2>
+        </div>
+        <div class="stats">
+            {% if post.stars_count == 0 %}
+            <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
+            {% else %}
+            <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
+            {% endif %}
         </div>
     </div>
 </div>
