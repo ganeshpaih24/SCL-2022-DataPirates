@@ -4,82 +4,84 @@
 
 <style>
    html {
-   background-color: #ecf9ff;
-   }
-   .main {
-   display: inline-block;
-   margin: 0 auto;
-   width: 33%
-   }
-   h1 {
-   font-size: 24px;
-   font-weight: 400;
-   text-align: center;
-   }
-   .thumbnail {
-   padding: .25rem;
-   background-color: #fff;
-   /* border: 1px solid #dee2e6; */
-   border-radius: .75rem;
-   max-width: 100%;
-   height: auto;
-   }
-   .page-item {
-   margin: 5px;
-   }
-   .card-img {
-   border-bottom-left-radius: 0px;
-   border-bottom-right-radius: 0px;
-   }
-   .card-title {
-   margin-bottom: 0.3rem;
-   }
-   .cat {
-   display: inline-block;
-   margin-bottom: 1rem;
-   }
-   .fa-users {
-   margin-left: 1rem;
-   }
-   .card-footer {
-   font-size: 0.8rem;
-   }
-   .card-img-top {
-   max-height: 35vh;
-   /*not want to take all vertical space*/
-   object-fit: cover;
-   /*show all image, autosized, no cut, in available space*/
-   }
-   .card-img-overlay {
-   pointer-events: none;
+      background-color: #ecf9ff;
    }
 
-   
-   
+   .main {
+      display: inline-block;
+      margin: 0 auto;
+      width: 33%
+   }
+
+   h1 {
+      font-size: 24px;
+      font-weight: 400;
+      text-align: center;
+   }
+
+   .thumbnail {
+      padding: .25rem;
+      background-color: #fff;
+      /* border: 1px solid #dee2e6; */
+      border-radius: .75rem;
+      max-width: 100%;
+      height: auto;
+   }
+
+   .page-item {
+      margin: 5px;
+   }
+
+   .card-img {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+   }
+
+   .card-title {
+      margin-bottom: 0.3rem;
+   }
+
+   .cat {
+      display: inline-block;
+      margin-bottom: 1rem;
+   }
+
+   .fa-users {
+      margin-left: 1rem;
+   }
+
+   .card-footer {
+      font-size: 0.8rem;
+   }
+
+   .card-img-top {
+      max-height: 35vh;
+      /*not want to take all vertical space*/
+      object-fit: cover;
+      /*show all image, autosized, no cut, in available space*/
+   }
+
+   .card-img-overlay {
+      pointer-events: none;
+   }
 </style>
 
 <div class="card py-3">
    <h1 class="blue" style="color:#2196F3;">Home</h1>
    <!-- <h3 class="blue">With Headers</h3> -->
- 
 </div>
-
 <div class="d-flex justify-content-center container my-4">
    <div class="col-xl-3">
       {% include 'includes/subpages/left_sidebar.html' %}
    </div>
    <!-- center card  -->
    <div class="col-xl-6">
-      
-            {% include 'includes/subpages/main_content.html' %}
-            {% include 'includes/subpages/pagination.html' %}
-       
+      {% include 'includes/subpages/main_content.html' %}
+      {% include 'includes/subpages/pagination.html' %}
    </div>
    <div class="col-xl-3">
       {% include 'includes/subpages/right_sidebar.html' %}
    </div>
-
-
 </div>
 
 {%endblock content%}

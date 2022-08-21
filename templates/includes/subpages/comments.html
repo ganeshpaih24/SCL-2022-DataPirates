@@ -1,12 +1,12 @@
-<div class="card mx-auto mt-2">
+<div class="card mx-auto mt-2" id="comments">
     <div class="container">
         <div class="text-center mt-2">
             <h2>Comments ({{comments.count}})</h2>
         </div>
         <hr>
-        <div class="row">
+        <div class="row mb-2">
             {% if user.is_authenticated %}
-            <form action="" method="POST">
+            <form action="{%url 'postComment' post.pk%}" method="POST">
                 {% csrf_token %}
                 <label for="exampleInputEmail1">Post Comment: </label>
                 <div class="form-group my-2 d-flex justify-content-start">
