@@ -27,29 +27,24 @@
             <p class="card-text">{{post.content|safe}}</p>
         </div>
         <div class="card-footer">
-            <div class="row">
-                <div class="col-3">
-                    {% if post.stars_count == 0 %}
-                    <a href="{% url 'postStar' post.id %}">
-                        <span id="boot-icon" class="bi bi-star" style="font-size:20px;">
-                            <span>
-                                Star
-                            </span> </span>
-                    </a>
-                    {% else %}
-                    <a href="{% url 'postStar' post.id %}">
-                        <span id="boot-icon" class="bi bi-star-fill" style="font-size:20px;">
-                        <span>
-                            Unstar
-                        </span></span>
-                    </a>
-                    {% endif %}
-                </div>
-                <div class="col-3 h5">
-                    <button type="button" class="btn btn-primary badge  align-self-end">{{ post.category }}{{ post.category }}{{ post.category }}{{ post.category }}{{ post.category }}{{ post.category }}</button>
-                </div>
+            {% if post.stars_count == 0 %}
+            <a href="{% url 'postStar' post.id %}">
+                <span id="boot-icon" class="bi bi-star" style="font-size:20px;">
+                    <span>
+                        Star
+                    </span> </span>
+            </a>
+            {% else %}
+            <a href="{% url 'postStar' post.id %}">
+                <span id="boot-icon" class="bi bi-star-fill" style="font-size:20px;">
+                    <span>
+                        Unstar
+                    </span></span>
+            </a>
+            {% endif %}
+            <div class="h5 float-end align-middle">
+                <button type="button" class="btn btn-primary badge text-white rounded-pill">{{ post.category }}{{ post.category }}{{ post.category }}{{ post.category }}{{ post.category }}</button>
             </div>
-
         </div>
     </div>
 </div>
