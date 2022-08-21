@@ -1,11 +1,3 @@
-
-    <div class="container">
-        <div class="mx-auto">
-            <div class="headline headline-md">
-                
-            </div>
-        </div>
-        {% for post in posts %}
-        {% include 'includes/subpages/card.html' %}
-        {% endfor %}
-    </div>
+{% for post in posts %}
+{% include 'includes/subpages/card_home.html' %}
+{% endfor %}

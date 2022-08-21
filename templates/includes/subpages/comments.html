@@ -27,10 +27,10 @@
             {% for comment in comments %}
             <div class="text-box d-flex justify-content-start mt-2">
                 <div class="icon-box px-2">
-                    <img style="width:60px; height:60px;" src="/media/default.jpg" alt="user">
+                    <img style="width:60px; height:60px;" src="{{ comment.user.profile.image.url }}" alt="user">
                 </div>
                 <div>
-                    <span><strong>{{comment.user.username}}</strong></span><span class="ms-3">{{comment.timestamp}}</span>
+                    <span><strong>{{comment.user.username}}</strong></span><span class="ms-3 text-muted">{{comment.timestamp}}</span>
                     <p>{{comment.body}}</p>
                 </div>
             </div>
