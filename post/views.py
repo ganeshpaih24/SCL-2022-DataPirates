@@ -147,9 +147,8 @@ def postComment(request, pk):
         body = request.POST.get('body')
         if body == "":
             messages.success(request, "Comment cannot be empty!")
-            # redirect (reverse_lazy('post-detail', pk) + '#comments')
             # return HttpResponseRedirect(reverse('post-details-comment') + '#' + urlencode({'next': comments}))
-            # return redirect('post-detail-comment', pk=pk)
+            return redirect('post-detail-comment', pk=pk)
         else:
             user = request.user
             postSno = request.POST.get('postSno')
@@ -159,6 +158,10 @@ def postComment(request, pk):
             messages.success(request, "Comment posted successfully!")
         return redirect('post-detail', pk=pk)
 
+
+# def get_redirect_url(*args, **kwargs):
+#     hash_part = "add_data_Modal"  # the data you want to add to the hash part
+#     return reverse("createpost") + "#{0}".format(hash_part)
 
 @login_required
 def star(request, pk):
