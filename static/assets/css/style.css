@@ -15,9 +15,14 @@
   --blued:#2799c6;
 
 /* pink shades */
-  --pinkl:#f092b7;
+  --pinkl:#f092b4;
   --pink:#E84D8A;
   --pinkd:#c03b70;
+
+  /* pink shades */
+  --greenl:#a5fa90;
+  --green:#17c012;
+  --greend:#258b25;
 
   /* orange shades */
   --orangel:#efd6a6;
@@ -35,10 +40,12 @@ html {
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.088), rgba(255, 255, 255, 0.027)),
-url("https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
-
-
+  background: linear-gradient(rgba(255, 255, 255, 0.088), rgba(255, 255, 255, 0.027)),
+url("https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80") no-repeat center center fixed;
+-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 
@@ -271,7 +278,7 @@ body {
 }
 
 .navspan{
-  color: orange;
+  color: var(--green);
   background-color: #fff;
  padding: 0px 5px 0px 5px;
   border-radius: 3px;
@@ -1909,3 +1916,71 @@ section {
   padding: 10px 0px;
 }
 
+
+/* bootsrap override */
+.btn-primary, .btn-outline-info, .btn-info, .page-item.active, .page-link {
+  background-color: var(--blued)!important;
+  color: white;
+  border-color: var(--blued);
+}
+
+.btn-success{
+  background-color: var(--green)!important;
+  color: white;
+  border-color: var(--greend);
+}
+
+.board{
+  color: var(--white);
+  font-size: 60px;
+}
+
+.main {
+  display: inline-block;
+  margin: 0 auto;
+  width: 33%
+  }
+  h1 {
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  }
+  .thumbnail {
+  padding: .25rem;
+  background-color: #fff;
+  /* border: 1px solid #dee2e6; */
+  border-radius: .75rem;
+  max-width: 100%;
+  height: auto;
+  }
+  .page-item {
+  margin: 5px;
+  }
+  .card-img {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  }
+  .card-title {
+  margin-bottom: 0.3rem;
+  }
+  .cat {
+  display: inline-block;
+  margin-bottom: 1rem;
+  }
+  .fa-users {
+  margin-left: 1rem;
+  }
+  .card-footer {
+  font-size: 0.8rem;
+  }
+  .card-img-top {
+  max-height: 35vh;
+  /*not want to take all vertical space*/
+  object-fit: cover;
+  /*show all image, autosized, no cut, in available space*/
+  }
+  .card-img-overlay {
+  pointer-events: none;
+  }
+
+  
