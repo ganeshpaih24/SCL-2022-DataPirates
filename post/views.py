@@ -21,7 +21,9 @@ from email.policy import HTTP
 import http
 from http.client import HTTPResponse
 from django.shortcuts import HttpResponse
+from django.http import HttpResponseRedirect
 from .models import Post, SubPost, Comment
+from django.utils.http import urlencode
 
 
 def flowchart(request):
@@ -131,17 +133,24 @@ def search(request):
 
 def postComment(request, pk):
     if request.method == "POST":
-        body=request.POST.get('body')
-        if body=="":
+        body = request.POST.get('body')
+        if body == "":
             messages.success(request, "Comment cannot be empty!")
+            # return HttpResponseRedirect(reverse('post-details-comment') + '#' + urlencode({'next': comments}))
+            return redirect('post-detail-comment', pk=pk)
         else:
-            user=request.user
-            postSno =request.POST.get('postSno')
-            post= Post.objects.get(pk=pk)
-            comment=Comment(body= body, user=user, post=post)
+            user = request.user
+            postSno = request.POST.get('postSno')
+            post = Post.objects.get(pk=pk)
+            comment = Comment(body=body, user=user, post=post)
             comment.save()
             messages.success(request, "Comment posted successfully!")
-    return redirect('post-detail',pk=pk)
+        return redirect('post-detail', pk=pk)
+
+
+# def get_redirect_url(*args, **kwargs):
+#     hash_part = "add_data_Modal"  # the data you want to add to the hash part
+#     return reverse("createpost") + "#{0}".format(hash_part)
 
 @login_required
 def star(request, pk):
@@ -173,8 +182,8 @@ def categoryList(request, slug):
     category_posts = Post.objects.filter(category=category)
     return render(request, "post/categories.html", {'category_posts': category_posts})
 
+
 def landing(request):
     post = Post.objects.all()
     context = {'post': post}
     return render(request, 'post/landing.html', context)
-

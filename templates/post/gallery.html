@@ -1,10 +1,11 @@
 {%load crispy_forms_tags%}
 {% block content%}
-<div class="row">
-    {% for post in posts %}
-    <div class="col-md-4" >
+{% for post in posts %}
+
+<div class="col-md-4 mb-3">
+    <div class="col-md-12 mx-auto border h-100">
         {% include 'includes/subpages/card.html' %}
     </div>
-    {% endfor %}
 </div>
+{% endfor %}
 {%endblock content%}

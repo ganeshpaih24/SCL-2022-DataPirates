@@ -1,16 +1,16 @@
 {% if post.author == request.user %}
     {% if not post.subposts.all%}
-        <div class="card text-center py-2">
+        <div class="card text-center py-2 my-1">
             <h4>
                 No SubPosts yet.
             </h4>
         </div>
-        <div class="card">
-            <a class="btn btn-primary" href="{%url 'subpost-create' post.pk%}">Add a SubPost</a>
+        <div class="my-1">
+            <a class="btn btn-primary w-100" href="{%url 'subpost-create' post.pk%}">Add a SubPost</a>
         </div>
     {% else %}
         {%for subpost in post.subposts.all%}
-        <div class="ps-3">
+        <div class="ps-3 my-2">
             <div class="card card-html">
                 <div class="card-header">
                     <i class="fab fa-html5 me-2"></i>{{subpost.title}}
@@ -51,10 +51,10 @@
                 </div>
             </div>
         </div>
-        {% endfor %}
-        <div class="card">
-            <a class="btn btn-primary" href="{%url 'subpost-create' post.pk%}">Add another SubPost</a>
-        </div>
+            {% endfor %}
+            <div class="my-1">
+                <a class="btn btn-primary w-100" href="{%url 'subpost-create' post.pk%}">Add another SubPost</a>
+            </div>
     {% endif %}
 {% else %}
 {% if not post.subposts.all%}
