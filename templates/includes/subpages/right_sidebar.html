@@ -1,19 +1,28 @@
-<div class="card rounded">
-    <div class="card-body">
-        <div class="d-flex align-items-center justify-content-between mb-2">
-            <center>
-                <h3 class="">Categories</h3>
-            </center>
-            <hr>
-        </div>
-        {% for category in categories_list %}
-        <div class="list-group">
-            <a href="{% url 'category' category.slug %}" class="btn btn-info my-1 rounded-pill opacity-100">{{category.title}}</a>
-            <a href="{% url 'category' category.slug %}" class="btn btn-info my-1 rounded-pill opacity-100">{{category.title}}</a>
-            <a href="{% url 'category' category.slug %}" class="btn btn-info my-1 rounded-pill opacity-100">{{category.title}}</a>
-            <a href="{% url 'category' category.slug %}" class="btn btn-info my-1 rounded-pill opacity-100">{{category.title}}</a>
+<style>
+    .sticky {
+        position: sticky;
+        top: 90px;
+        background: #ffffff;
+    }
+</style>
 
+<div class="rounded sticky">
+    <div class="card-body">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <center>
+                    <h3 class="">Categories</h3>
+                </center>
+                <hr>
+            </div>
+            {% for category in categories_list %}
+            <div class="list-group">
+                <a href="{% url 'category' category.slug %}" class="btn btn-info my-1 rounded-pill opacity-100">{{category.title}}</a>
+        
+               
+
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
