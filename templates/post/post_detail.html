@@ -48,6 +48,7 @@
     top: 90px;
 
   }
+
   .sticky2 {
     position: sticky;
     top: 0;
@@ -57,26 +58,36 @@
 <div class="container my-4">
   <div class="d-flex justify-content-center px-1">
     <div class="col-4 mx-1 mb-1">
-      {% if object.author == user %}
       <div class="sticky">
+        {% if object.author == user %}
         <div class="">
           <div class="card-body rounded mb-2 card">
-            <div class="d-flex align-items-center justify-content-between mb-2">
-              <div class="text-center">
-                <h3>Actions</h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam tenetur, asperiores temporibus vero, eius quisquam at natus perspiciatis eveniet incidunt pariatur animi fuga iste quasi sed doloremque, aperiam magnam? Dolore!
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe, placeat architecto aperiam iure aut ducimus
+            <div class="text-center">
+              <h3>Actions</h3>
+
+            </div>
+            <div class="row justify-content-md-center my-2">
+              <div class="col">
+                <a class="btn btn-primary w-100" href="{% url 'post-update' object.id %}">Update</a>
+              </div>
+              <div class="col">
+                <a type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deletePost">
+                  Delete
+                </a>
+              </div>
+            </div>
+            <div class="row my-2">
+              <div class="col">
+                <a class="btn btn-secondary w-100" href="{%url 'subpost-create' post.pk%}">Add a SubPost</a>
               </div>
             </div>
           </div>
         </div>
         {% endif %}
         <div class="card-body sticky2 rounded card">
-          <div class="d-flex align-items-center justify-content-between mb-2">
-            <div class="text-center">
-              <h3>Categories</h3>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam ullam nesciunt, nulla repudiandae placeat repellat minima corrupti error sunt architecto aspernatur quas accusamus, sint dolor esse! Assumenda perferendis qui eaque!Lorem Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque blanditiis perferendis qui! Commodi, maxime neque non esse ut eius, eveniet sed, quo ea voluptatum ducimus. Repellendus nemo accusamus Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, nulla illo necessitatibus repellat consequuntur magni ipsum impedit quae ratione beatae cum exercitationem quod saepe inventore minus doloribus labore. Quisquam, ex. corporis provident!
-            </div>
+          <div class="text-center">
+            <h3>Categories</h3>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam ullam nesciunt, nulla repudiandae placeat repellat minima corrupti error sunt architecto aspernatur quas accusamus, sint dolor esse! Assumenda perferendis qui eaque!Lorem Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque blanditiis perferendis qui! Commodi, maxime neque non esse ut eius, eveniet sed, quo ea voluptatum ducimus. Repellendus nemo accusamus Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, nulla illo necessitatibus repellat consequuntur magni ipsum impedit quae ratione beatae cum exercitationem quod saepe inventore minus doloribus labore. Quisquam, ex. corporis provident!
           </div>
         </div>
       </div>
@@ -110,8 +121,47 @@
 
 
 
+<!-- Post delete modal -->
+<div class="modal fade" id="deletePost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the post "{{object.title}}"?
+      </div>
+      <div class="modal-footer">
+        <div class="clearfix">
+          <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1" data-bs-dismiss="modal">Close</a>
+          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-
+<!-- Subpost delet modal -->
+<div class="modal fade" id="deletePost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete SubPost</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the post "{{object.title}}"?
+      </div>
+      <div class="modal-footer">
+        <div class="clearfix">
+          <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1" data-bs-dismiss="modal">Close</a>
+          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
