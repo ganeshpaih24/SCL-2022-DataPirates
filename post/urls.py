@@ -6,20 +6,25 @@ from .views import (
     SubPostCreateView,
 )
 from . import views
+from django.urls import re_path
 
 urlpatterns = [
     path('', PostListView.as_view(), name='user-home'),
     path('new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    # path(r"post/<int:pk>/#comments", PostDetailView.as_view(), name='post-detail-comment'),
     path('update/<int:pk>/', views.postUpdateView, name='post-update'),
     path('delete/<int:pk>/', views.deletePost, name='post-delete'),
-    path('post/<int:pk>/subpost/new/',SubPostCreateView.as_view(), name="subpost-create"),
-    path('post/<int:pk>/subpost/<int:id>/update/',views.updateSubpost, name="subpost-update"),
-    path('post/<int:pk>/subpost/<int:id>/delete/',views.deleteSubpost, name="subpost-delete"),
+    path('post/<int:pk>/subpost/new/',
+         SubPostCreateView.as_view(), name="subpost-create"),
+    path('post/<int:pk>/subpost/<int:id>/update/',
+         views.updateSubpost, name="subpost-update"),
+    path('post/<int:pk>/subpost/<int:id>/delete/',
+         views.deleteSubpost, name="subpost-delete"),
     path('search/', views.search, name='search'),
     path('post/<int:pk>/postComment/', views.postComment, name="postComment"),
     path('post/<int:pk>/star/', views.star, name="postStar"),
     path('stars/', views.starlist, name="stars"),
-    path('categories/<slug:slug>/',views.categoryList,name='category'),
+    path('categories/<slug:slug>/', views.categoryList, name='category'),
     path('flow/', views.landing, name='landing-page'),
 ]

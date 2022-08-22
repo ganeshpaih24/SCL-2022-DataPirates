@@ -21,7 +21,9 @@ from email.policy import HTTP
 import http
 from http.client import HTTPResponse
 from django.shortcuts import HttpResponse
+from django.http import HttpResponseRedirect
 from .models import Post, SubPost, Comment
+from django.utils.http import urlencode
 
 
 def flowchart(request):
@@ -70,6 +72,7 @@ class PostDetailView(DetailView):
     def post(self, request, *args, **kwargs):
         if request.POST.get('body') == '':
             messages.success(request, f'Your comment cannot be empty!')
+
         else:
             new_comment = Comment(body=request.POST.get(
                 'body'), user=self.request.user, post=self.get_object())
@@ -141,14 +144,20 @@ def search(request):
 
 def postComment(request, pk):
     if request.method == "POST":
-        body = request.POST.get('body',)
-        user = request.user
-        postSno = request.POST.get('postSno')
-        post = Post.objects.get(pk=pk)
-        comment = Comment(body=body, user=user, post=post)
-        comment.save()
-        messages.success(request, f'Comment posted successfully!')
-    return redirect('post-detail', pk=pk)
+        body = request.POST.get('body')
+        if body == "":
+            messages.success(request, "Comment cannot be empty!")
+            # redirect (reverse_lazy('post-detail', pk) + '#comments')
+            # return HttpResponseRedirect(reverse('post-details-comment') + '#' + urlencode({'next': comments}))
+            # return redirect('post-detail-comment', pk=pk)
+        else:
+            user = request.user
+            postSno = request.POST.get('postSno')
+            post = Post.objects.get(pk=pk)
+            comment = Comment(body=body, user=user, post=post)
+            comment.save()
+            messages.success(request, "Comment posted successfully!")
+        return redirect('post-detail', pk=pk)
 
 
 @login_required
@@ -181,8 +190,8 @@ def categoryList(request, slug):
     category_posts = Post.objects.filter(category=category)
     return render(request, "post/categories.html", {'category_posts': category_posts})
 
+
 def landing(request):
     subpost = SubPost.objects.all()
     context = {'subpost': subpost}
     return render(request, 'post/landing.html', context)
-

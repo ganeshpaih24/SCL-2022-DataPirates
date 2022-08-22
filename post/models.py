@@ -60,7 +60,7 @@ class SubPost(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.CharField(max_length=200)
+    body = models.TextField(max_length=200)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     date_added = models.DateTimeField(auto_now_add=True)

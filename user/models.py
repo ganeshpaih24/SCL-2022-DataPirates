@@ -8,7 +8,7 @@ from post.models import Post
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField("Profile picture",default='default.jpg', upload_to='profile_pics')
     name = models.CharField(max_length=50, null=True, blank=True)
     profession = models.CharField(max_length=50,null=True, blank=True)
     followers = models.ManyToManyField("self", blank=True, related_name="following", symmetrical=False)
