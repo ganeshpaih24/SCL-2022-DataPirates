@@ -62,23 +62,13 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = Comment.objects.filter(
-            post=self.get_object()).order_by('-created')
-        if self.request.user.is_authenticated:
-            context['comment_form'] = PostCommentForm(
-                instance=self.request.user)
-        return context
-
-    def post(self, request, *args, **kwargs):
-        if request.POST.get('body') == '':
-            messages.success(request, f'Your comment cannot be empty!')
-
+        context['comments'] = Comment.objects.filter(post=self.get_object()).order_by('-created')
+        if Star.objects.filter(posts=self.get_object(),user=self.request.user).exists():
+            starred=True
         else:
-            new_comment = Comment(body=request.POST.get(
-                'body'), user=self.request.user, post=self.get_object())
-            new_comment.save()
-            messages.success(request, f'Your comment has been added!')
-        return self.get(self, request, *args, **kwargs)
+            starred=False
+        context['starred']=starred
+        return context
 
 
 @login_required
@@ -123,7 +113,6 @@ def updateSubpost(request, pk, id):
         return redirect('post-detail', pk=pk)
     context["form"] = form
     return render(request, "post/subpost_update.html", context)
-
 
 @login_required
 def deleteSubpost(request, pk, id):
