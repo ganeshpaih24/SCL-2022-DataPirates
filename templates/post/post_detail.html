@@ -68,17 +68,17 @@
             </div>
             <div class="row justify-content-md-center my-2">
               <div class="col">
-                <a class="btn btn-primary w-100" href="{% url 'post-update' object.id %}">Update</a>
+                <a class="btn btn-primary w-100 rounded-pill" href="{% url 'post-update' object.id %}">Update</a>
               </div>
               <div class="col">
-                <a type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#deletePost">
+                <a class="btn btn-danger w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#deletePost">
                   Delete
                 </a>
               </div>
             </div>
             <div class="row my-2">
               <div class="col">
-                <a class="btn btn-secondary w-100" href="{%url 'subpost-create' post.pk%}">Add a SubPost</a>
+                <a class="btn btn-success w-100 rounded-pill" href="{%url 'subpost-create' post.pk%}">Add a SubPost</a>
               </div>
             </div>
           </div>
