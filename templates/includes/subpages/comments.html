@@ -9,7 +9,7 @@
             <form action="{%url 'postComment' post.pk%}" method="POST">
                 {% csrf_token %}
                 <label for="exampleInputEmail1">Post Comment: </label>
-                <div class="form-group my-2 d-flex justify-content-start">
+                <div class="form form-group my-2 d-flex justify-content-start">
                     <input type="text" class="form-control" name="body" placeholder="Type your comment here.">
                     <input type="hidden" name="postSno" value="{{post.sno}}">
                     <div class="mx-2">

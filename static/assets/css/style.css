@@ -6,7 +6,7 @@
 
   /* purple shades */
   --purplel:#af86e0;
-  --purple:#6f4a9d;
+  --purple:#674295;
   --purpled:#452f5f;
 
   /* blue shades */
@@ -16,13 +16,13 @@
 
 /* pink shades */
   --pinkl:#f092b4;
-  --pink:#E84D8A;
+  --pink:#9d21a8;
   --pinkd:#c03b70;
 
   /* pink shades */
   --greenl:#a5fa90;
   --green:#17c012;
-  --greend:#258b25;
+  --greend:#167416;
 
   /* orange shades */
   --orangel:#efd6a6;
@@ -57,12 +57,12 @@ label.required::after {
 }
 
 a {
-  color: #47b2e4;
+  color: var(--green);
   text-decoration: none;
 }
 
 a:hover {
-  color: #73c5eb;
+  color: var(--purpled);
   text-decoration: none;
 }
 
@@ -1974,7 +1974,7 @@ section {
   font-size: 0.8rem;
   }
   .card-img-top {
-  max-height: 35vh;
+  max-height: 20vh;
   /*not want to take all vertical space*/
   object-fit: cover;
   /*show all image, autosized, no cut, in available space*/
