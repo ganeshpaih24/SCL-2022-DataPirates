@@ -1,24 +1,31 @@
-<style>
-    .sticky {
-        position: sticky;
-        background: #ffffff;
-    }
-</style>
-
-<div class="rounded sticky">
-    <div class="card-body">
+<div class="rounded sticky bg-transparent">
+    <div class="card p-3 ">
         <div class="d-flex align-items-center justify-content-between mb-2">
-            <div class="text-center">
-                <h3>Categories</h3>
-            </div>
+            <p class="text-center">
+                <h3>Actions</h3>
+            </p>
         </div>
         <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat illo porro dolores ipsam dignissimos dolorum dolore facilis officia assumenda! Eligendi beatae reiciendis minus hic provident impedit eos nostrum, deleniti commodi.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat illo porro dolores ipsam dignissimos dolorum dolore facilis officia assumenda! Eligendi beatae reiciendis minus hic provident impedit eos nostrum, deleniti commodi.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat illo porro dolores ipsam dignissimos dolorum dolore facilis officia assumenda! Eligendi beatae reiciendis minus hic provident impedit eos nostrum, deleniti commodi.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat illo porro dolores ipsam dignissimos dolorum dolore facilis officia assumenda! Eligendi beatae reiciendis minus hic provident impedit eos nostrum, deleniti commodi.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat illo porro dolores ipsam dignissimos dolorum dolore facilis officia assumenda! Eligendi beatae reiciendis minus hic provident impedit eos nostrum, deleniti commodi.
+            <ul class="nav flex-column bg-white mb-0">
+                <li class="nav-item my-1">
+                    <a href="{% url 'post-create' %}" class="nav-link text-dark  bg-light">
+                        <i class="fa fa-edit mr-3  "></i>
+                        Create Post
+                    </a>
+                </li>
+                <li class="nav-item my-1">
+                    <a href="{% url 'stars' %}" class="nav-link text-dark  bg-light">
+                        <i class="fa fa-star-o mr-3  "></i>
+                        Starred Posts
+                    </a>
+                </li>
+                <li class="nav-item my-1">
+                    <a href="../user/info/{{user.id}}" class="nav-link text-dark bg-light">
+                        <i class="fa fa-user-circle-o mr-3  "></i>
+                        View Profile
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
-
 </div>
