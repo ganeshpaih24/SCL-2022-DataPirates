@@ -194,7 +194,11 @@ def starlist(request):
 def categoryList(request, slug):
     category = Category.objects.get(slug=slug)
     category_posts = Post.objects.filter(category=category)
-    return render(request, "post/categories.html", {'category_posts': category_posts})
+    context={
+        'category_posts': category_posts,
+        'category':category
+            }
+    return render(request, "post/categories.html",context)
 
 def explore(request):
     posts = Post.objects.all()
