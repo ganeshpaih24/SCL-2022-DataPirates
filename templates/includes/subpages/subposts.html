@@ -9,7 +9,7 @@
 {% else %}
 {%for subpost in post.subposts.all%}
 <div class="ps-3 my-2">
-    <div class="card card-html">
+    <div class="card card-html" id="{{ subpost.id }}">
         <div class="card-header">
             <i class="fab fa-html5 me-2"></i>{{subpost.title}}
         </div>

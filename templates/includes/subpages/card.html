@@ -1,3 +1,42 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<div class="my-3">
+    <div class="h-100">
+        <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
+        {% if post.category is not None %}
+        <div class="card-img-overlay">
+            <a href="#" class="btn btn-light btn-sm">{{post.category}}</a>
+        </div>
+        {% endif %}
+        <div class="card-body">
+            <h4 class="card-title">{{post.title}}</h4>
+            <div class="d-flex justify-content-start my-2">
+                <div class="me-3">
+                    <i class="bx bxs-user"></i><a href="{% url 'user-info' post.id %}"><small>{{post.author}}</small></a>
+                </div>
+                <div class="me-5">
+                    <i class="bx bx-time"></i><small>{{ post.date_posted|date:"F d, Y" }}</small>
+                </div>
+            </div>
+            <p class="card-text">{{post.content|truncatechars:250|safe }}</p>
+
+        </div>
+
+        <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0" style="position: relative; bottom: 0px;">
+            <div class="stats">
+                <a href="../post/{{post.id}}" class="btn btn-info">View More</a>
+            </div>
+            <div class="my-auto">
+                {% if post.stars_count == 0 %}
+                <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
+                {% else %}
+                <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
     .section_our_solution .row {
         align-items: center;
@@ -135,7 +174,6 @@
         object-fit: contain;
     }
 
-    /*start media query*/
     @media screen and (min-width: 320px) {
         .sol_card_top_3 {
             position: relative;

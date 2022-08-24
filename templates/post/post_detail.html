@@ -58,7 +58,7 @@
 <div class="container my-4">
   <div class="d-flex justify-content-center px-1">
     <div class="col-4 mx-1 mb-1">
-      <div class="sticky">
+      <div class="sticky bg-transparent">
         {% if object.author == user %}
         <div class="">
           <div class="card-body rounded mb-2 card">
@@ -88,24 +88,17 @@
           <div class="text-center">
             <h3>Categories</h3>
             {% if not post.subposts.all%}
-<div class="card text-center py-2">
-    <h4>
-        No SubPosts yet.
-    </h4>
-</div>
-{% endif %}
-<ol>
-{%for subpost in post.subposts.all%}
-
-
-   
-        <li>{{subpost.title}}</li>
-            
-    
-
-
-{% endfor %}
-</ol>
+            <div class="card text-center py-2">
+              <h4>
+                No SubPosts yet.
+              </h4>
+            </div>
+            {% endif %}
+            <ol>
+              {%for subpost in post.subposts.all%}
+              <li class="text-left"><a href="../../post/{{post.id}}/#{{subpost.id}}">{{subpost.title}}</a></li>
+              {% endfor %}
+            </ol>
           </div>
         </div>
       </div>
