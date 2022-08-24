@@ -206,3 +206,8 @@ def landing(request):
     context = {'posts': posts}
     return render(request, 'post/landing.html', context)
 '''
+
+def explore(request):
+    posts = Post.objects.all()
+    context = {'posts': posts}
+    return render(request, 'post/explore.html',context)
