@@ -9,6 +9,7 @@
         padding: 10px 20px;
         columns: #ffffff;
     }
+
     .search-bar input {
         background: transparent;
         flex: 1;
@@ -18,12 +19,15 @@
         font-size: 20px;
         color: #ffffff;
     }
+
     ::placeholder {
         color: #e7e1e1;
     }
+
     .search-bar button i {
         width: 20px;
     }
+
     .search-bar button {
         border: 0;
         border-radius: 50px;
@@ -47,22 +51,22 @@
                 <div class="collapse navbar-collapse" id="">
                     <ul>
                         <li><a class="nav-link scrollto" href="{% url 'user-home' %}">Home</a></li>
-                        <li><a class="nav-link scrollto" href="#about">Our Story</a></li>
+                        <li><a class="nav-link scrollto" href="{% url 'user-login-about' %}"">Our Story</a></li>
                         {% if user.is_authenticated %}
-                        <li class="dropdown"><a href="{% url 'profile' %}"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
-                            <ul>
-                                <li><a href="{% url 'post-create' %}">Create Post</a></li>
-                                <li><a href="{% url 'stars' %}">Starred Posts</a></li>
-                                <li><a href="{% url 'logout' %}">Logout</a></li>
-                                {% else %}
-                                <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
-                                    <ul>
-                                        <li><a href="{% url 'register' %}">Register</a></li>
-                                        <li><a href="{% url 'login' %}">Login</a></li>
-                                        {% endif %}
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li class=" dropdown"><a href="{% url 'profile' %}"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="{% url 'post-create' %}">Create Post</a></li>
+                                    <li><a href="{% url 'stars' %}">Starred Posts</a></li>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                    {% else %}
+                                    <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+                                        <ul>
+                                            <li><a href="{% url 'register' %}">Register</a></li>
+                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                </ul>
                         </li>
                     </ul>
                 </div>

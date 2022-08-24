@@ -1,217 +1,236 @@
-{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content%}
+<head>
+    <link rel="icon" type="image/x-icon" href="/media/favicon1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!-- start banner Area -->
-<section class="banner-area relative" id="home">
-    <div class="container">
-        <div class="row fullscreen d-flex align-items-center justify-content-start">
-            <div class="banner-content col-lg-8 col-md-12">
-                <h1 class="text-uppercase">
-                    We Make <br>
-                    Your Walk Through <br>
-                    More Easier
-                </h1>
-                <p class="text-white">
-                    Create your own roadmaps for your journeys<br>also learn simply with the help of prebuilt roadmaps from experts
-                </p>
-                <a href="#" class="primary-btn header-btn text-uppercase">Explore Our Features</a>
+    <!-- Alertify Js CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Alertify Js Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+    <script src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+    <script src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+
+
+    <!--Alertify Js-->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    {% if title %}
+    <title>WalkThrough | {{ title }}</title>
+    {% else %}
+    <title>WalkThrough</title>
+    {% endif %}
+    {% block custom_css %}{% endblock %}
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'includes/style.html' %}
+
+
+    {% block custom_js %}{% endblock %}
+    {% include 'includes/notification.html' %}
+
+    <script>
+        {% if messages %}
+        {% for message in messages %}
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.success('{{ message }}');
+        {% endfor %}
+        {% endif %}
+    </script>
+</body>
+
+</html>
+<style>
+    .background-image {
+        background-image: url(https://i.postimg.cc/RhYky2K1/neww.jpg);
+        background-size: cover;
+
+        /* background-repeat: no-repeat; */
+        /* width: 100vw; */
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .orange {
+        color: rgb(255, 255, 255);
+        background-color: rgb(255, 136, 0);
+
+
+    }
+
+    .orange:hover {
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+
+        background-color: rgb(255, 255, 255);
+        color: rgb(255, 136, 0);
+    }
+
+    .blur {
+        /* background: rgba(255, 255, 255, 0.2); // Make sure this color has an opacity of less than 1 */
+        backdrop-filter: blur(3px);
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+
+    }
+</style>
+<div class="">
+    <div class="background-image">
+        <section class="blur">
+            <div class="container">
+                <div class="row d-flex align-items-center justify-content-center" style="margin-top: 160px;">
+                    <div class="text-center mt-5 align-self-center blur">
+                        <h1 class="text-uppercase" style="font-weight: 900;">
+                            We Make <br>
+                            Your Walk Through <br>
+                            More Easier
+                        </h1>
+                        <p class="text-success" style="font-weight: 800;">
+                            <strong>
+
+                                Create your own roadmaps for your journeys<br>also learn simply with the help of prebuilt roadmaps from experts.
+                            </strong>
+                        </p>
+                        <div class="btn-orange btn">
+                            <a href="#features" class="btn rounded btn-lg orange text-uppercase">Explore</a>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+            <!-- End banner Area -->
+
+        </section>
     </div>
-</section>
-<!-- End banner Area -->
 
 
 
 
 
-<!-- <section class="service-area section-gap" id="service">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-8 pb-40 header-text">
-                <h1>Explore</h1>
 
-            </div>
-        </div>
-        <div class="row">
 
-            <div class="col-lg-4 col-md-6">
-                <div class="single-service">
-                    <h4><span class="lnr lnr-bookmark"></span>Follow</h4>
+    <section class="bg-light border-bottom" id="features">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8 pb-40 header-text text-center">
+                    <h1>Some Features that Made us Unique</h1>
                     <p>
-                        You can follow authors of different roadmaps according to your needs and interests.
+                        Who are in extremely love with walkthrough journeys.
                     </p>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
- -->
-
-<!-- Start about Area -->
-<!-- <section class="about-area" id="about">
-    <div class="container-fluid">
-        <div class="row d-flex justify-content-end align-items-center">
-            <div class="col-lg-6 col-md-12 about-left">
-                <h1>We Believe that
-                    Walkthrogh beautifies the</h1>
-                <p>
-                    journeys that you decide to walkthrough in your life. Whenever you want to learn something new and have problems deciding which road map to take to make your journey successful visit Walkthrough to find similar roadmaps and build your own roadmap. You can also guide others who are facing difficulties in their journey by posting your walkthrough through your journeys so that they can have a smooth walkthrough.
-                </p>
-                <a href="#" class="primary-btn header-btn text-uppercase">See Details</a>
-            </div>
-            <div class="col-lg-6 col-md-12 about-right no-padding">
-                <img class="img-fluid" src="img/c1.jpg" alt="">
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- End about Area -->
-
-<!-- Start service Area -->
-<!-- <section class="service-area section-gap" id="service">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-8 pb-40 header-text">
-                <h1>Some Features that Made us Unique</h1>
-                <p>
-                    Who are in extremely love with walkthrough journeys.
-                </p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-service">
-                    <h4><span class="lnr lnr-users"></span>Create your roadmap</h4>
-                    <p>
-                        You can create your own roadmap through posts and also you can update them.
-                    </p>
+            <div class="row mx-auto">
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                    <div class="mx-2 rounded border mb-4 p-3">
+                        <h4><span class="fa fa-sort pe-2"></span>Create your roadmap</h4>
+                        <p>
+                            You can create your own roadmap through posts and also you can update them.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-service">
-                    <h4><span class="lnr lnr-home"></span>All resources in one place</h4>
-                    <p>
-                        All the resources required through your walkthrough journeys are available at single place.
-                    </p>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                    <div class="mx-2 rounded border mb-4 p-3">
+                        <h4><span class="fa fa-home pe-2"></span>All resources in one place</h4>
+                        <p>
+                            All the resources required through your walkthrough journeys are available at single place.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-service">
-                    <h4><span class="lnr lnr-sort-amount-asc"></span>Step-By-Step Explanations</h4>
-                    <p>
-                        You can also find step-by-step explanations in each roadmap for easy understanding.
-                    </p>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                    <div class="mx-2 rounded border mb-4 p-3">
+                        <h4><span class="fa fa-list pe-2"></span>Step-By-Step Explanations</h4>
+                        <p>
+                            You can also find step-by-step explanations in each roadmap for easy understanding.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-service">
-                    <h4><span class="lnr lnr-list"></span>Category Search for Roadmaps</h4>
-                    <p>
-                        You can search through categories and through titles to find your required roadmaps.
-                    </p>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                    <div class="mx-2 rounded border mb-4 p-3">
+                        <h4><span class="fa fa-list pe-2"></span>Category Search for Roadmaps</h4>
+                        <p>
+                            You can search through categories and through titles to find the required roadmaps.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-service">
-                    <h4><span class="lnr lnr-star"></span>Star feature</h4>
-                    <p>
-                        You can star and unstar roadmaps according to your requirements.This is very useful.
-                    </p>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                    <div class="mx-2 rounded border mb-4 p-3">
+                        <h4><span class="fa fa-star pe-2"></span>Star feature</h4>
+                        <p>
+                            You can star and unstar roadmaps according to your requirements.This is very useful.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-service">
-                    <h4><span class="lnr lnr-bookmark"></span>Follow</h4>
-                    <p>
-                        You can follow authors of different roadmaps according to your needs and interests.
-                    </p>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                    <div class="mx-2 rounded border mb-4 p-3">
+                        <h4><span class="fa fa-user pe-2"></span>Follow</h4>
+                        <p>
+                            You can follow authors of different roadmaps according to your needs and interests.
+                        </p>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="{% url 'user-home' %}" class="btn rounded btn-lg orange text-uppercase me-3 w-50">Explore Top Posts</a>
                 </div>
             </div>
         </div>
-    </div>
-</section> -->
-
-<!-- End service Area -->
-
-<!-- Start info Area -->
-<!-- <section class="info-area relative section-gap">
-    <div class="overlay overlay-bg"></div>
-    <div class="container">
-        <div class="row justify-content-start">
-            <div class="col-lg-5">
-                <h1 class="text-white">From the root <br>
-                    of experience We dig <br>
-                    out the best experiences</h1>
-                <p class="pt-20 pb-20">
-                    We provide all the resources and different roadmaps that you need throughout your walkthrough journey. You only need to make your choice.
-                </p>
-                <a href="#" class="primary-btn header-btn text-uppercase">Get Customer Support</a>
-            </div>
-        </div>
-    </div>
-</section> -->
-<!-- End info Area -->
+    </section>
 
 
-<!-- Start faq Area -->
-<!-- <section class="faq-area section-gap" id="faq">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="menu-content pb-60 col-lg-8">
-                <div class="title text-center">
-                    <h1 class="mb-10">Features That make us Unique</h1>
-                    <p>Who are in extremely love with walkthrough journeys.</p>
+    <section class="bg-light" id="">
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-5">
+                    <h1>We Believe that <br>
+                        Walkthrogh beautifies</h1>
+                    <p class="text-justify">
+                        the journeys that you decide to walkthrough in your life. Whenever you want to learn something new and have problems deciding which road map to take to make your journey successful visit Walkthrough to find similar roadmaps and build your own roadmap. You can also guide others who are facing difficulties in their journey by posting your walkthrough through your journeys so that they can have a smooth walkthrough.
+                    </p>
+                    <a href="#" class="btn rounded btn-primary btn-lg text-uppercase">See Details</a>
+                </div>
+                <div class="col-5">
+                    <img class="img-fluid" src="https://miro.medium.com/max/674/1*ITlKBTv9liQMerlpg4Be1w.png" alt="">
                 </div>
             </div>
         </div>
-        <div class="row d-flex align-items-center">
-            <div class="counter-left col-lg-3 col-md-3">
-                <div class="single-facts">
-                    <h2 class="counter">5962</h2>
-                    <p>Roadmaps completed</p>
-                </div>
-                <div class="single-facts">
-                    <h2 class="counter">2394</h2>
-                    <p>New Users</p>
-                </div>
-                <div class="single-facts">
-                    <h2 class="counter">1439</h2>
-                    <p>Followed authors</p>
-                </div>
-                <div class="single-facts">
-                    <h2 class="counter">933</h2>
-                    <p>Starred roadmaps</p>
-                </div>
+    </section>
+    <section id="team" class="team section-bg">
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Team</h2>
+                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
             </div>
-            <div class="faq-content col-lg-9 col-md-9">
-                <div class="single-faq">
-                    <h2>
-                        Can I ask questions on any roadmap?
-                    </h2>
-                    <p>
-                        “Yes. We have comment feature in every roadmap which helps you to make comments on roadmaps.
-                    </p>
-                </div>
-                <div class="single-faq">
-                    <h2>
-                        Can I post roadmap without registering?
-                    </h2>
-                    <p>
-                        “No. You must register an account to make a post.
-                    </p>
-                </div>
-                <div class="single-faq">
-                    <h2>
-                        Can I star any post and follow any author?
-                    </h2>
-                    <p>
-                        “Yes. You can star and unstar, follow and unfollow anytime according to your will.
-                    </p>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="member d-flex align-items-start aos-init aos-animate">
+                        <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Walter White</h4> <span>Chief Executive Officer</span>
+                            <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                            <div class="social">
+                                <a href=""><i class="ri-twitter-fill"></i></a>
+                                <a href=""><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/prateek_nayak_24/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/prateek-nayak/"> <i class="ri-linkedin-box-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section> -->
-{%endblock content%}
+    </section>
+</div>
+
+
+{% include 'includes/footer.html' %}
