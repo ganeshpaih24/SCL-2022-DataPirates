@@ -21,11 +21,7 @@
         <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
     </div>
     <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-        <div class="views">
-            Oct 20, 12:45PM <h2>
-{{post.stars_count}}
-            </h2>
-        </div>
+        
         <div class="stats">
             {% if post.stars_count == 0 %}
             <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>

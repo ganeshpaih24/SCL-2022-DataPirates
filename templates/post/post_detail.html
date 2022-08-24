@@ -87,7 +87,25 @@
         <div class="card-body sticky2 rounded card">
           <div class="text-center">
             <h3>Categories</h3>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam ullam nesciunt, nulla repudiandae placeat repellat minima corrupti error sunt architecto aspernatur quas accusamus, sint dolor esse! Assumenda perferendis qui eaque!Lorem Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque blanditiis perferendis qui! Commodi, maxime neque non esse ut eius, eveniet sed, quo ea voluptatum ducimus. Repellendus nemo accusamus Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, nulla illo necessitatibus repellat consequuntur magni ipsum impedit quae ratione beatae cum exercitationem quod saepe inventore minus doloribus labore. Quisquam, ex. corporis provident!
+            {% if not post.subposts.all%}
+<div class="card text-center py-2">
+    <h4>
+        No SubPosts yet.
+    </h4>
+</div>
+{% endif %}
+<ol>
+{%for subpost in post.subposts.all%}
+
+
+   
+        <li>{{subpost.title}}</li>
+            
+    
+
+
+{% endfor %}
+</ol>
           </div>
         </div>
       </div>
