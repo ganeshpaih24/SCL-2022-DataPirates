@@ -24,6 +24,7 @@ from django.shortcuts import HttpResponse
 from django.http import HttpResponseRedirect
 from .models import Post, SubPost, Comment
 from django.utils.http import urlencode
+from user.models import Profile
 
 
 def flowchart(request):
@@ -34,7 +35,7 @@ def flowchart(request):
 
 class PostListView(ListView):
     model = Post
-    template_name = 'post/home.html'
+    template_name = 'post/landing.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 5
@@ -44,6 +45,23 @@ class PostListView(ListView):
         context['categories_list'] = Category.objects.all()
         return context
 
+def following_posts(request):
+    posts=Post.objects.all()
+    categories_list = Category.objects.all()
+    following_profiles=Profile.objects.get(user=request.user).following.all()
+    '''
+    following_posts=[]
+    for post in posts:
+        if post.author.profile in following_profiles:
+            following_posts.add(post.id)
+    print(following_posts)
+    '''
+    context = {
+        'posts':posts,
+        'following_profiles': following_profiles,
+        'categories_list':categories_list
+        }
+    return render(request, 'post/home.html', context)
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
@@ -182,8 +200,9 @@ def categoryList(request, slug):
     category_posts = Post.objects.filter(category=category)
     return render(request, "post/categories.html", {'category_posts': category_posts})
 
-
+'''
 def landing(request):
-    subpost = SubPost.objects.all()
-    context = {'subpost': subpost}
+    posts = Post.objects.all()
+    context = {'posts': posts}
     return render(request, 'post/landing.html', context)
+'''
