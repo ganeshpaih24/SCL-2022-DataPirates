@@ -13,4 +13,18 @@
         </div>
         {% endfor %}
     </div>
+
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+            <p class="text-center">
+            <h3>More Posts</h3>
+            </p>
+        </div>
+        {% for post in posts|slice:":5" %}
+        <div class="list-group">
+            <a href="{% url 'post-detail' post.id %}" class="my-1  opacity-100">{{post.title}}</a>
+
+        </div>
+        {% endfor %}
+    </div>
 </div>

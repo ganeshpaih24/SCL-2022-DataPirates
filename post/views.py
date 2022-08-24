@@ -48,6 +48,7 @@ class PostListView(ListView):
 @login_required
 def following_posts(request):
     posts=Post.objects.all()
+    random_list = Post.objects.order_by('?')
     categories_list = Category.objects.all()
     following_profiles=Profile.objects.get(user=request.user).following.all()
     starred_posts = Star.objects.get(user=request.user).posts.all()
@@ -55,7 +56,8 @@ def following_posts(request):
         'posts':posts,
         'following_profiles': following_profiles,
         'categories_list':categories_list,
-        'starred_posts':starred_posts
+        'starred_posts':starred_posts,
+        'random_list':random_list
         }
     return render(request, 'post/home.html', context)
 
