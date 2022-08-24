@@ -13,11 +13,16 @@
 
     <script src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
     <script src="/static/ckeditor/ckeditor/ckeditor.js"></script>
-    
+
 
     <!--Alertify Js-->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
+    <!-- AOS animate resources -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     {% if title %}
     <title>WalkThrough | {{ title }}</title>
     {% else %}
