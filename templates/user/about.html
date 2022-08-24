@@ -173,13 +173,14 @@
                         </p>
                     </div>
                 </div>
+                {% if not user.is_authenticated %}
                 <div class="d-flex justify-content-center mt-3">
-                    <a href="{% url 'user-home' %}" class="btn rounded btn-lg orange text-uppercase me-3 w-50">Explore Top Posts</a>
+                    <a href="{% url 'register' %}" class="btn rounded btn-lg orange text-uppercase me-3 w-50">Join now</a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </section>
-
 
     <section class="bg-light border-bottom" id="">
         <div class="container">
@@ -201,7 +202,6 @@
         <div class="container aos-init aos-animate" data-aos="fade-up">
             <div class="section-title">
                 <h2>Team</h2>
-                <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
             </div>
 
             <div class="row">
