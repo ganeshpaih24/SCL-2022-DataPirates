@@ -1,39 +1,76 @@
 {% load static %}
-<header id="header" class="">
-    <div class="container d-flex align-items-center ">
+<style>
+    .search-bar {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        border-radius: 50px;
+        padding: 10px 20px;
+        columns: #ffffff;
+    }
 
-        <h1 class="logo me-auto"><a href="{% url 'user-home' %}">WalkThrough</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="{% static 'assets/img/logo.png' %}" alt="" class="img-fluid"></a> -->
+    .search-bar input {
+        background: transparent;
+        flex: 1;
+        border: 0;
+        outline: none;
+        padding: 0px 10px;
+        font-size: 20px;
+        color: #ffffff;
+    }
 
-        <nav id="navbar" class="navbar light">
-            <ul>
-                <li><a class="nav-link scrollto" href="{% url 'user-home' %}">Home</a></li>
-                <!-- <li><a class="nav-link scrollto" href="#stories">Stories</a></li> -->
-                <li><a class="nav-link scrollto" href="#about">Our Story</a></li>
-                
+    ::placeholder {
+        color: #e7e1e1;
+    }
+
+    .search-bar button i {
+        width: 20px;
+    }
+
+    .search-bar button {
+        border: 0;
+        border-radius: 50px;
+        width: 60px;
+        height: 30px;
+        background: purple;
+        cursor: pointer;
+    }
+</style>
+<header id="header" class="sticky-top">
+    <div class="container d-flex align-items-center">
+        <h1 class="logo me-5"><a href="{% url 'user-home' %}"><span>Walk</span><span class="navspan">Through</span></a></h1>
+        <div class="col-xl-6 ms-1">
+            <form method="GET" action="{% url 'search' %}" class="search-bar">
+                <input class="input" type="search" placeholder="What are you looking for today?" aria-label="Search" name="query" id="query">
+                <button class="button" type="submit"><i class="fa fa-search text-white"></i></button>
+            </form>
+        </div>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid ms-5">
+                <div class="collapse navbar-collapse" id="">
+                    <ul>
+                        <li><a class="nav-link scrollto" href="{% url 'user-home' %}">Home</a></li>
+                        <li><a class="nav-link scrollto" href="{% url 'user-login-about' %}"">Our Story</a></li>
                         {% if user.is_authenticated %}
-                        <li class="dropdown"><a href="{% url 'profile' %}"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
-                            <ul>
-                        <li><a href="{% url 'post-create' %}">Create Post</a></li>
-                        <li><a href="{% url 'stars' %}">Starred Posts</a></li>
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
-                        {% else %}
-                        <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
-                            <ul>
-                        <li><a href="{% url 'register' %}">Register</a></li>
-                        <li><a href="{% url 'login' %}">Login</a></li>
-                        {% endif %}
-                 
-                        
-                        
+                        <li class=" dropdown"><a href="{% url 'profile' %}"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="{% url 'post-create' %}">Create Post</a></li>
+                                    <li><a href="{% url 'stars' %}">Starred Posts</a></li>
+                                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                                    {% else %}
+                                    <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+                                        <ul>
+                                            <li><a href="{% url 'register' %}">Register</a></li>
+                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </li>
+                                </ul>
+                        </li>
                     </ul>
-                   
-                </li>
-               
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
+                </div>
+            </div>
+        </nav>
     </div>
 </header>

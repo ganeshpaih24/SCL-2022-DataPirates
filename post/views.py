@@ -21,7 +21,10 @@ from email.policy import HTTP
 import http
 from http.client import HTTPResponse
 from django.shortcuts import HttpResponse
+from django.http import HttpResponseRedirect
 from .models import Post, SubPost, Comment
+from django.utils.http import urlencode
+from user.models import Profile
 
 
 def flowchart(request):
@@ -32,7 +35,7 @@ def flowchart(request):
 
 class PostListView(ListView):
     model = Post
-    template_name = 'post/home.html'
+    template_name = 'post/landing.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 5
@@ -42,6 +45,23 @@ class PostListView(ListView):
         context['categories_list'] = Category.objects.all()
         return context
 
+def following_posts(request):
+    posts=Post.objects.all()
+    categories_list = Category.objects.all()
+    following_profiles=Profile.objects.get(user=request.user).following.all()
+    '''
+    following_posts=[]
+    for post in posts:
+        if post.author.profile in following_profiles:
+            following_posts.add(post.id)
+    print(following_posts)
+    '''
+    context = {
+        'posts':posts,
+        'following_profiles': following_profiles,
+        'categories_list':categories_list
+        }
+    return render(request, 'post/home.html', context)
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
@@ -60,22 +80,13 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = Comment.objects.filter(
-            post=self.get_object()).order_by('-created')
-        if self.request.user.is_authenticated:
-            context['comment_form'] = PostCommentForm(
-                instance=self.request.user)
-        return context
-
-    def post(self, request, *args, **kwargs):
-        if request.POST.get('body') == '':
-            messages.success(request, f'Your comment cannot be empty!')
+        context['comments'] = Comment.objects.filter(post=self.get_object()).order_by('-created')
+        if Star.objects.filter(posts=self.get_object(),user=self.request.user).exists():
+            starred=True
         else:
-            new_comment = Comment(body=request.POST.get(
-                'body'), user=self.request.user, post=self.get_object())
-            new_comment.save()
-            messages.success(request, f'Your comment has been added!')
-        return self.get(self, request, *args, **kwargs)
+            starred=False
+        context['starred']=starred
+        return context
 
 
 @login_required
@@ -121,7 +132,6 @@ def updateSubpost(request, pk, id):
     context["form"] = form
     return render(request, "post/subpost_update.html", context)
 
-
 @login_required
 def deleteSubpost(request, pk, id):
     subpost = SubPost.objects.get(id=id).delete()
@@ -133,23 +143,32 @@ def search(request):
     query = request.GET['query']
     # allposts=Post.objects.all()
     allposts = Post.objects.filter(title__icontains=query)
-    print(allposts[0])
-    params = {'allpost': allposts}
-    return render(request, 'post/search.html', params)
+    print(allposts)
+    context = {'allpost': allposts}
+    return render(request, 'post/search.html', context)
     # return HttpResponse('This is search')
 
 
 def postComment(request, pk):
     if request.method == "POST":
-        body = request.POST.get('body',)
-        user = request.user
-        postSno = request.POST.get('postSno')
-        post = Post.objects.get(pk=pk)
-        comment = Comment(body=body, user=user, post=post)
-        comment.save()
-        messages.success(request, f'Comment posted successfully!')
-    return redirect('post-detail', pk=pk)
+        body = request.POST.get('body')
+        if body == "":
+            messages.success(request, "Comment cannot be empty!")
+            # return HttpResponseRedirect(reverse('post-details-comment') + '#' + urlencode({'next': comments}))
+            return redirect('post-detail-comment', pk=pk)
+        else:
+            user = request.user
+            postSno = request.POST.get('postSno')
+            post = Post.objects.get(pk=pk)
+            comment = Comment(body=body, user=user, post=post)
+            comment.save()
+            messages.success(request, "Comment posted successfully!")
+        return redirect('post-detail', pk=pk)
 
+
+# def get_redirect_url(*args, **kwargs):
+#     hash_part = "add_data_Modal"  # the data you want to add to the hash part
+#     return reverse("createpost") + "#{0}".format(hash_part)
 
 @login_required
 def star(request, pk):
@@ -167,7 +186,7 @@ def star(request, pk):
         messages.success(request, f'Post added to Starred Posts List!')
     post.stars_count = current_stars
     post.save()
-    return redirect('post-detail',pk=pk)
+    return redirect('post-detail', pk=pk)
 
 
 @login_required
@@ -180,3 +199,10 @@ def categoryList(request, slug):
     category = Category.objects.get(slug=slug)
     category_posts = Post.objects.filter(category=category)
     return render(request, "post/categories.html", {'category_posts': category_posts})
+
+'''
+def landing(request):
+    posts = Post.objects.all()
+    context = {'posts': posts}
+    return render(request, 'post/landing.html', context)
+'''

@@ -22,7 +22,7 @@ class Post(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100)
-    image = models.ImageField(default='wt-logo.png', upload_to='post_img')
+    image = models.ImageField("Thumbnail",default='wt-logo.png', upload_to='post_img')
     content = RichTextField(blank=True, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -60,7 +60,7 @@ class SubPost(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = models.CharField(max_length=200)
+    body = models.TextField(max_length=200)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     date_added = models.DateTimeField(auto_now_add=True)

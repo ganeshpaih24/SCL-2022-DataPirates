@@ -1,0 +1,8 @@
+{% for post in posts %}
+{%if post.author.profile in following_profiles%}
+{% include 'includes/subpages/card_home.html' %}
+{%endif%}
+{% endfor %}
+{%if following_profiles.count == 0 %}
+<h3>No feeds to show</h3>
+{%endif%}
