@@ -1941,11 +1941,7 @@ section {
   margin: 0 auto;
   width: 33%
   }
-  h1 {
-  font-size: 24px;
-  font-weight: 400;
-  text-align: center;
-  }
+
   .thumbnail {
   padding: .25rem;
   background-color: #fff;
