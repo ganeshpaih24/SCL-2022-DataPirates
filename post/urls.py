@@ -27,4 +27,6 @@ urlpatterns = [
     path('stars/', views.starlist, name="stars"),
     path('categories/<slug:slug>/', views.categoryList, name='category'),
     path('flow/', PostListView.as_view(), name='landing-page'),
+     path('explore/', views.explore, name='explore'),
 ]
+

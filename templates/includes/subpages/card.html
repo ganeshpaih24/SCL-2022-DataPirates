@@ -2,9 +2,11 @@
 
 <div class="my-3">
     <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
+    {% if  post.category is not None %}
     <div class="card-img-overlay">
-        <a href="#" class="btn btn-light btn-sm">Cooking</a>
+        <a href="#" class="btn btn-light btn-sm">{{post.category}}</a>
     </div>
+    {% endif %}
     <div class="card-body">
         <h4 class="card-title">{{post.title}}</h4>
 
@@ -17,13 +19,13 @@
             </div>
         </div>
         <p class="card-text">{{post.content|truncatechars:250|safe }}</p>
-        <a href="post/{{post.id}}" class="btn btn-info">Read Recipe</a>
-        <a class="new" href="post/{{ post.id }}"><button class="btn1">Detailed Roadmap</button></a>
+        <a href="post/{{post.id}}" class="btn btn-info">View More</a>
+        
     </div>
     <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
         <div class="views">
             Oct 20, 12:45PM <h2>
-{{post.stars_count}}
+
             </h2>
         </div>
         <div class="stats">
