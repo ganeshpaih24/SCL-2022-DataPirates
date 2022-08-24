@@ -1,3 +1,23 @@
+<div class="mx-auto row justify-content-md-center">
+    <div class="col">
+        <a class="btn btn-primary w-100" href="{%url 'subpost-create' post.pk%}">Add a SubPost</a>
+    </div>
+    <div class="col">
+        <a class="btn btn-primary w-100" href="{%url 'subpost-create' post.pk%}">Add a SubPost</a>
+    </div>
+</div>
+<div class="row mx-auto">
+    <div class="col">
+        <a class="btn btn-primary w-100" href="{%url 'subpost-create' post.pk%}">Add a SubPost</a>
+    </div>
+</div>
+
+
+
+
+
+
+
 <div class="row">
     <div class="col-8">
         <h1 class="">{{ object.title }}</h1>
@@ -18,7 +38,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Delete SubPost</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -60,7 +80,6 @@
                                                 <a type="button" class="btn btn-secondary btn-sm mt-1 mb-1" data-bs-dismiss="modal">Close</a>
                                                 <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
