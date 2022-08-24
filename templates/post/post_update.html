@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
 {% block content%}
-
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 <div class=" py-3">
     <h1 class="board d-flex justify-content-center">Update Post</h1>
     <!-- <h3 class="blue">With Headers</h3> -->
- </div>
-<div class="container">
+</div>
+<div class="container" data-aos="fade-up">
     <div class="row">
         <div class="my-3">
             <div class="form-control" style="border-radius: 15px;">

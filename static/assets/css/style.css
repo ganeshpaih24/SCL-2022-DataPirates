@@ -39,7 +39,6 @@ html {
   height: 100%;
   margin: 0px;
   padding: 0px;
-  overflow-x: hidden;
   background: linear-gradient(rgba(255, 255, 255, 0.088), rgba(255, 255, 255, 0.027)),
 url("https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80") no-repeat center center fixed;
 -webkit-background-size: cover;

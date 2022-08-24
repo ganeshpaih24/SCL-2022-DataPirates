@@ -10,11 +10,11 @@
 </div>
 
 <div class="d-flex justify-content-center container my-4">
-   <div class="col-xl-3">
+   <div class="col-xl-3" data-aos="fade-down">
       {% include 'includes/subpages/left_sidebar.html' %}
    </div>
    <!-- center card  -->
-   <div class="col-xl-6">
+   <div class="col-xl-6" data-aos="fade-up">
       
     {% for post in star_list.posts.all %}
     <!-- <div class="row d-flex justify-content-center">
@@ -27,7 +27,7 @@
     
     {% endfor %}
    </div>
-   <div class="col-xl-3">
+   <div class="col-xl-3" data-aos="fade-down">
       {% include 'includes/subpages/right_sidebar.html' %}
    </div>
 

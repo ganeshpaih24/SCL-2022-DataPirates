@@ -1,6 +1,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-<div class="my-3">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<div class="my-3" data-aos="fade-up">
     <div class="h-100">
         <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
         {% if post.category is not None %}
@@ -19,12 +23,11 @@
                 </div>
             </div>
             <p class="card-text">{{post.content|truncatechars:250|safe }}</p>
-
         </div>
 
         <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0" style="position: relative; bottom: 0px;">
             <div class="stats">
-                <a href="../post/{{post.id}}" class="btn btn-info">View More</a>
+                <a href="{% url 'post-detail' post.id %}" class="btn btn-info">View More</a>
             </div>
             {% if user.is_authenticated %}
             <div class="my-auto">
