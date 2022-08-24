@@ -200,7 +200,7 @@ body {
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #000000;
+  color: var(--green);
 }
 
 .navbar .getstarted,
@@ -245,7 +245,7 @@ body {
   font-size: 14px;
   text-transform: none;
   font-weight: 500;
-  color: #0c3c53;
+  color: var(--black);
 }
 
 .navbar .dropdown ul a i {
@@ -363,7 +363,7 @@ body {
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
-  color: #47b2e4;
+  color: var(--green);
 }
 
 .navbar-mobile .getstarted,
@@ -1982,5 +1982,7 @@ section {
   .card-img-overlay {
   pointer-events: none;
   }
+
+  
 
   
