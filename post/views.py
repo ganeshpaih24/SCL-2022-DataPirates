@@ -45,6 +45,7 @@ class PostListView(ListView):
         context['categories_list'] = Category.objects.all()
         return context
 
+@login_required
 def following_posts(request):
     posts=Post.objects.all()
     categories_list = Category.objects.all()
@@ -69,7 +70,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin,DetailView):
     model = Post
     template_name = 'post/post_detail.html'
 
@@ -194,13 +195,6 @@ def categoryList(request, slug):
     category = Category.objects.get(slug=slug)
     category_posts = Post.objects.filter(category=category)
     return render(request, "post/categories.html", {'category_posts': category_posts})
-
-'''
-def landing(request):
-    posts = Post.objects.all()
-    context = {'posts': posts}
-    return render(request, 'post/landing.html', context)
-'''
 
 def explore(request):
     posts = Post.objects.all()
