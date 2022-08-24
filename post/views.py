@@ -35,7 +35,7 @@ def flowchart(request):
 
 class PostListView(ListView):
     model = Post
-    template_name = 'post/landing.html'
+    template_name = 'post/home.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 5
@@ -200,3 +200,12 @@ def explore(request):
     posts = Post.objects.all()
     context = {'posts': posts}
     return render(request, 'post/explore.html',context)
+
+def landing(request):
+    
+    return render(request, 'post/landing.html')
+
+# def lside(request):
+#     user = request.user
+#     context={'users':user}
+#     return render(request, 'includes/subpages/left_sidebar.html',context)
