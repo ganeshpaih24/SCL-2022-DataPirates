@@ -49,17 +49,12 @@ def following_posts(request):
     posts=Post.objects.all()
     categories_list = Category.objects.all()
     following_profiles=Profile.objects.get(user=request.user).following.all()
-    '''
-    following_posts=[]
-    for post in posts:
-        if post.author.profile in following_profiles:
-            following_posts.add(post.id)
-    print(following_posts)
-    '''
+    starred_posts = Star.objects.get(user=request.user).posts.all()
     context = {
         'posts':posts,
         'following_profiles': following_profiles,
-        'categories_list':categories_list
+        'categories_list':categories_list,
+        'starred_posts':starred_posts
         }
     return render(request, 'post/home.html', context)
 
@@ -186,7 +181,7 @@ def star(request, pk):
         messages.success(request, f'Post added to Starred Posts List!')
     post.stars_count = current_stars
     post.save()
-    return redirect('post-detail', pk=pk)
+    return redirect('user-home')
 
 
 @login_required
@@ -206,3 +201,8 @@ def landing(request):
     context = {'posts': posts}
     return render(request, 'post/landing.html', context)
 '''
+
+def explore(request):
+    posts = Post.objects.all()
+    context = {'posts': posts}
+    return render(request, 'post/explore.html',context)

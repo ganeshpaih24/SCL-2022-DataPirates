@@ -9,7 +9,7 @@ from . import views
 from django.urls import re_path
 
 urlpatterns = [
-    path('', views.following_posts, name='user-home'),
+    path('post/', views.following_posts, name='user-home'),
     path('new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path("post/<int:pk>/" + "#".format() + "comments", PostDetailView.as_view(), name='post-detail-comment'),
@@ -27,4 +27,6 @@ urlpatterns = [
     path('stars/', views.starlist, name="stars"),
     path('categories/<slug:slug>/', views.categoryList, name='category'),
     path('flow/', PostListView.as_view(), name='landing-page'),
+     path('explore/', views.explore, name='explore'),
 ]
+
