@@ -92,18 +92,18 @@
 
 </head>
 
-<div class="loader-wrapper">
-  <span class="loader"><span class="loader-inner"></span></span>
-</div>
+
 <class = "d-flex flex-column min-vh-100">
 
     <body class="d-flex flex-column min-vh-100">
         {% include 'includes/navbar.html' %}
     
         {% block content %}
-    
+        
         {% endblock %}
-    
+        <div class="loader-wrapper">
+          <span class="loader"><span class="loader-inner"></span></span>
+        </div>
         {% include 'includes/style.html' %}
         {% include 'includes/footer.html' %}
     
