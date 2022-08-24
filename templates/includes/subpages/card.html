@@ -4,7 +4,7 @@
 <script>
     AOS.init();
 </script>
-<div class="my-3" data-aos="flip-left">
+<div class="my-3" data-aos="fade-up">
     <div class="h-100">
         <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
         {% if post.category is not None %}
@@ -27,7 +27,7 @@
 
         <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0" style="position: relative; bottom: 0px;">
             <div class="stats">
-                <a href="../post/{{post.id}}" class="btn btn-info">View More</a>
+                <a href="{% url 'post-detail' post.id %}" class="btn btn-info">View More</a>
             </div>
             <div class="my-auto">
                 {% if post.stars_count == 0 %}

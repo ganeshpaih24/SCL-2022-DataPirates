@@ -20,7 +20,7 @@
         </div>
         <div class="card-body">
             <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
-            <a href="post/{{post.id}}">
+            <a href="{% url 'post-detail' post.id %}">
                 <h4 class="card-title mt-2">{{post.title}}</h4>
             </a>
             <div class="d-flex justify-content-start my-2">
