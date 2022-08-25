@@ -1,1 +1,1 @@
-web gunicorn walkthrough_scl.wsgi:apllication --log-file -
+web: waitress-serve --port=$PORT walkthrough_scl.wsgi:application
