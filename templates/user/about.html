@@ -17,7 +17,7 @@
 
     <!--Alertify Js-->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
+    
     {% if title %}
     <title>WalkThrough | {{ title }}</title>
     {% else %}
@@ -53,7 +53,7 @@
 </html>
 <style>
     .background-image {
-        background-image: url(https://i.postimg.cc/RhYky2K1/neww.jpg);
+        background-image: url(https://images.unsplash.com/photo-1564032236772-dfc27a12feda?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
         background-size: cover;
 
         /* background-repeat: no-repeat; */
@@ -72,7 +72,6 @@
 
     .orange:hover {
         box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-
         background-color: rgb(255, 255, 255);
         color: rgb(255, 136, 0);
     }
@@ -91,8 +90,8 @@
         <section class="blur">
             <div class="container">
                 <div class="row d-flex align-items-center justify-content-center" style="margin-top: 160px;">
-                    <div class="text-center mt-5 align-self-center blur">
-                        <h1 class="text-uppercase" style="font-weight: 900;">
+                    <div class="text-center mt-3 align-self-center blur">
+                        <h1 class="text-uppercase" style="font-weight: 900; font-size: 70px;">
                             We Make <br>
                             Your Walk Through <br>
                             More Easier
@@ -115,12 +114,6 @@
         </section>
     </div>
 
-
-
-
-
-
-
     <section class="bg-light border-bottom" id="features">
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -132,7 +125,7 @@
                 </div>
             </div>
             <div class="row mx-auto">
-                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
                     <div class="mx-2 rounded border mb-1 p-3 h-100 h-100">
                         <h4><span class="fa fa-sort pe-2"></span>Create your roadmap</h4>
                         <p>
@@ -140,7 +133,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
                     <div class="mx-2 rounded border mb-1 p-3 h-100">
                         <h4><span class="fa fa-home pe-2"></span>All resources in one place</h4>
                         <p>
@@ -148,7 +141,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
                     <div class="mx-2 rounded border mb-1 p-3 h-100">
                         <h4><span class="fa fa-list pe-2"></span>Step-By-Step Explanations</h4>
                         <p>
@@ -156,7 +149,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
                     <div class="mx-2 rounded border mb-1 p-3 h-100">
                         <h4><span class="fa fa-list pe-2"></span>Category Search for Roadmaps</h4>
                         <p>
@@ -164,7 +157,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
                     <div class="mx-2 rounded border mb-1 p-3 h-100">
                         <h4><span class="fa fa-star pe-2"></span>Star feature</h4>
                         <p>
@@ -172,7 +165,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 rounded p-1 mb-2">
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
                     <div class="mx-2 rounded border mb-1 p-3 h-100">
                         <h4><span class="fa fa-user pe-2"></span>Follow</h4>
                         <p>
@@ -180,15 +173,16 @@
                         </p>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <a href="{% url 'user-home' %}" class="btn rounded btn-lg orange text-uppercase me-3 w-50">Explore Top Posts</a>
+                {% if not user.is_authenticated %}
+                <div class="d-flex justify-content-center mt-3">
+                    <a href="{% url 'register' %}" class="btn rounded btn-lg orange text-uppercase me-3 w-50">Join now</a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </section>
 
-
-    <section class="bg-light" id="">
+    <section class="bg-light border-bottom" id="">
         <div class="container">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-5">
@@ -197,7 +191,6 @@
                     <p class="text-justify">
                         the journeys that you decide to walkthrough in your life. Whenever you want to learn something new and have problems deciding which road map to take to make your journey successful visit Walkthrough to find similar roadmaps and build your own roadmap. You can also guide others who are facing difficulties in their journey by posting your walkthrough through your journeys so that they can have a smooth walkthrough.
                     </p>
-                    <a href="#" class="btn rounded btn-primary btn-lg text-uppercase">See Details</a>
                 </div>
                 <div class="col-5">
                     <img class="img-fluid" src="https://miro.medium.com/max/674/1*ITlKBTv9liQMerlpg4Be1w.png" alt="">
@@ -209,34 +202,34 @@
         <div class="container aos-init aos-animate" data-aos="fade-up">
             <div class="section-title">
                 <h2>Team</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
             </div>
 
             <div class="row">
                 <div class="col-lg-6">
                     <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="pic"><img src="" class="img-fluid" alt=""></div>
+                        <div class="pic"><img src="{% static 'assets\img\profile\rishabh.jpeg' %}" class="img-fluid" alt=""></div>
                         <div class="member-info">
                             <h4>Rishabh Naik</h4> <span>Team Lead</span>
                             <p>Bangalore</p>
-                            <div class="social"> 
-                                <a href=""><i class="ri-twitter-fill"></i></a> 
-                                <a href=""><i class="ri-github-fill"></i></a> 
-                                <a href=""><i class="ri-instagram-fill"></i></a> 
-                                <a href=""> <i class="ri-linkedin-box-fill"></i> </a></div>
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/RishabhNaik"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/rishabh._.naik/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/rishabhnaik/"> <i class="ri-linkedin-box-fill"></i> </a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-4 mt-lg-0">
                     <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="pic"><img src="assets/img/team/team-2.jpg" class="img-fluid" alt=""></div>
+                        <div class="pic"><img src="{% static 'assets\img\profile\ganesh.jpeg' %}" class="img-fluid" alt=""></div>
                         <div class="member-info">
                             <h4>Ganesh Pai H</h4> <span>Back-end Developer</span>
                             <p>Udupi</p>
-                            <div class="social"> 
-                                <a href=""><i class="ri-twitter-fill"></i></a> 
-                                <a href=""><i class="ri-github-fill"></i></a> 
-                                <a href=""><i class="ri-instagram-fill"></i></a> 
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/ganeshpaih24"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/ganeshpaih24/"><i class="ri-instagram-fill"></i></a>
                                 <a href="https://www.linkedin.com/in/ganeshpaih24/"> <i class="ri-linkedin-box-fill"></i></a>
                             </div>
                         </div>
@@ -244,74 +237,74 @@
                 </div>
                 <div class="col-lg-6 mt-4">
                     <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="pic"><img src="assets/img/team/team-3.jpg" class="img-fluid" alt=""></div>
+                        <div class="pic"><img src="{% static 'assets\img\profile\prateek.png' %}" class="img-fluid" alt=""></div>
                         <div class="member-info">
-                            <h4>William Anderson</h4> <span>CTO</span>
-                            <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                            <div class="social"> 
-                                <a href=""><i class="ri-twitter-fill"></i></a> 
-                                <a href=""><i class="ri-github-fill"></i></a> 
-                                <a href=""><i class="ri-instagram-fill"></i></a> 
-                                <a href=""> <i class="ri-linkedin-box-fill"></i></a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mt-4">
-                    <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="pic"><img src="" class="img-fluid" alt=""></div>
-                        <div class="member-info">
-                            <h4>Amanda Jepson</h4> <span>Accountant</span>
-                            <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                            <div class="social"> 
-                                <a href=""><i class="ri-twitter-fill"></i></a> 
-                                <a href=""><i class="ri-github-fill"></i></a> 
-                                <a href=""><i class="ri-instagram-fill"></i></a> 
-                                <a href=""> <i class="ri-linkedin-box-fill"></i></a>
+                            <h4>Prateek Nayak</h4> <span>Front-end/back-end developer</span>
+                            <p>Bangalore</p>
+                            <div class="social">
+                                <a href="https://twitter.com/prateek_nayak_"><i class="ri-twitter-fill"></i></a>
+                                <a href="https://github.com/Prateek-Nayak"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/prateek_nayak_24/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/prateek-nayak/"> <i class="ri-linkedin-box-fill"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-4">
                     <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="pic"><img src="" class="img-fluid" alt=""></div>
+                        <div class="pic"><img src="{% static 'assets\img\profile\priyanka.jpeg' %}" class="img-fluid" alt=""></div>
                         <div class="member-info">
-                            <h4>Amanda Jepson</h4> <span>Accountant</span>
-                            <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                            <div class="social"> 
-                                <a href=""><i class="ri-twitter-fill"></i></a> 
-                                <a href=""><i class="ri-github-fill"></i></a> 
-                                <a href=""><i class="ri-instagram-fill"></i></a> 
-                                <a href=""> <i class="ri-linkedin-box-fill"></i></a>
+                            <h4>Priyanka Kudva</h4> <span>Back-end developer</span>
+                            <p>Mangalore</p>
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/PriyankaKudva"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/_smily_gal_2671/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/priyankakudva/"> <i class="ri-linkedin-box-fill"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-4">
                     <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="pic"><img src="" class="img-fluid" alt=""></div>
+                        <div class="pic"><img src="{% static 'assets\img\profile\sujatha.jpg' %}" class="img-fluid" alt=""></div>
                         <div class="member-info">
-                            <h4>Amanda Jepson</h4> <span>Accountant</span>
-                            <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                            <div class="social"> 
-                                <a href=""><i class="ri-twitter-fill"></i></a> 
-                                <a href=""><i class="ri-github-fill"></i></a> 
-                                <a href=""><i class="ri-instagram-fill"></i></a> 
-                                <a href=""> <i class="ri-linkedin-box-fill"></i></a>
+                            <h4>Sujatha Bhat</h4> <span>Back-end developer</span>
+                            <p>Bangalore</p>
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/SujathaBhat"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/sujathabhat2/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/sujatha-bhat-96a900225/"> <i class="ri-linkedin-box-fill"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-4">
                     <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="pic"><img src="" class="img-fluid" alt=""></div>
+                        <div class="pic"><img src="{% static 'assets\img\profile\srinidhi.png' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Srinidhi Shet U</h4> <span>Front-end developer</span>
+                            <p>Udupi</p>
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/Srinidhishet"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/_srinidhi4/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/srinidhi-shet-u-a138a5246/"> <i class="ri-linkedin-box-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4">
+                    <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="pic"><img src="{% static 'assets\img\profile\vasundhara.jpeg' %}" class="img-fluid" alt=""></div>
                         <div class="member-info">
                             <h4>Vasundhara Shenoy</h4> <span>Front-end developer</span>
-                            <p>Bangalore</p>
-                            <div class="social"> 
-                                <a href="https://twitter.com/prateek_nayak_"><i class="ri-twitter-fill"></i></a> 
-                                <a href="https://github.com/Prateek-Nayak"><i class="ri-github-fill"></i></a> 
-                                <a href="https://www.instagram.com/prateek_nayak_24/"><i class="ri-instagram-fill"></i></a> 
-                                <a href="https://www.linkedin.com/in/prateek-nayak/"> <i class="ri-linkedin-box-fill"></i></a>
+                            <p>Udupi</p>
+                            <div class="social">
+                                <a href="https://github.com/VasundharaShenoy"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/vasundharashenoy/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/vasundharashenoy/"> <i class="ri-linkedin-box-fill"></i></a>
                             </div>
                         </div>
                     </div>

@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {%load crispy_forms_tags%}
 {% block content%}
-<style>
-    .django-ckeditor-widget {
-        width: 100%;
-    }
-</style>
-<div class="container">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<div class="container" data-aos="fade-up"> 
     <div class="row">
         <div class="my-3">
             <div class="form-control" style="border-radius: 15px;">

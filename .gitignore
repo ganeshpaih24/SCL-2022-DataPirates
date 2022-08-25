@@ -2,8 +2,7 @@
 # Mac
 .DS_Store
 .idea
-# media/*
-# !media/default.jpg
+
 db.sqlite3
 env
 */migrations/0*
@@ -13,7 +12,7 @@ users/signals.py
 
 configs/config.json
 
-static
+
 
 
 # Byte-compiled / optimized / DLL files

@@ -1,75 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <style>
-    html {
-        background-color: #ecf9ff;
-    }
-
-    .main {
-        display: inline-block;
-        margin: 0 auto;
-        width: 33%
-    }
-
-    h2 {
-        text-align: center;
-    }
-
-
-    .thumbnail {
-        padding: .25rem;
-        background-color: #fff;
-        /* border: 1px solid #dee2e6; */
-        border-radius: .75rem;
-        max-width: 100%;
-        height: auto;
-    }
-
-    .page-item {
-        margin: 5px;
-    }
-
-    card-img {
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
-    }
-
-    .card-title {
-        margin-bottom: 0.3rem;
-    }
-
-    .cat {
-        display: inline-block;
-        margin-bottom: 1rem;
-    }
-
-    .fa-users {
-        margin-left: 1rem;
-    }
-
-    .card-footer {
-        font-size: 0.8rem;
-    }
-
-    .card-img-top {
-        max-height: 30vh;
-        /*not want to take all vertical space*/
-        object-fit: cover;
-        /*show all image, autosized, no cut, in available space*/
-    }
-
-    .card-img-overlay {
-        pointer-events: none;
-    }
-
-    /* .customMargin {
+  
+         /* .customMargin {
         margin: 15px 0px;
         border-radius: 15px;
 
     } */
 </style>
-<div class="">
-    <div class="container mt-3 mb-3">
+<div class="" >
+    <div class="container mt-3 mb-3" data-aos="fade-up">
         <div class="row d-flex justify-content-center align-items-center ">
             <div class="card" style="border-radius: 15px;">
                 <div class="card-body p-4">
@@ -80,6 +20,7 @@
                         <div class="flex-grow-1 ms-3">
                             <h1>{{ profile.user.username }}</h1>
                             <p class="mb-2 pb-1" style="color: #2b2a2a;">{{ profile.user.email }}</p>
+                            <p class="mb-2 pb-1" style="color: #2b2a2a;">{{ profile.about }}</p>
                             <div class="d-flex justify-content-start rounded-3 p-2 mb-2" style="background-color: #efefef;">
                                 <div class="px-3">
                                     <p class="small text-muted mb-1">Posts</p>
