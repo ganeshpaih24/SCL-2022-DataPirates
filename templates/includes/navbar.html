@@ -9,27 +9,26 @@
                 <button class="button" type="submit"><i class="fa fa-search text-white"></i></button>
             </form>
         </div>
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg" style="padding: 0px;">
             <div class="container-fluid ms-5">
                 <div class="collapse navbar-collapse" id="">
                     <ul>
                         <li><a class="nav-link scrollto" href="{% url 'explore' %}">Explore</a></li>
-                        <li><a class="nav-link scrollto" href="{% url 'user-login-about' %}"">Our Story</a></li>
+                        
                         {% if user.is_authenticated %}
                         <li><a class="nav-link scrollto" href="{% url 'user-home' %}">Home</a></li>
 
-                        <li class=" dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+                        <li class=" dropdown nav-link scrollto"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
                                 <ul>
                                     <li><a href="{% url 'profile' %}">Edit Profile</a></li>
 
                                     <li><a href="{% url 'logout' %}">Logout</a></li>
                                     {% else %}
-                                    <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="{% url 'register' %}">Register</a></li>
-                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                
+                                    <li><a class="nav-link scrollto" href="{% url 'register' %}">Register</a></li>
+                                 <li><a class="btn btn-primary nav-link scrollto"href="{% url 'login' %}">Login</a></li>
                                             {% endif %}
-                                        </ul>
+                                      
                                     </li>
                                 </ul>
                         </li>

@@ -180,7 +180,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 0 10px 30px;
+  /* padding: 10px 0 10px 30px; */
   font-size: 15px;
   font-weight: 500;
   color: #fff;
@@ -2032,3 +2032,17 @@ section {
   .modal-open {
     overflow: visible;
   }
+
+
+    .single li a {
+    color: #666;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 40px;
+    display: block;
+    text-decoration: none; }
+    .single li a:hover {
+    color: #ff173c; }
+    .single li:last-child a {
+    border-bottom: 0; }
