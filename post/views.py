@@ -51,7 +51,8 @@ def following_posts(request):
     random_list = Post.objects.order_by('?')
     categories_list = Category.objects.all()
     following_profiles=Profile.objects.get(user=request.user).following.all()
-    starred_posts = Star.objects.get(user=request.user).posts.all()
+    s,created = Star.objects.get_or_create(user=request.user)
+    starred_posts=s.posts.all()
     context = {
         'posts':posts,
         'following_profiles': following_profiles,
@@ -189,7 +190,8 @@ def star(request, pk):
 
 @login_required
 def starlist(request):
-    star_list = Star.objects.get(user=request.user)
+    s,created=Star.objects.get_or_create(user=request.user)
+    star_list = s
     return render(request, "post/stars.html", {'star_list': star_list})
 
 
