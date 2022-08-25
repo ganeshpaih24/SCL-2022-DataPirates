@@ -1,0 +1,1 @@
+web gunicorn walkthrough_scl.wsgi:apllication --log-file -
