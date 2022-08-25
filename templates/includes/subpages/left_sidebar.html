@@ -1,0 +1,31 @@
+<div class="rounded sticky bg-transparent">
+    <div class="card p-3 ">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+            <p class="text-center">
+                <h3 class="single-title">Actions</h3>
+            </p>
+        </div>
+        <div>
+            <ul class="nav flex-column bg-white mb-0">
+                <li class="nav-item my-1">
+                    <a href="{% url 'post-create' %}" class="nav-link text-dark  bg-light">
+                        <i class="fa fa-edit mr-3  "></i>
+                        Create Post
+                    </a>
+                </li>
+                <li class="nav-item my-1">
+                    <a href="{% url 'stars' %}" class="nav-link text-dark  bg-light">
+                        <i class="fa fa-star mr-3  "></i>
+                        Starred Posts
+                    </a>
+                </li>
+                <li class="nav-item my-1">
+                    <a href="../user/info/{{user.id}}" class="nav-link text-dark bg-light">
+                        <i class="fa fa-user mr-3  "></i>
+                        View Profile
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

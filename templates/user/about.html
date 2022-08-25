@@ -1,4 +1,318 @@
-{% extends "user/base.html" %}
-{% block content%}
-<h1>user About Page</h1>
-{%endblock content%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/x-icon" href="/media/favicon1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Alertify Js CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Alertify Js Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+    <script src="/static/ckeditor/ckeditor-init.js" data-ckeditor-basepath="/static/ckeditor/ckeditor/" id="ckeditor-init-script"></script>
+    <script src="/static/ckeditor/ckeditor/ckeditor.js"></script>
+
+
+    <!--Alertify Js-->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    
+    {% if title %}
+    <title>WalkThrough | {{ title }}</title>
+    {% else %}
+    <title>WalkThrough</title>
+    {% endif %}
+    {% block custom_css %}{% endblock %}
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'includes/style.html' %}
+
+
+    {% block custom_js %}{% endblock %}
+    {% include 'includes/notification.html' %}
+
+    <script>
+        {% if messages %}
+        {% for message in messages %}
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.success('{{ message }}');
+        {% endfor %}
+        {% endif %}
+    </script>
+</body>
+
+</html>
+<style>
+    .background-image {
+        background-image: url(https://images.unsplash.com/photo-1564032236772-dfc27a12feda?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);
+        background-size: cover;
+
+        /* background-repeat: no-repeat; */
+        /* width: 100vw; */
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .orange {
+        color: rgb(255, 255, 255);
+        background-color: rgb(255, 136, 0);
+
+
+    }
+
+    .orange:hover {
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+        background-color: rgb(255, 255, 255);
+        color: rgb(255, 136, 0);
+    }
+
+    .blur {
+        /* background: rgba(255, 255, 255, 0.2); // Make sure this color has an opacity of less than 1 */
+        backdrop-filter: blur(3px);
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+
+    }
+</style>
+<div class="">
+    <div class="background-image">
+        <section class="blur">
+            <div class="container">
+                <div class="row d-flex align-items-center justify-content-center" style="margin-top: 160px;">
+                    <div class="text-center mt-3 align-self-center blur">
+                        <h1 class="text-uppercase" style="font-weight: 900; font-size: 70px;">
+                            We Make <br>
+                            Your Walk Through <br>
+                            More Easier
+                        </h1>
+                        <p class="text-success" style="font-weight: 800;">
+                            <strong>
+
+                                Create your own roadmaps for your journeys<br>also learn simply with the help of prebuilt roadmaps from experts.
+                            </strong>
+                        </p>
+                        <div class="btn-orange btn">
+                            <a href="{%url 'explore'%}" class="btn rounded btn-lg orange text-uppercase">Explore</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End banner Area -->
+
+        </section>
+    </div>
+
+    <section class="bg-light border-bottom" id="features">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8 pb-40 header-text text-center">
+                    <h1>Some Features that Made us Unique</h1>
+                    <p>
+                        Who are in extremely love with walkthrough journeys.
+                    </p>
+                </div>
+            </div>
+            <div class="row mx-auto">
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
+                    <div class="mx-2 rounded border mb-1 p-3 h-100 h-100">
+                        <h4><span class="fa fa-sort pe-2"></span>Create your roadmap</h4>
+                        <p>
+                            You can create your own roadmap through posts and also you can update them.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
+                    <div class="mx-2 rounded border mb-1 p-3 h-100">
+                        <h4><span class="fa fa-home pe-2"></span>All resources in one place</h4>
+                        <p>
+                            All the resources required through your walkthrough journeys are available at single place.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
+                    <div class="mx-2 rounded border mb-1 p-3 h-100">
+                        <h4><span class="fa fa-list pe-2"></span>Step-By-Step Explanations</h4>
+                        <p>
+                            You can also find step-by-step explanations in each roadmap for easy understanding.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
+                    <div class="mx-2 rounded border mb-1 p-3 h-100">
+                        <h4><span class="fa fa-list pe-2"></span>Category Search for Roadmaps</h4>
+                        <p>
+                            You can search through categories and through titles to find the required roadmaps.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
+                    <div class="mx-2 rounded border mb-1 p-3 h-100">
+                        <h4><span class="fa fa-star pe-2"></span>Star feature</h4>
+                        <p>
+                            You can star and unstar roadmaps according to your requirements.This is very useful.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 rounded p-1 mb-4">
+                    <div class="mx-2 rounded border mb-1 p-3 h-100">
+                        <h4><span class="fa fa-user pe-2"></span>Follow</h4>
+                        <p>
+                            You can follow authors of different roadmaps according to your needs and interests.
+                        </p>
+                    </div>
+                </div>
+                {% if not user.is_authenticated %}
+                <div class="d-flex justify-content-center mt-3">
+                    <a href="{% url 'register' %}" class="btn rounded btn-lg orange text-uppercase me-3 w-50">Join now</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light border-bottom" id="">
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-5">
+                    <h1>We Believe that <br>
+                        Walkthrogh beautifies</h1>
+                    <p class="text-justify">
+                        the journeys that you decide to walkthrough in your life. Whenever you want to learn something new and have problems deciding which road map to take to make your journey successful visit Walkthrough to find similar roadmaps and build your own roadmap. You can also guide others who are facing difficulties in their journey by posting your walkthrough through your journeys so that they can have a smooth walkthrough.
+                    </p>
+                </div>
+                <div class="col-5">
+                    <img class="img-fluid" src="https://miro.medium.com/max/674/1*ITlKBTv9liQMerlpg4Be1w.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="team" class="team section-bg">
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Team</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="pic"><img src="{% static 'assets\img\profile\rishabh.jpeg' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Rishabh Naik</h4> <span>Team Lead</span>
+                            <p>Bangalore</p>
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/RishabhNaik"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/rishabh._.naik/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/rishabhnaik/"> <i class="ri-linkedin-box-fill"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="pic"><img src="{% static 'assets\img\profile\ganesh.jpeg' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Ganesh Pai H</h4> <span>Back-end Developer</span>
+                            <p>Udupi</p>
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/ganeshpaih24"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/ganeshpaih24/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/ganeshpaih24/"> <i class="ri-linkedin-box-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4">
+                    <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="pic"><img src="{% static 'assets\img\profile\prateek.png' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Prateek Nayak</h4> <span>Front-end/back-end developer</span>
+                            <p>Bangalore</p>
+                            <div class="social">
+                                <a href="https://twitter.com/prateek_nayak_"><i class="ri-twitter-fill"></i></a>
+                                <a href="https://github.com/Prateek-Nayak"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/prateek_nayak_24/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/prateek-nayak/"> <i class="ri-linkedin-box-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4">
+                    <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="pic"><img src="{% static 'assets\img\profile\priyanka.jpeg' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Priyanka Kudva</h4> <span>Back-end developer</span>
+                            <p>Mangalore</p>
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/PriyankaKudva"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/_smily_gal_2671/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/priyankakudva/"> <i class="ri-linkedin-box-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4">
+                    <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="pic"><img src="{% static 'assets\img\profile\sujatha.jpg' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Sujatha Bhat</h4> <span>Back-end developer</span>
+                            <p>Bangalore</p>
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/SujathaBhat"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/sujathabhat2/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/sujatha-bhat-96a900225/"> <i class="ri-linkedin-box-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4">
+                    <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="pic"><img src="{% static 'assets\img\profile\srinidhi.png' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Srinidhi Shet U</h4> <span>Front-end developer</span>
+                            <p>Udupi</p>
+                            <div class="social">
+                                <!-- <a href=""><i class="ri-twitter-fill"></i></a> -->
+                                <a href="https://github.com/Srinidhishet"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/_srinidhi4/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/srinidhi-shet-u-a138a5246/"> <i class="ri-linkedin-box-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4">
+                    <div class="member d-flex align-items-start aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="pic"><img src="{% static 'assets\img\profile\vasundhara.jpeg' %}" class="img-fluid" alt=""></div>
+                        <div class="member-info">
+                            <h4>Vasundhara Shenoy</h4> <span>Front-end developer</span>
+                            <p>Udupi</p>
+                            <div class="social">
+                                <a href="https://github.com/VasundharaShenoy"><i class="ri-github-fill"></i></a>
+                                <a href="https://www.instagram.com/vasundharashenoy/"><i class="ri-instagram-fill"></i></a>
+                                <a href="https://www.linkedin.com/in/vasundharashenoy/"> <i class="ri-linkedin-box-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% include 'includes/footer.html' %}
