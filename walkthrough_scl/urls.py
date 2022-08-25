@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path, include
+from django.urls import path, include,re_path
 from django.conf.urls.static import static
 from walkthrough_scl import settings
 from user import views as user_views
+from django.views.static import serve
 
 
 urlpatterns = [
@@ -33,6 +34,8 @@ urlpatterns = [
     path('', include('user.urls')),
     path('user/info/<int:pk>/', user_views.userInfo, name='user-info'),
     path('user/follow/<int:id>/',user_views.follow, name="follow"),
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
 
 if settings.DEBUG:
