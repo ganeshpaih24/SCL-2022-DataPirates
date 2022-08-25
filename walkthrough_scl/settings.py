@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["https://walkthrough-datapirates.herokuapp.com","walkthrough-datapirates.herokuapp.com","localhost"]
 
-
+CSRF_TRUSTED_ORIGINS = ["https://walkthrough-datapirates.herokuapp.com","walkthrough-datapirates.herokuapp.com"]
 # Application definition
 
 INSTALLED_APPS = [
