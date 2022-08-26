@@ -1,0 +1,1 @@
+web: waitress-serve --port=$PORT walkthrough_scl.wsgi:application

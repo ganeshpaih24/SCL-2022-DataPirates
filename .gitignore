@@ -2,7 +2,8 @@
 # Mac
 .DS_Store
 .idea
-
+# media/*
+# !media/default.jpg
 db.sqlite3
 env
 */migrations/0*
@@ -99,4 +100,3 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
-

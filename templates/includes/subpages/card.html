@@ -13,7 +13,7 @@
         </div>
         {% endif %}
         <div class="card-body">
-            <h4 class="card-title">{{post.title}}</h4>
+            <a href="{% url 'post-detail' post.id %}"><h4 class="card-title">{{post.title}}</h4></a>
             <div class="d-flex justify-content-start my-2">
                 <div class="me-3">
                     <i class="bx bxs-user"></i><a href="{% url 'user-info' post.author.profile.id %}"><small>{{post.author}}</small></a>
