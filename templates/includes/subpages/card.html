@@ -16,7 +16,7 @@
             <h4 class="card-title">{{post.title}}</h4>
             <div class="d-flex justify-content-start my-2">
                 <div class="me-3">
-                    <i class="bx bxs-user"></i><a href="{% url 'user-info' post.id %}"><small>{{post.author}}</small></a>
+                    <i class="bx bxs-user"></i><a href="{% url 'user-info' post.author.profile.id %}"><small>{{post.author}}</small></a>
                 </div>
                 <div class="me-5">
                     <i class="bx bx-time"></i><small>{{ post.date_posted|date:"F d, Y" }}</small>
