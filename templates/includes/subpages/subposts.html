@@ -11,20 +11,22 @@
 <div class="ps-3 my-2">
     <div class="card card-html" id="{{ subpost.id }}">
         <div class="card-header">
-            <i class="fab fa-html5 me-2"></i>{{subpost.title}}
+            <h2 class="text-white">{{subpost.title}}</h2>
         </div>
         <div class="card-body">
             {{subpost.description|safe}}
         </div>
-        <div class="card-body">
+        
             {% if subpost.resources is not None %}
+            <div class="card-body">
             <div class="d-flex justify-content-start">
                 <div class="me-2">
                     <h6><strong>Resource:</strong></h6><a href="https://{{subpost.resources}}">{{subpost.resources}}</a>
                 </div>
             </div>
-            {% endif %}
         </div>
+            {% endif %}
+        
         <div class="card-body">
             <a class="btn btn-primary btn-sm mt-1 mb-1" href="subpost/{{ subpost.pk }}/update/" class="card-link">Update</a>
             <a type="button" class="btn btn-danger btn-sm mt-1 mb-1" data-bs-toggle="modal" data-bs-target="#deleteSubPost">Delete</a>
