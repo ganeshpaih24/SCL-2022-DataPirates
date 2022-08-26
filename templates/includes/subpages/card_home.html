@@ -9,7 +9,11 @@
         <div class="card-header">
             <div class="text-box d-flex justify-content-start">
                 <div class="icon-box">
+                    {% if post.author.profile.image.url|is_empty %}
                     <img style="width:40px; height:40px;" src="{{post.author.profile.image.url}}" alt="user">
+                    {% else %}
+                    <img style="width:40px; height:40px;" src="{{post.author.profile.image.url}}" alt="user">
+                    {% endif %}
                 </div>
                 <div class="ms-2 ">
                     <a href="{% url 'user-info' post.id %}" class="text-dark">
