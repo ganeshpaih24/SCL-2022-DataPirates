@@ -4,9 +4,9 @@
 .idea
 # media/*
 # !media/default.jpg
-# db.sqlite3
+db.sqlite3
 env
-# */migrations/0*
+*/migrations/0*
 venv
 
 users/signals.py
