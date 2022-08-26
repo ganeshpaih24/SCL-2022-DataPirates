@@ -48,17 +48,14 @@ class PostListView(ListView):
 @login_required
 def following_posts(request):
     posts=Post.objects.all()
-    random_list = Post.objects.order_by('?')
     categories_list = Category.objects.all()
     following_profiles=Profile.objects.get(user=request.user).following.all()
-    s,created = Star.objects.get_or_create(user=request.user)
-    starred_posts=s.posts.all()
+    starred_posts = Star.objects.get(user=request.user).posts.all()
     context = {
         'posts':posts,
         'following_profiles': following_profiles,
         'categories_list':categories_list,
-        'starred_posts':starred_posts,
-        'random_list':random_list
+        'starred_posts':starred_posts
         }
     return render(request, 'post/home.html', context)
 
@@ -190,8 +187,7 @@ def star(request, pk):
 
 @login_required
 def starlist(request):
-    s,created=Star.objects.get_or_create(user=request.user)
-    star_list = s
+    star_list = Star.objects.get(user=request.user)
     return render(request, "post/stars.html", {'star_list': star_list})
 
 
@@ -206,12 +202,7 @@ def categoryList(request, slug):
 
 def explore(request):
     posts = Post.objects.all()
-    s,created = Star.objects.get_or_create(user=request.user)
-    starred_posts=s.posts.all()
-    context = {
-        'posts': posts,
-        'starred_posts':starred_posts,
-        }
+    context = {'posts': posts}
     return render(request, 'post/explore.html',context)
 
 def landing(request):
