@@ -1,6 +1,21 @@
 # SCL-2022-DataPirates
 A SCL project for guidance
 
+<p align="center"> 
+ <img src="https://i.ibb.co/bzCVQyz/Walkthrough-Logo.png" alt="Walkthrough-logo" border="0" width=300 height=300/>&nbsp; </a></p>
+
+
+<p class="text-center mb-3" align="center">
+<a href="https://walkthrough-datapirates.herokuapp.com/"><img src="https://forthebadge.com/images/badges/made-with-python.svg" border="0" title="Made with Python" /></a>
+</p>
+
+<p class="text-center mb-3" align="center">
+<a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django." /></a>
+</p>
+
+Using this platform ‘WalkThrough’ making roadmaps can be much easier than the traditional method. It helps in making creative roadmaps and is easy to make even for users who are new to this platform. It allows people who are new to sign up and create a new account whereas people who already have existing accounts can sign in to create roadmaps or search for roadmaps they are interested in. Creating roadmaps gives the users a clear vision and helps them establish their goals. This will allow them to start moving ahead in the direction of the goals they want to achieve.
+
+
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -11,8 +26,6 @@ A SCL project for guidance
         <li><a href="#development">Development</a></li>
       </ul>
     </li>
-    <li><a href="#contributing">Contributing / Adding Features</a></li>
-    <li><a href="#license">License</a></li>
   </ol>
 </details>
 
@@ -61,34 +74,24 @@ A SCL project for guidance
     
     ```
    
-5.     
-    Change the config parameters (Optional, only if you want to enable mail sending functionality)
-    ```python
-   
-   SECRET_KEY = 'Enter random character string'
-   EMAIL_USER = 'your email username'
-   EMAIL_PASS = 'Enter you email password'
-   SLACK_AUTH_TOKEN: "token here"
-
-    ```
    
    comment line #45 (If you are using badge giving feature other leave as it is) of users/signals.py (send_email.delay(array)) during development and uncomment before sending PR
    
 
-6. Make migrations/ Create db.sqlite3
+5. Make migrations/ Create db.sqlite3
 
     ```bash
     python manage.py makemigrations
     python manage.py migrate
     ```
-7. Create a super user.
+6. Create a super user.
     In django if you want to access admin page, you need to create an account first.
     ```djangotemplate
     python manage.py createsuperuser
     ```
    Then select your username and password.
    
-8. Run server
+7. Run server
     ```bash
     python manage.py runserver
     ```
