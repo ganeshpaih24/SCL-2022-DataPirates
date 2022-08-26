@@ -206,7 +206,12 @@ def categoryList(request, slug):
 
 def explore(request):
     posts = Post.objects.all()
-    context = {'posts': posts}
+    s,created = Star.objects.get_or_create(user=request.user)
+    starred_posts=s.posts.all()
+    context = {
+        'posts': posts,
+        'starred_posts':starred_posts,
+        }
     return render(request, 'post/explore.html',context)
 
 def landing(request):
