@@ -24,7 +24,7 @@ A SCL project for guidance
 
 1. Fork and Clone
     <ol>
-    <li>Fork sushiksha-website the Repo</li>
+    <li>Fork the Repo</li>
     <li>Clone the repo to your computer.</li>
     </ol>
 
