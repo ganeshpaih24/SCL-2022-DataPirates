@@ -1,5 +1,5 @@
 # SCL-2022-DataPirates
-A SCL project for guidance
+
 
 <p align="center"> 
  <img src="https://i.ibb.co/bzCVQyz/Walkthrough-Logo.png" alt="Walkthrough-logo" border="0" width=300 height=300/>&nbsp; </a></p>
@@ -13,21 +13,9 @@ A SCL project for guidance
 <a href="http://www.djangoproject.com/"><img src="https://www.djangoproject.com/m/img/badges/djangopowered126x54.gif" border="0" alt="Powered by Django." title="Powered by Django." /></a>
 </p>
 
-Using this platform ‘WalkThrough’ making roadmaps can be much easier than the traditional method. It helps in making creative roadmaps and is easy to make even for users who are new to this platform. It allows people who are new to sign up and create a new account whereas people who already have existing accounts can sign in to create roadmaps or search for roadmaps they are interested in. Creating roadmaps gives the users a clear vision and helps them establish their goals. This will allow them to start moving ahead in the direction of the goals they want to achieve.
+A Sushiksha Coding League project for guidance. Using this platform ‘WalkThrough’ making roadmaps can be much easier than the traditional method. It helps in making creative roadmaps and is easy to make even for users who are new to this platform. It allows people who are new to sign up and create a new account whereas people who already have existing accounts can sign in to create roadmaps or search for roadmaps they are interested in. Creating roadmaps gives the users a clear vision and helps them establish their goals. This will allow them to start moving ahead in the direction of the goals they want to achieve.
 
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#development">Development</a></li>
-      </ul>
-    </li>
-  </ol>
-</details>
 
 
 1. Backend Framework: **Django**
@@ -73,9 +61,6 @@ Using this platform ‘WalkThrough’ making roadmaps can be much easier than th
     git checkout develop
     
     ```
-   
-   
-   comment line #45 (If you are using badge giving feature other leave as it is) of users/signals.py (send_email.delay(array)) during development and uncomment before sending PR
    
 
 5. Make migrations/ Create db.sqlite3
