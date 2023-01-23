@@ -85,11 +85,7 @@ WSGI_APPLICATION = 'walkthrough_scl.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:///'+os.path.join('db.sqlite3')
-
-
-    )
+    'default': dj_database_url.config(default='postgres://walkthrough_db_user:Oizj0ezUuy02EtzcmtxX3j8KDn4atB9D@dpg-cf7dt81gp3jnt5hbl6i0-a.oregon-postgres.render.com/walkthrough_db')
 }
 
 

@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from walkthrough_scl import settings
 from user import views as user_views
 from django.views.static import serve
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -45,3 +46,4 @@ if settings.DEBUG:
                           document_root=settings.MEDIA_ROOT)
 
 handler404 = "walkthrough_scl.views.page_not_found_view"
+urlpatterns+=staticfiles_urlpatterns()
