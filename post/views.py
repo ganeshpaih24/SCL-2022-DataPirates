@@ -50,7 +50,9 @@ def following_posts(request):
     posts=Post.objects.all()
     categories_list = Category.objects.all()
     following_profiles=Profile.objects.get(user=request.user).following.all()
-    starred_posts = Star.objects.get(user=request.user).posts.all()
+    starred_posts = Star.objects.filter(user=request.user).first()
+    if starred_posts is not None:
+        starred_posts=Star.objects.get(user=request.user).posts.all()
     context = {
         'posts':posts,
         'following_profiles': following_profiles,
@@ -202,7 +204,11 @@ def categoryList(request, slug):
 
 def explore(request):
     posts = Post.objects.all()
-    context = {'posts': posts}
+    starred_posts = Star.objects.filter(user=request.user).first()
+    if starred_posts is not None:
+        starred_posts=Star.objects.get(user=request.user).posts.all()
+        print(starred_posts)
+    context = {'posts': posts,'starred_posts':starred_posts}
     return render(request, 'post/explore.html',context)
 
 def landing(request):
