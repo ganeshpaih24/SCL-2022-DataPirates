@@ -12,7 +12,6 @@ django-tinymce==3.4.0
 djangorestframework==3.13.1
 gunicorn==20.1.0
 Pillow==9.2.0
-psycopg2==2.9.3
 pytz==2022.1
 sqlparse==0.4.2
 tzdata==2022.1
