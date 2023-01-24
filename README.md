@@ -21,6 +21,16 @@ A Sushiksha Coding League project for guidance. Using this platform ‘WalkThrou
 1. Backend Framework: **Django**
 2. Front-end Framework: **Bootstrap**
 
+## Features
+1. User Registration and Login
+2. Roadmap Creation and Updation
+3. Search for Roadmaps through Categories and Titles
+4. Subpost feature(Steps inside a Roadmap)
+4. Star Feature
+5. Follow Roadmap authors
+6. Comment feature under each Roadmap
+7. User Profile Creation and Updation
+
 ## Installation 
 
 1. Fork and Clone
@@ -80,3 +90,35 @@ A Sushiksha Coding League project for guidance. Using this platform ‘WalkThrou
     ```bash
     python manage.py runserver
     ```
+
+## Screenshots
+
+- Landing Page
+<img src="https://i.postimg.cc/SNrKJwKf/Screenshot-20230124-124553.png" alt="Landing Page">
+
+- Explore Page(Displays all Roadmaps)
+<img src="https://i.postimg.cc/sxmnbpYS/Screenshot-20230124-141935.png" alt="Explore Page">
+
+- Register Page
+<img src="https://i.postimg.cc/T3kgWt9B/Screenshot-20230124-142038.png" alt="Register Page">
+
+- Login Page
+<img src="https://i.postimg.cc/0jbDnDyc/Screenshot-20230124-142107.png" alt="Login Page">
+
+- Author Profile Page
+<img src="https://i.postimg.cc/QCVsMkXg/Screenshot-20230124-143820.png" alt="Profile Page">
+
+- Home Page(Displays Roadmaps of following authors)
+<img src="https://i.postimg.cc/YqGGnQ1m/Screenshot-20230124-143920.png" alt="Home Page">
+
+- Roadmap Creation Page
+<img src="https://i.postimg.cc/vZGvpPXN/Screenshot-20230124-154310.png" alt="Roadmap Creation Page">
+
+- Edit Profile Page
+<img src="https://i.postimg.cc/GpwTW9ch/Screenshot-20230124-160500.png" alt="Edit Profile Page">
+
+- Roadmap Details Page
+<img src="https://i.postimg.cc/4NGtdBqb/Screenshot-20230124-160736.png" alt="Roadmap Details Page">
+
+- Comments Feature
+<img src="https://i.ibb.co/t3Tgshd/Screenshot-20230124-170657.png" alt="Comments Feature">
