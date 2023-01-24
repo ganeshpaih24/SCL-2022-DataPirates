@@ -31,7 +31,7 @@
             </div>
             {% if user.is_authenticated %}
             <div class="my-auto">
-                {% if post not in starred_posts %}
+                {% if post not in starred_posts or starred_posts is None %}
                 <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
                 {% else %}
                 <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>

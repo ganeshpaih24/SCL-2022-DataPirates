@@ -189,8 +189,19 @@ def star(request, pk):
 
 @login_required
 def starlist(request):
-    star_list = Star.objects.get(user=request.user)
-    return render(request, "post/stars.html", {'star_list': star_list})
+    posts = Star.objects.filter(user=request.user).first()
+    if posts is not None:
+        posts=Star.objects.get(user=request.user).posts.all()
+    categories_list = Category.objects.all()
+    starred_posts = Star.objects.filter(user=request.user).first()
+    if starred_posts is not None:
+        starred_posts=Star.objects.get(user=request.user).posts.all()
+    context = {
+        'posts':posts,
+        'categories_list':categories_list,
+        'starred_posts':starred_posts
+        }
+    return render(request, "post/stars.html", context)
 
 
 def categoryList(request, slug):
@@ -207,7 +218,6 @@ def explore(request):
     starred_posts = Star.objects.filter(user=request.user).first()
     if starred_posts is not None:
         starred_posts=Star.objects.get(user=request.user).posts.all()
-        print(starred_posts)
     context = {'posts': posts,'starred_posts':starred_posts}
     return render(request, 'post/explore.html',context)
 
