@@ -51,9 +51,11 @@ def profile(request):
 
 @login_required
 def userInfo(request,pk):
-    post=Post.objects.get(id=pk)
-    user=post.author
-    profile=Profile.objects.get(user=user)
+    # post=Post.objects.get(id=pk)
+    # user=post.author
+    # profile=Profile.objects.get(user=user)
+    profile=Profile.objects.get(id=pk)
+    user=profile.user
     posts=Post.objects.filter(author=user)
     context={
         'user':user,

@@ -9,7 +9,7 @@
         <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
         {% if post.category is not None %}
         <div class="card-img-overlay">
-            <a href="#" class="btn btn-light btn-sm">{{post.category}}</a>
+            <a href="#" class="btn btn-light btn-sm border border-dark">{{post.category}}</a>
         </div>
         {% endif %}
         <div class="card-body">
@@ -29,7 +29,6 @@
             <div class="stats">
                 <a href="{% url 'post-detail' post.id %}" class="btn btn-info">View More</a>
             </div>
-            {% if user.is_authenticated %}
             <div class="my-auto">
                 {% if post not in starred_posts or starred_posts is None %}
                 <a href="{% url 'postStar' post.id %}">Star<i class="far fa-star"></i></a>
@@ -37,7 +36,6 @@
                 <a href="{% url 'postStar' post.id %}">Unstar<i class="fa fas fa-star"></i></a>
                 {% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
 </div>

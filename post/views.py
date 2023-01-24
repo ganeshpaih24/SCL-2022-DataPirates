@@ -215,9 +215,11 @@ def categoryList(request, slug):
 
 def explore(request):
     posts = Post.objects.all()
-    starred_posts = Star.objects.filter(user=request.user).first()
-    if starred_posts is not None:
-        starred_posts=Star.objects.get(user=request.user).posts.all()
+    starred_posts=None
+    if request.user.is_authenticated:
+        starred_posts = Star.objects.filter(user=request.user).first()
+        if starred_posts is not None:
+            starred_posts=Star.objects.get(user=request.user).posts.all()
     context = {'posts': posts,'starred_posts':starred_posts}
     return render(request, 'post/explore.html',context)
 
