@@ -9,7 +9,11 @@
         <div class="card-header">
             <div class="text-box d-flex justify-content-start">
                 <div class="icon-box">
-                    <img style="width:40px; height:40px;" src="{{post.author.profile.image.url}}" alt="user">
+                    {%if post.author.profile.image %}
+                        <img style="width:40px; height:40px;" src="{{post.author.profile.image.url}}" alt="user">
+                    {%else%}
+                        <img style="width:40px; height:40px;" src="{% static 'assets\img\default.jpg' %}" alt="user">
+                    {%endif%}
                 </div>
                 <div class="ms-2 ">
                     <a href="{% url 'user-info' post.id %}" class="text-dark">
@@ -19,7 +23,11 @@
             </div>
         </div>
         <div class="card-body">
-            <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
+            {%if post.image%}
+                <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Thumbnail">
+            {%else%}
+                <img class="card-img card-img-top img-fluid" src="{% static 'assets\img\wt-logo.png' %}" alt="Thumbnail">
+            {%endif%}
             <a href="{% url 'post-detail' post.id %}">
                 <h4 class="card-title mt-2">{{post.title}}</h4>
             </a>

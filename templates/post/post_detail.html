@@ -110,7 +110,11 @@
     <div class="col-8 mx-1">
       <div class="mx-auto">
         <div class="card">
-          <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Bologna">
+          {%if post.image %}
+            <img class="card-img card-img-top img-fluid" src="{{ post.image.url }}" alt="Thumbnail">
+          {%else%}
+            <img class="card-img card-img-top img-fluid" src="{% static 'assets\img\wt-logo.png' %}" alt="Thumbnail">
+          {%endif%}
           <div class="card-body" data-aos="fade-up">
             <h1 class="card-title my-2">{{post.title}}</h1>
             <div class="d-flex justify-content-start my-2">

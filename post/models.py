@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 
 
 class Category(models.Model):
@@ -22,7 +23,7 @@ class Post(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100)
-    image = models.ImageField("Thumbnail",default='wt-logo.png', upload_to='post_img')
+    image =CloudinaryField('image')
     content = RichTextField(blank=True, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -38,11 +39,11 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         super(Post, self).save(*args, **kwargs)
-        img = Image.open(self.image.path)
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+        # img = Image.open(self.image.path)
+        # if img.height > 300 or img.width > 300:
+        #     output_size = (300, 300)
+        #     img.thumbnail(output_size)
+        #     img.save(self.image.path)
 
 
 class SubPost(models.Model):

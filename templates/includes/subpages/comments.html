@@ -27,7 +27,11 @@
             {% for comment in comments %}
             <div class="text-box d-flex justify-content-start mt-2">
                 <div class="icon-box px-2">
-                    <img style="width:60px; height:60px;" src="{{ comment.user.profile.image.url }}" alt="user">
+                    {%if comment.user.profile.image %}
+                        <img style="width:60px; height:60px;" src="{{ comment.user.profile.image.url }}" alt="user">
+                    {%else%}
+                        <img style="width:60px; height:60px;" src="{% static 'assets\img\default.jpg' %}" alt="user">
+                    {%endif%}
                 </div>
                 <div>
                     <span><strong>{{comment.user.username}}</strong></span><span class="ms-3 text-muted">{{comment.timestamp}}</span>

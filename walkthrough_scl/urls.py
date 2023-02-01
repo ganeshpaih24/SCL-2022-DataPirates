@@ -35,15 +35,15 @@ urlpatterns = [
     path('', include('user.urls')),
     path('user/info/<int:pk>/', user_views.userInfo, name='user-info'),
     path('user/follow/<int:id>/',user_views.follow, name="follow"),
-    re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
-    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+    # re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
+    # re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL,
-                          document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL,
+#                           document_root=settings.STATIC_ROOT)
+#     urlpatterns += static(settings.MEDIA_URL,
+#                           document_root=settings.MEDIA_ROOT)
 
 handler404 = "walkthrough_scl.views.page_not_found_view"
-urlpatterns+=staticfiles_urlpatterns()
+# urlpatterns+=staticfiles_urlpatterns()

@@ -9,6 +9,11 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 import os
 import dj_database_url
 from pathlib import Path
@@ -23,13 +28,13 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 't}F<<`k3AR\tpLa!m)px.yo?\n\EXobL*Yp.[\2P0kn!\x0bab1<y\\V/Jg&\x0c%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-CSRF_TRUSTED_ORIGINS=[]
+ALLOWED_HOSTS = ["walkthrough-scl.up.railway.app", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS=['https://walkthrough-scl.up.railway.app']
 
 
 # Application definition
@@ -46,6 +51,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'ckeditor',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -121,12 +127,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -154,3 +159,10 @@ CKEDITOR_CONFIGS = {
         'width': '80hv',
     },
 }
+
+
+cloudinary.config( 
+  cloud_name = "djrpzev0r", 
+  api_key = "135843153556287", 
+  api_secret = "XW87XgmfN0I6DABKFpBgEkuL9Yo" 
+)
